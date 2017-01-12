@@ -3,10 +3,10 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:info,
-				description: "Responds with bot info",
+				description: "responds with player info",
 				useage: "info"
 		) do |event|
-			event.respond "```ruby\nRuby Version: #{RUBY_VERSION}\nRuby patchlevel: #{RUBY_PATCHLEVEL}\nRuby release date: #{RUBY_RELEASE_DATE}\nRuby DevelopmentKit: No Dev Kit (Linux)\nOperating System: Debian(DigitalOcean Hosting)\nBig Thanks to the Bot Community and @meew0\nCreator: @ZerO (ask him if there are any questions)\nContributors: @Reaver01 and @Alice\nupdated: 06.2016```"
+			event.channel.send_embed '', userInfo(event.user.id.to_s, event.user.name.to_s)
 			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: info"
 			nil
 		end

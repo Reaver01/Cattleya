@@ -50,5 +50,5 @@ puts $bot.invite_url
 #start cron
 cronjobs_start
 
-puts 'SKYNET ONLINE'
+puts 'Cattleya ready to serve!'
 $bot.sync
