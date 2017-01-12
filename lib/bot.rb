@@ -11,7 +11,7 @@ $players = Hash.new
 $players = loadJSON($players, "botfiles/players.json")
 
 #sets bot prefix
-$prefix = '-'
+$prefix = '#'
 
 #Loads and establishes $bot object
 $bot = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: $prefix, advanced_functionality: false
@@ -44,6 +44,8 @@ if File.file?("botfiles/game")
 else
 	$bot.game = 0
 end
+
+puts $bot.invite_url
 
 #start cron
 cronjobs_start
