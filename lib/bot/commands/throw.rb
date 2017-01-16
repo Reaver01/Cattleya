@@ -3,7 +3,7 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:throw,
-				description: "responds with player info",
+				description: "Throws something at somebody",
 				useage: "throws <item> <user>"
 		) do |event, *item|
 			uname = item[-1]
@@ -14,16 +14,23 @@ module Commands
 				item = item.first item.size - 1
 				item = item.join(' ').titleize
 				threw = false
-				$items.each do |x|
-					if x['name'] == item
+				x = 0
+				begin
+					if $items[x]['name'] == item
 						threw = true
-						thrownitem = itemsindexed[x].to_s
+						thrownitem = itemsindexed[$items[x]].to_s
+						thrownindex = x
 					end
-				end
+					x += 1
+				end while x < $items.length
 				if threw
 					if $players[event.user.id.to_s]['inv'].has_key?(thrownitem)
-						event.respond "**#{event.user.name}** threw a **#{item}** at #{uname}!"
-						$players[event.user.id.to_s]['inv'][thrownitem] -= 1
+						if $items[thrownindex]['throw']
+							event.respond "**#{event.user.name}** threw a **#{item}** at #{uname}!"
+							$players[event.user.id.to_s]['inv'][thrownitem] -= 1
+						else
+							event.respond "You can't throw **#{item}s**!"
+						end
 						if $players[event.user.id.to_s]['inv'][thrownitem] < 1
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrownitem)
 						end
@@ -35,16 +42,23 @@ module Commands
 				#throw things at the ground
 				item = item.join(' ').titleize
 				threw = false
-				$items.each do |x|
-					if x['name'] == item
+				x = 0
+				begin
+					if $items[x]['name'] == item
 						threw = true
-						thrownitem = itemsindexed[x].to_s
+						thrownitem = itemsindexed[$items[x]].to_s
+						thrownindex = x
 					end
-				end
+					x += 1
+				end while x < $items.length
 				if threw
 					if $players[event.user.id.to_s]['inv'].has_key?(thrownitem)
-						event.respond "**#{event.user.name}** threw a **#{item}**!"
-						$players[event.user.id.to_s]['inv'][thrownitem] -= 1
+						if $items[thrownindex]['throw']
+							event.respond "**#{event.user.name}** threw a **#{item}**!"
+							$players[event.user.id.to_s]['inv'][thrownitem] -= 1
+						else
+							event.respond "You can't throw **#{item}s**!"
+						end
 						if $players[event.user.id.to_s]['inv'][thrownitem] < 1
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrownitem)
 						end

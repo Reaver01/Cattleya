@@ -8,8 +8,9 @@ module Commands
 				help_available: false,
 				permission_level: 800,
 		) do |event|
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: kill"
-			$bot.send_message(event.message.channel, "Shutting down... I'll be back.")
+			puts "#{event.timestamp}: #{event.user.name}: CMD: kill"
+			$bot.send_message(event.message.channel, "Saving data and shutting down... I'll be back.")
+			File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
 			$bot.stop
 			exit
 			nil

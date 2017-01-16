@@ -16,31 +16,26 @@ module Commands
 				del = "yes"
 			end
 			level = level.to_i
-			permarray = []
-			permarray = loadArr(permarray,"botfiles/perm")
+			permissions = Hash.new
+			permissions = loadPERM(permissions,"botfiles/permissions.json")
 			if $bot.parse_mention(uname) !=nil
 				userid = $bot.parse_mention(uname).id
-				username = $bot.parse_mention(uname).name
-				if permarray.include? userid
+				if permissions.has_key?(userid.to_s)
 					event.respond "User permissions found... Updating permissions."
-					hash = Hash[permarray.map.with_index.to_a]
-					i = hash[userid].to_i
-					curlevel = permarray[i+1]
+					curlevel = permissions[userid.to_s]['lvl']
 					event.respond "Current permission level: #{curlevel}"
 					if [800, 999].include? curlevel
 						if del == "yes"
 							if force == "yes"
 								event.respond "Force deleting user's permissions"
-								permarray.delete_at(i+2)
-								permarray.delete_at(i+1)
-								permarray.delete_at(i)
+								permissions = permissions.without(userid)
 							else
 								event.respond "You must force deletion of admin or botmaster"
 							end
 						else
 							if force == "yes"
 								event.respond "Forcing permission change to lower level."
-								permarray[i+1] = level
+								permissions[userid.to_s]['lvl'] = level
 							end
 							if force == "no"
 								event.respond "User permissions level is admin or higher, you must force permissions change to set lower."
@@ -49,28 +44,23 @@ module Commands
 					else
 						if del == "yes"
 							event.respond "Deleting user's permissions"
-							permarray.delete_at(i+2)
-							permarray.delete_at(i+1)
-							permarray.delete_at(i)
+							permissions = permissions.without(userid.to_s)
 						else
 							event.respond "Changing user's permissions"
-							permarray[i+1] = level
+							permissions[userid.to_s]['lvl'] = level
 						end
 					end
 				else
 					event.respond "User permissions not found... Adding permissions."
-					permarray.push(userid,level,username)
+					permissions[userid.to_s] = {'id'=>userid, 'lvl'=>level}
 				end
-				File.write('botfiles/perm', permarray.to_s)
-				pos = 0
-				begin
-					$bot.set_user_permission(permarray[pos],permarray[pos+1])
-					pos += 3
-				end while pos < permarray.length
-				puts "Permission Loaded!"
+				File.open("botfiles/permissions.json", 'w') { |f| f.write permissions.to_json }
+				permissions.each do |key, value|
+					$bot.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
+				end
 			else
 				if uname == "check"
-					event.respond permarray
+					event << permissions
 				else
 					event.respond "Invalid user."
 				end

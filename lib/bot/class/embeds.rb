@@ -53,3 +53,14 @@ def userInfo(id, uname)
 	e.description = "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n**XP:** #{$players[id]['xp']}\n**Zenny:** #{$players[id]['zenny']}\n**Inventory:** #{invnum} items"
 	e
 end
+
+def monster(index, damage, trap, anger)
+	e = Discordrb::Webhooks::Embed.new
+	e.author = {
+		name: $monsters[index]['name']
+	}
+	e.color = $monsters[index]['color']
+	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{$monsters[index]['icon']}.png" }
+	e.description = "Health: #{$monsters[index]['hp'].to_i-damage.to_i}\nAngry: #{anger}\nIn Trap: #{trap}"
+	e
+end

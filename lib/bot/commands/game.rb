@@ -9,10 +9,10 @@ module Commands
 				min_args: 1,
 				permission_level: 2,
 		) do |event, *text|
-			gametext = text.join(' ')
-			File.write('botfiles/game', gametext)
-			$bot.game = gametext
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: game <#{gametext}>"
+			$settings['game'] = text.join(' ')
+			$bot.game = $settings['game']
+			File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
+			puts "#{event.timestamp}: #{event.user.name}: CMD: game <#{gametext}>"
 			nil
 		end
 	end
