@@ -5,8 +5,8 @@ module Commands
 				:buy,
 				description: "Buys an item from the shop",
 				useage: "buy",
-				min_args: 2,
-				max_args: 3
+				min_args: 1,
+				max_args: 2
 		) do |event, opt, num=1|
 			if num < 1
 				num = 1
