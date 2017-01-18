@@ -71,8 +71,7 @@ module Commands
 								else
 									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
 								end
-							end
-							if item == 'Pitfall Trap'
+							elsif item == 'Pitfall Trap'
 								if ['pitfall', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
 									$current_unstable[event.channel.id.to_s]['intrap'] = true
 									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now

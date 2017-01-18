@@ -7,13 +7,7 @@ module Commands
 				usage: "$unstable",
 				help_available: true
 		) do |event|
-			user_is_admin = false
-			event.user.roles.each do |x|
-				if x.permissions.administrator
-					user_is_admin = true
-				end
-			end
-			if user_is_admin
+			if event.user.can_manage_channels?
 				if $unstable.key?(event.channel.id.to_s)
 					if $unstable[event.channel.id.to_s]
 						$unstable[event.channel.id.to_s] = false

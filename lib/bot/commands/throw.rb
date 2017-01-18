@@ -62,6 +62,23 @@ module Commands
 						if $players[event.user.id.to_s]['inv'][thrown_item] < 1
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrown_item)
 						end
+						if $current_unstable.has_key?(event.channel.id.to_s)
+							if item == 'Barrel Bomb S'
+								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
+									if $current_unstable[event.channel.id.to_s]['intrap']
+										chance_to_hit = 0
+									else
+										chance_to_hit = 3
+									end
+								else
+									chance_to_hit = 3
+								end
+								if rand(0..chance_to_hit) == 0
+									$current_unstable[event.channel.id.to_s]['hp'] -= 10
+									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+								end
+							end
+						end
 					else
 						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
 					end
