@@ -1,13 +1,13 @@
 module Commands
-	module Monster
+	module MonsterInfo
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:minfo,
-				description: "responds with monster info",
+				description: "Responds with monster info",
 				useage: "monster"
 		) do |event|
-			if $curunst.has_key?(event.channel.id.to_s)
-				event.channel.send_embed '', monster($curunst[event.channel.id.to_s])
+			if CURRENT_UNSTABLE.has_key?(event.channel.id.to_s)
+				event.channel.send_embed '', monster(CURRENT_UNSTABLE[event.channel.id.to_s])
 			else
 				event.respond "There isn't a monster in this channel right now."
 			end

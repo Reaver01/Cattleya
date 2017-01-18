@@ -1,115 +1,99 @@
-def embed(eName, eDesc)
-	e = Discordrb::Webhooks::Embed.new
-	e.author = {
-		name: eName
-	}
-	e.color = "%06x" % (rand * 0xffffff)
-	e.description = eDesc
-	e.timestamp = Time.now
-	e
+def Embed(e_name, e_color, e_desc)
+  Discordrb::Webhooks::Embed.new(
+    author: { name: e_name, icon_url: e_icon },
+    color: e_color,
+    description: e_desc,
+    timestamp: Time.now
+  )
 end
 
-def inventory(id, uname)
-	desc = "**Zenny:** #{$players[id]['zenny']}\n\n"
-	$players[id]['inv'].each do |key, item|
-		desc += "**#{$items[key.to_i]['name']}:** #{item.to_i}\n"
+def EmbedWithIcon(e_name, e_icon, e_color, e_desc)
+  Discordrb::Webhooks::Embed.new(
+    author: { name: e_name, icon_url: e_icon },
+    color: e_color,
+    description: e_desc,
+    timestamp: Time.now
+  )
+end
+
+def EmbedWithThumbnail(e_name, e_color, e_thumb, e_desc)
+  Discordrb::Webhooks::Embed.new(
+    author: { name: e_name },
+    color: e_color,
+    thumbnail: { url: e_thumb }
+    description: e_desc,
+    timestamp: Time.now
+  )
+end
+
+def EmbedWithIconAndThumbnail(e_name, e_icon e_color, e_thumb, e_desc)
+  Discordrb::Webhooks::Embed.new(
+    author: { name: e_name, icon_url: e_icon },
+    color: e_color,
+    thumbnail: { url: e_thumb }
+    description: e_desc,
+    timestamp: Time.now
+  )
+end
+
+def inventory(id, user_name)
+	desc = "**Zenny:** #{PLAYERS[id]['zenny']}\n\n"
+	PLAYERS[id]['inv'].each do |key, item|
+		desc += "**#{ITEMS[key.to_i]['name']}:** #{item.to_i}\n"
 	end
-	e = Discordrb::Webhooks::Embed.new
-	e.author = {
-		name: "Here is your inventory #{uname}!",
-		icon_url: $bot.profile.avatar_url
-	}
-	e.color = "%06x" % (rand * 0xffffff)
-	e.description = desc
-	e
+	EmbedWithIcon("Here is your inventory #{user_name}!", BOT.profile.avatar_url, "%06x" % (rand * 0xffffff), desc)
 end
 
-def newItems(items, uname)
+def new_items(items, user_name)
 	desc = ""
 	items.each do |item|
-		desc += "**#{$items[item]['name']}**\n"
+		desc += "**#{ITEMS[item]['name']}**\n"
 	end
-	e = Discordrb::Webhooks::Embed.new
-	e.author = {
-		name: "Here are the new items you recieved #{uname}!",
-		icon_url: $bot.profile.avatar_url
-	}
-	e.color = "%06x" % (rand * 0xffffff)
-	e.description = desc
-	e
+	EmbedWithIcon("Here are the new items you recieved #{user_name}!", BOT.profile.avatar_url, "%06x" % (rand * 0xffffff), desc)
 end
 
-def userInfo(id, uname, avatar)
+def userInfo(id, user_name, avatar)
 	invnum = 0
-	$players[id]['inv'].each do |key, item|
+	PLAYERS[id]['inv'].each do |key, item|
 		invnum += item.to_i
 	end
-	e = Discordrb::Webhooks::Embed.new
-	e.author = {
-		name: "This is info all about #{uname}!",
-		icon_url: avatar
-	}
-	e.color = "%06x" % (rand * 0xffffff)
-	e.description = "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n**XP:** #{$players[id]['xp']}\n**Zenny:** #{$players[id]['zenny']}\n**Inventory:** #{invnum} items"
-	e
+	EmbedWithIcon("This is info all about #{user_name}!", avatar, "%06x" % (rand * 0xffffff), "**Level:** #{PLAYERS[id]['level']}\n**HR:** #{PLAYERS[id]['hr']}\n**XP:** #{PLAYERS[id]['xp']}\n**Zenny:** #{PLAYERS[id]['zenny']}\n**Inventory:** #{invnum} items")
 end
 
-def newMonster(arr)
-	e = Discordrb::Webhooks::Embed.new
-	e.author = {
-		name: arr['name']
-	}
-	e.color = arr['color']
-	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
-	e.description = "Good luck!"
-	e
+def NewMonster(arr)
+	EmbedWithThumbnail(arr['name'], arr['color'], "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png", "Good luck!")
 end
 
 def monster(arr)
-	anger = "No"
-	trap = "No"
+	is_angry = "No"
+	is_trapped = "No"
 	if arr.has_key?('intrap')
 		if arr['intrap']
-			trap = "Yes"
+			is_trapped = "Yes"
 		else
-			trap = "No"
+			is_trapped = "No"
 		end
 	end
 	if arr.has_key?('angry')
 		if arr['angry']
-			anger = "Yes"
+			is_angry = "Yes"
 		else
-			anger = "No"
+			is_angry = "No"
 		end
 	end
-	e = Discordrb::Webhooks::Embed.new
-	e.author = {
-		name: arr['name']
-	}
-	e.color = arr['color']
-	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
-	e.description = "Angry: #{anger}\nIn Trap: #{trap}"
-	e
+	EmbedWithThumbnail(arr['name'], arr['color'], "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png", "Angry: #{is_angry}\nIn Trap: #{is_trapped}")
 end
 
-def huntEnd(arr)
+def HuntEnd(arr)
 	desc = ''
 	players = arr['players'].sort_by {|k,v| v}.reverse.to_h
 	players.each do |k,v|
 		desc += "**#{arr['players2'][k]}:** #{v}\n"
-		if v > 50 + $players[k]['hr']
-			$players[k]['hr'] += 1
+		if v > 50 + PLAYERS[k]['hr']
+			PLAYERS[k]['hr'] += 1
 		end
 	end
-	e = Discordrb::Webhooks::Embed.new
-	e.author = {
-		name: "#{arr['name']}",
-		icon_url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
-	}
-	e.color = arr['color']
-	e.thumbnail = { url: "http://i.imgur.com/0MskAc1.png" }
-	e.description = desc.chomp("\n")
-	e
+	EmbedWithIconAndThumbnail("#{arr['name']}", "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" arr['color'], "http://i.imgur.com/0MskAc1.png", desc.chomp("\n"))
 end
 
 def shop(arr)
@@ -119,11 +103,5 @@ def shop(arr)
 		desc += "**#{x}. #{k['name']}:** #{k['price']}\n"
 		x += 1
 	end
-	e = Discordrb::Webhooks::Embed.new
-	e.author = {
-		name: "Here is the shop listing!"
-	}
-	e.color = "%06x" % (rand * 0xffffff)
-	e.description = desc.chomp("\n")
-	e
+	Embed("Here is the shop listing!", "%06x" % (rand * 0xffffff), desc.chomp("\n"))
 end

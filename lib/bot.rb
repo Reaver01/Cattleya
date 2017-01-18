@@ -7,52 +7,52 @@ end
 Dotenv.load
 
 #load other variables
-$settings = Hash.new
-$settings = loadJSON($settings, "botfiles/settings.json")
-$players = Hash.new
-$players = loadJSON($players, "botfiles/players.json")
-$unstable = Hash.new
-$unstable = loadJSON($unstable, "botfiles/unstable.json")
-$curunst = Hash.new
-$curunst = loadJSON($curunst, "botfiles/curunst.json")
+SETTINGS = Hash.new
+SETTINGS = LoadJSON(SETTINGS, "botfiles/settings.json")
+PLAYERS = Hash.new
+PLAYERS = LoadJSON(PLAYERS, "botfiles/players.json")
+UNSTABLE = Hash.new
+UNSTABLE = LoadJSON(UNSTABLE, "botfiles/unstable.json")
+CURRENT_UNSTABLE = Hash.new
+CURRENT_UNSTABLE = LoadJSON(CURRENT_UNSTABLE, "botfiles/CURRENT_UNSTABLE.json")
 
 #sets bot prefix
-$prefix = '>'
+PREFIX = '>'
 
-#Loads and establishes $bot object
-$bot = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: $prefix, advanced_functionality: false
+#Loads and establishes BOT object
+BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false
 
 #Load permissions from file
 permissions = Hash.new
-permissions = loadPERM(permissions,"botfiles/permissions.json")
+permissions = LoadPermissions(permissions,"botfiles/permissions.json")
 permissions.each do |key, value|
-	$bot.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
+	BOT.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
 end
 puts "Permission Loaded!"
 
 #Load all commands
 Commands.constants.each do |x|
-	$bot.include! Commands.const_get x
+	BOT.include! Commands.const_get x
 end
 
 #Load events
-$bot.include! Events
+BOT.include! Events
 
 #Turn off debugging and run async
-$bot.debug = false
-$bot.run :async
+BOT.debug = false
+BOT.run :async
 	
 #Set game status from file
-if $settings.has_key?('game')
-	$bot.game = $settings['game']
+if SETTINGS.has_key?('game')
+	BOT.game = SETTINGS['game']
 else
-	$bot.game = 0
+	BOT.game = 0
 end
 
-puts $bot.invite_url
+puts BOT.invite_url
 
 #start cron
 cronjobs_start
 
 puts 'Cattleya ready to serve!'
-$bot.sync
+BOT.sync

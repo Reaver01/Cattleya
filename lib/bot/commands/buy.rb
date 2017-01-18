@@ -7,23 +7,23 @@ module Commands
 				useage: "buy",
 				min_args: 1,
 				max_args: 2
-		) do |event, opt, num=1|
-			if num.to_i < 1
-				num = 1
+		) do |event, option_number, amount=1|
+			if amount.to_i < 1
+				amount = 1
 			end
-			num = num.to_i.round
-			opt = opt.to_i
-			if $players.has_key?(event.user.id.to_s)
-				if $players[event.user.id.to_s]['zenny'].to_i < ($items[opt-1]['price'].to_i * num.to_i)
-					event.respond "You don't have enough Zenny to purchase #{num} #{$items[opt-1]['name']}"
+			amount = amount.to_i.round
+			option_number = option_number.to_i
+			if PLAYERS.has_key?(event.user.id.to_s)
+				if PLAYERS[event.user.id.to_s]['zenny'].to_i < (ITEMS[option_number-1]['price'].to_i * amount.to_i)
+					event.respond "You don't have enough Zenny to purchase #{amount} #{ITEMS[option_number-1]['name']}"
 				else
-					$players[event.user.id.to_s]['zenny'] -= $items[opt-1]['price'] * num
-					if $players[event.user.id.to_s]['inv'].has_key?("#{opt-1}")
-						$players[event.user.id.to_s]['inv']["#{opt-1}"] += 1 * num
+					PLAYERS[event.user.id.to_s]['zenny'] -= ITEMS[option_number-1]['price'] * amount
+					if PLAYERS[event.user.id.to_s]['inv'].has_key?("#{option_number-1}")
+						PLAYERS[event.user.id.to_s]['inv']["#{option_number-1}"] += 1 * amount
 					else
-						$players[event.user.id.to_s]['inv']["#{opt-1}"] = 1 * num
+						PLAYERS[event.user.id.to_s]['inv']["#{option_number-1}"] = 1 * amount
 					end
-					event.respond "**#{event.user.name}** purchased **#{num} #{$items[opt-1]['name']}**"
+					event.respond "**#{event.user.name}** purchased **#{amount} #{ITEMS[option_number-1]['name']}**"
 				end
 			end
 			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: buy"

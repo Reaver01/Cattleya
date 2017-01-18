@@ -3,22 +3,22 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:notify,
-				description: "toggles pm notifications of level and other things",
+				description: "Toggles pm notifications of level.",
 				useage: "notify"
 		) do |event|
-			if $players[event.user.id.to_s].key?("messages")
-				if $players[event.user.id.to_s]['messages']
-					pmstatus = false
-					$bot.user(event.user.id.to_s).pm("PM notifications have been toggled off. How sad.")
+			if PLAYERS[event.user.id.to_s].key?("messages")
+				if PLAYERS[event.user.id.to_s]['messages']
+					pm_status = false
+					BOT.user(event.user.id.to_s).pm("PM notifications have been toggled off. How sad.")
 				else
-					pmstatus = true
-					$bot.user(event.user.id.to_s).pm("PM notifications have been toggled on! I love sending notifications!")
+					pm_status = true
+					BOT.user(event.user.id.to_s).pm("PM notifications have been toggled on! I love sending notifications!")
 				end
 			else
-				pmstatus = true
-				$bot.user(event.user.id.to_s).pm("PM notifications have been toggled on! I love sending notifications!")
+				pm_status = true
+				BOT.user(event.user.id.to_s).pm("PM notifications have been toggled on! I love sending notifications!")
 			end
-			$players[event.user.id.to_s]['messages'] = pmstatus
+			PLAYERS[event.user.id.to_s]['messages'] = pm_status
 			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: notify"
 			nil
 		end
