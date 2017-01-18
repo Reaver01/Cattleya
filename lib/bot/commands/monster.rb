@@ -2,7 +2,7 @@ module Commands
 	module Monster
 		extend Discordrb::Commands::CommandContainer
 		command(
-				:monster,
+				:minfo,
 				description: "responds with monster info",
 				useage: "monster"
 		) do |event|
