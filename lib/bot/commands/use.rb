@@ -3,13 +3,13 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:use,
-				description: "Use an item on somebody or monster",
+				description: "Use an item",
 				useage: "use <item> <user>"
 		) do |event, *item|
-			user_name = item[-1]
-			items_indexed = Hash[$items.map.with_index.to_a]
-			used_item = -1
-			if BOT.parse_mention(user_name) !=nil
+			uname = item[-1]
+			itemsindexed = Hash[$items.map.with_index.to_a]
+			useditem = -1
+			if BOT.parse_mention(uname) !=nil
 				#throw things at somebody
 				item = item.first item.size - 1
 				item = item.join(' ').titleize
@@ -18,21 +18,21 @@ module Commands
 				begin
 					if $items[x]['name'] == item
 						threw = true
-						used_item = items_indexed[$items[x]].to_s
-						used_item_index = x
+						useditem = itemsindexed[$items[x]].to_s
+						thrownindex = x
 					end
 					x += 1
 				end while x < $items.length
 				if threw
-					if $players[event.user.id.to_s]['inv'].has_key?(used_item)
-						if $items[used_item_index]['throw']
+					if $players[event.user.id.to_s]['inv'].has_key?(useditem)
+						if $items[thrownindex]['throw']
 							event.respond "**#{item}s** must be thrown!"
 						else
-							event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
-							$players[event.user.id.to_s]['inv'][used_item] -= 1
+							event.respond "**#{event.user.name}** used a **#{item}** on #{uname}!"
+							$players[event.user.id.to_s]['inv'][useditem] -= 1
 						end
-						if $players[event.user.id.to_s]['inv'][used_item] < 1
-							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
+						if $players[event.user.id.to_s]['inv'][useditem] < 1
+							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(useditem)
 						end
 					else
 						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
@@ -46,38 +46,39 @@ module Commands
 				begin
 					if $items[x]['name'] == item
 						threw = true
-						used_item = items_indexed[$items[x]].to_s
-						used_item_index = x
+						useditem = itemsindexed[$items[x]].to_s
+						thrownindex = x
 					end
 					x += 1
 				end while x < $items.length
 				if threw
-					if $players[event.user.id.to_s]['inv'].has_key?(used_item)
-						if $items[used_item_index]['throw']
+					if $players[event.user.id.to_s]['inv'].has_key?(useditem)
+						if $items[thrownindex]['throw']
 							event.respond "**#{item}s** must be thrown!"
 						else
 							event.respond "**#{event.user.name}** used a **#{item}**!"
-							$players[event.user.id.to_s]['inv'][used_item] -= 1
+							$players[event.user.id.to_s]['inv'][useditem] -= 1
 						end
-						if $players[event.user.id.to_s]['inv'][used_item] < 1
-							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
+						if $players[event.user.id.to_s]['inv'][useditem] < 1
+							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(useditem)
 						end
-						if $current_unstable.has_key?(event.channel.id.to_s)
-							if item == 'Shock Trap'
-								if ['shock', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
-									$current_unstable[event.channel.id.to_s]['intrap'] = true
-									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now
-									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+						if $curunst.has_key?(event.channel.id.to_s)
+							if useditem == 'Shock Trap'
+								if ['shock', 'both'].include? $curunst[event.channel.id.to_s]['trap']
+									$curunst[event.channel.id.to_s]['intrap'] = true
+									$curunst[event.channel.id.to_s]['traptime'] = Time.now
+									event.respond "The #{$curunst[event.channel.id.to_s]['name']} has been trapped!"
 								else
-									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									event.respond "The #{$curunst[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
 								end
-							elsif item == 'Pitfall Trap'
-								if ['pitfall', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
-									$current_unstable[event.channel.id.to_s]['intrap'] = true
-									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now
-									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+							end
+							if useditem == 'Pitfall Trap'
+								if ['pitfall', 'both'].include? $curunst[event.channel.id.to_s]['trap']
+									$curunst[event.channel.id.to_s]['intrap'] = true
+									$curunst[event.channel.id.to_s]['traptime'] = Time.now
+									event.respond "The #{$curunst[event.channel.id.to_s]['name']} has been trapped!"
 								else
-									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									event.respond "The #{$curunst[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
 								end
 							end
 						end
