@@ -1,10 +1,10 @@
 def embed(e_name, e_desc)
-  Discordrb::Webhooks::Embed.new(
-    author: { name: e_name },
-    color: "%06x" % (rand * 0xffffff),
-    description: e_desc,
-    timestamp: Time.now
-  )
+	Discordrb::Webhooks::Embed.new(
+		author: { name: e_name },
+		color: 0xffffff,
+		description: e_desc,
+		timestamp: Time.now
+	)
 end
 
 def inventory(id, user_name)
