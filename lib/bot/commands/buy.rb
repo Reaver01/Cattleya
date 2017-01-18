@@ -14,7 +14,7 @@ module Commands
 			num = num.to_i.round
 			opt = opt.to_i
 			if $players.has_key?(event.user.id.to_s)
-				if $players[event.user.id.to_s]['zenny'] < $items[opt-1]['price'] * num
+				if $players[event.user.id.to_s]['zenny'].to_i < $items[opt-1]['price'].to_i * num.to_i
 					event.respond "You don't have enough Zenny to purchase #{num} #{$items[opt-1]['name']}"
 				else
 					$players[event.user.id.to_s]['zenny'] -= $items[opt-1]['price'] * num
