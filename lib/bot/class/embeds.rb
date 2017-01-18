@@ -114,8 +114,10 @@ end
 
 def shop(arr)
 	desc = ''
+	x = 1
 	arr.each do |k,v|
-		desc += "**#{arr[k]['name']}:** #{arr[k]['price']}\n"
+		desc += "**#{x}. #{k['name']}:** #{k['price']}\n"
+		x += 1
 	end
 	e = Discordrb::Webhooks::Embed.new
 	e.author = {
