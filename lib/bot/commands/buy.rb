@@ -22,7 +22,7 @@ module Commands
 					event.respond "**#{event.user.name}** purchased **#{num} #{$items[opt-1]['name']}**"
 				end
 			end
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: inventory"
+			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: buy"
 			nil
 		end
 	end
