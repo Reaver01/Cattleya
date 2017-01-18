@@ -40,7 +40,7 @@ end
 def new_monster(arr)
 	e = embed(arr['name'], "Good luck!")
 	e.color = arr['color']
-	e.thumbnail[:url] = "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
+	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
 	e
 end
 
@@ -63,7 +63,7 @@ def monster(arr)
 	end
 	e = embed(arr['name'], "Angry: #{is_angry}\nIn Trap: #{is_trapped}")
 	e.color = arr['color']
-	e.thumbnail[:url] = "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
+	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
 	e
 end
 
@@ -79,7 +79,7 @@ def hunt_end(arr)
 	e = embed("#{arr['name']}", desc.chomp("\n"))
 	e.author[:icon_url] = "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
 	e.color = arr['color']
-	e.thumbnail[:url] = "http://i.imgur.com/0MskAc1.png"
+	e.thumbnail = { url: "http://i.imgur.com/0MskAc1.png" }
 	e
 end
 
