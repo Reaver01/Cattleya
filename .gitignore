@@ -5,3 +5,4 @@ userbase
 .env
 vendor
 bin
+.bundle
