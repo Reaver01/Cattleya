@@ -1,3 +1,4 @@
+#main embed that is called by everything
 def embed(e_name, e_desc)
 	Discordrb::Webhooks::Embed.new(
 		author: { name: e_name },
@@ -6,7 +7,7 @@ def embed(e_name, e_desc)
 		timestamp: Time.now
 	)
 end
-
+#displays inventory for user
 def inventory(id, user_name)
 	desc = "**Zenny:** #{$players[id]['zenny']}\n\n"
 	$players[id]['inv'].each do |key, item|
@@ -16,7 +17,7 @@ def inventory(id, user_name)
 	e.author[:icon_url] = BOT.profile.avatar_url
 	e
 end
-
+#displays new items that user gains on level
 def new_items(items, user_name)
 	desc = ""
 	items.each do |item|
@@ -26,7 +27,7 @@ def new_items(items, user_name)
 	e.author[:icon_url] = BOT.profile.avatar_url
 	e
 end
-
+#displays info about the user
 def user_info(id, user_name, avatar)
 	invnum = 0
 	$players[id]['inv'].each do |key, item|
@@ -36,14 +37,14 @@ def user_info(id, user_name, avatar)
 	e.author[:icon_url] = avatar
 	e
 end
-
+#displays the monster that appears in the channels
 def new_monster(arr)
 	e = embed(arr['name'], "Good luck!")
 	e.color = arr['color']
 	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
 	e
 end
-
+#displays info about the monster
 def monster(arr)
 	is_angry = "No"
 	is_trapped = "No"
@@ -66,7 +67,7 @@ def monster(arr)
 	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
 	e
 end
-
+#displays after hunt statistics
 def hunt_end(arr)
 	desc = ''
 	players = arr['players'].sort_by {|k,v| v}.reverse.to_h
@@ -82,7 +83,7 @@ def hunt_end(arr)
 	e.thumbnail = { url: "http://i.imgur.com/0MskAc1.png" }
 	e
 end
-
+#displays the items and prices
 def shop(arr)
 	desc = ''
 	x = 1

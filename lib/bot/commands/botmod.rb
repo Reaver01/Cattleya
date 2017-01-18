@@ -12,7 +12,7 @@ module Commands
 				permission_message: "I'm sorry Dave, I cannot do that.",
 		) do |event, mention, level=1, force="no"|
 			delete_permission = "no"
-			if level == "delete_permissionete"
+			if level == "delete"
 				delete_permission = "yes"
 			end
 			level = level.to_i
@@ -27,10 +27,10 @@ module Commands
 					if [800, 999].include? current_permission_level
 						if delete_permission == "yes"
 							if force == "yes"
-								event.respond "Force delete_permissioneting user's permissions"
+								event.respond "Force deleteing user's permissions"
 								permissions = permissions.without(user_id)
 							else
-								event.respond "You must force delete_permissionetion of admin or botmaster"
+								event.respond "You must force deletetion of admin or botmaster"
 							end
 						else
 							if force == "yes"
@@ -43,7 +43,7 @@ module Commands
 						end
 					else
 						if delete_permission == "yes"
-							event.respond "delete_permissioneting user's permissions"
+							event.respond "deleteing user's permissions"
 							permissions = permissions.without(user_id.to_s)
 						else
 							event.respond "Changing user's permissions"
