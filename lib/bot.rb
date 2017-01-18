@@ -7,14 +7,14 @@ end
 Dotenv.load
 
 #load other variables
-SETTINGS = Hash.new
-SETTINGS = LoadJSON(SETTINGS, "botfiles/settings.json")
-PLAYERS = Hash.new
-PLAYERS = LoadJSON(PLAYERS, "botfiles/players.json")
-UNSTABLE = Hash.new
-UNSTABLE = LoadJSON(UNSTABLE, "botfiles/unstable.json")
-CURRENT_UNSTABLE = Hash.new
-CURRENT_UNSTABLE = LoadJSON(CURRENT_UNSTABLE, "botfiles/curunst.json")
+$settings = Hash.new
+$settings = LoadJSON($settings, "botfiles/$settings.json")
+$players = Hash.new
+$players = LoadJSON($players, "botfiles/$players.json")
+$unstable = Hash.new
+$unstable = LoadJSON($unstable, "botfiles/$unstable.json")
+$current_unstable = Hash.new
+$current_unstable = LoadJSON($current_unstable, "botfiles/current_unstable.json")
 
 #sets bot prefix
 PREFIX = '>'
@@ -43,8 +43,8 @@ BOT.debug = false
 BOT.run :async
 	
 #Set game status from file
-if SETTINGS.has_key?('game')
-	BOT.game = SETTINGS['game']
+if $settings.has_key?('game')
+	BOT.game = $settings['game']
 else
 	BOT.game = 0
 end

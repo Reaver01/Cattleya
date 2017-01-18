@@ -24,15 +24,15 @@ module Commands
 					x += 1
 				end while x < ITEMS.length
 				if threw
-					if PLAYERS[event.user.id.to_s]['inv'].has_key?(used_item)
+					if $players[event.user.id.to_s]['inv'].has_key?(used_item)
 						if ITEMS[used_item_index]['throw']
 							event.respond "**#{item}s** must be thrown!"
 						else
 							event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
-							PLAYERS[event.user.id.to_s]['inv'][used_item] -= 1
+							$players[event.user.id.to_s]['inv'][used_item] -= 1
 						end
-						if PLAYERS[event.user.id.to_s]['inv'][used_item] < 1
-							PLAYERS[event.user.id.to_s]['inv'] = PLAYERS[event.user.id.to_s]['inv'].without(used_item)
+						if $players[event.user.id.to_s]['inv'][used_item] < 1
+							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
 						end
 					else
 						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
@@ -52,33 +52,33 @@ module Commands
 					x += 1
 				end while x < ITEMS.length
 				if threw
-					if PLAYERS[event.user.id.to_s]['inv'].has_key?(used_item)
+					if $players[event.user.id.to_s]['inv'].has_key?(used_item)
 						if ITEMS[used_item_index]['throw']
 							event.respond "**#{item}s** must be thrown!"
 						else
 							event.respond "**#{event.user.name}** used a **#{item}**!"
-							PLAYERS[event.user.id.to_s]['inv'][used_item] -= 1
+							$players[event.user.id.to_s]['inv'][used_item] -= 1
 						end
-						if PLAYERS[event.user.id.to_s]['inv'][used_item] < 1
-							PLAYERS[event.user.id.to_s]['inv'] = PLAYERS[event.user.id.to_s]['inv'].without(used_item)
+						if $players[event.user.id.to_s]['inv'][used_item] < 1
+							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
 						end
-						if CURRENT_UNSTABLE.has_key?(event.channel.id.to_s)
+						if $current_unstable.has_key?(event.channel.id.to_s)
 							if item == 'Shock Trap'
-								if ['shock', 'both'].include? CURRENT_UNSTABLE[event.channel.id.to_s]['trap']
-									CURRENT_UNSTABLE[event.channel.id.to_s]['intrap'] = true
-									CURRENT_UNSTABLE[event.channel.id.to_s]['traptime'] = Time.now
-									event.respond "The #{CURRENT_UNSTABLE[event.channel.id.to_s]['name']} has been trapped!"
+								if ['shock', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
+									$current_unstable[event.channel.id.to_s]['intrap'] = true
+									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now
+									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
 								else
-									event.respond "The #{CURRENT_UNSTABLE[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
 								end
 							end
 							if item == 'Pitfall Trap'
-								if ['pitfall', 'both'].include? CURRENT_UNSTABLE[event.channel.id.to_s]['trap']
-									CURRENT_UNSTABLE[event.channel.id.to_s]['intrap'] = true
-									CURRENT_UNSTABLE[event.channel.id.to_s]['traptime'] = Time.now
-									event.respond "The #{CURRENT_UNSTABLE[event.channel.id.to_s]['name']} has been trapped!"
+								if ['pitfall', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
+									$current_unstable[event.channel.id.to_s]['intrap'] = true
+									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now
+									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
 								else
-									event.respond "The #{CURRENT_UNSTABLE[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
 								end
 							end
 						end

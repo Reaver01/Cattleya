@@ -24,15 +24,15 @@ module Commands
 					x += 1
 				end while x < ITEMS.length
 				if threw
-					if PLAYERS[event.user.id.to_s]['inv'].has_key?(thrown_item)
+					if $players[event.user.id.to_s]['inv'].has_key?(thrown_item)
 						if ITEMS[thrown_item_index]['throw']
 							event.respond "**#{event.user.name}** threw a **#{item}** at #{user_name}!"
-							PLAYERS[event.user.id.to_s]['inv'][thrown_item] -= 1
+							$players[event.user.id.to_s]['inv'][thrown_item] -= 1
 						else
 							event.respond "You can't throw **#{item}s**!"
 						end
-						if PLAYERS[event.user.id.to_s]['inv'][thrown_item] < 1
-							PLAYERS[event.user.id.to_s]['inv'] = PLAYERS[event.user.id.to_s]['inv'].without(thrown_item)
+						if $players[event.user.id.to_s]['inv'][thrown_item] < 1
+							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrown_item)
 						end
 					else
 						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
@@ -52,15 +52,15 @@ module Commands
 					x += 1
 				end while x < ITEMS.length
 				if threw
-					if PLAYERS[event.user.id.to_s]['inv'].has_key?(thrown_item)
+					if $players[event.user.id.to_s]['inv'].has_key?(thrown_item)
 						if ITEMS[thrown_item_index]['throw']
 							event.respond "**#{event.user.name}** threw a **#{item}**!"
-							PLAYERS[event.user.id.to_s]['inv'][thrown_item] -= 1
+							$players[event.user.id.to_s]['inv'][thrown_item] -= 1
 						else
 							event.respond "You can't throw **#{item}s**!"
 						end
-						if PLAYERS[event.user.id.to_s]['inv'][thrown_item] < 1
-							PLAYERS[event.user.id.to_s]['inv'] = PLAYERS[event.user.id.to_s]['inv'].without(thrown_item)
+						if $players[event.user.id.to_s]['inv'][thrown_item] < 1
+							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrown_item)
 						end
 					else
 						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"

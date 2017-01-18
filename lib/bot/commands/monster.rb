@@ -6,8 +6,8 @@ module Commands
 				description: "Responds with monster info",
 				useage: "monster"
 		) do |event|
-			if CURRENT_UNSTABLE.has_key?(event.channel.id.to_s)
-				event.channel.send_embed '', monster(CURRENT_UNSTABLE[event.channel.id.to_s])
+			if $current_unstable.has_key?(event.channel.id.to_s)
+				event.channel.send_embed '', monster($current_unstable[event.channel.id.to_s])
 			else
 				event.respond "There isn't a monster in this channel right now."
 			end

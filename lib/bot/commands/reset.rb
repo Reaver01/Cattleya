@@ -6,13 +6,13 @@ module Commands
 				description: "Resets player back to 0",
 				useage: "reset"
 		) do |event|
-			if PLAYERS.key?(event.user.id.to_s)
-				if PLAYERS[event.user.id.to_s].key?('messages')
-					messages = PLAYERS[event.user.id.to_s]['messages']
+			if $players.key?(event.user.id.to_s)
+				if $players[event.user.id.to_s].key?('messages')
+					messages = $players[event.user.id.to_s]['messages']
 				else
 					messages = false
 				end
-				PLAYERS[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'time'=>event.timestamp, 'inv'=>{'0'=>1}, 'messages'=>messages}
+				$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'time'=>event.timestamp, 'inv'=>{'0'=>1}, 'messages'=>messages}
 				event.respond "**#{event.user.name}** has been reset."
 			end
 			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: reset"

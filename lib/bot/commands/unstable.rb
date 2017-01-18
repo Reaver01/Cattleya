@@ -1,10 +1,10 @@
 module Commands
-	module Unstable
+	module $unstable
 		extend Discordrb::Commands::CommandContainer
 		command(
-				:unstable,
-				description: "Toggle unstable status for the current channel.",
-				usage: "unstable",
+				:$unstable,
+				description: "Toggle $unstable status for the current channel.",
+				usage: "$unstable",
 				help_available: true
 		) do |event|
 			user_is_admin = false
@@ -14,23 +14,23 @@ module Commands
 				end
 			end
 			if user_is_admin
-				if UNSTABLE.key?(event.channel.id.to_s)
-					if UNSTABLE[event.channel.id.to_s]
-						UNSTABLE[event.channel.id.to_s] = false
-						event.respond "Unstable has been toggled off for this channel. Monsters will no longer appear."
+				if $unstable.key?(event.channel.id.to_s)
+					if $unstable[event.channel.id.to_s]
+						$unstable[event.channel.id.to_s] = false
+						event.respond "$unstable has been toggled off for this channel. Monsters will no longer appear."
 					else
-						UNSTABLE[event.channel.id.to_s] = true
-						event.respond "Unstable has been toggled on for this channel. Monsters will appear in this channel."
+						$unstable[event.channel.id.to_s] = true
+						event.respond "$unstable has been toggled on for this channel. Monsters will appear in this channel."
 					end
 				else
-					UNSTABLE[event.channel.id.to_s] = true
-					event.respond "Unstable has been toggled on for this channel. Monsters will appear in this channel."
+					$unstable[event.channel.id.to_s] = true
+					event.respond "$unstable has been toggled on for this channel. Monsters will appear in this channel."
 				end
-				File.open('botfiles/unstable.json', 'w') { |f| f.write UNSTABLE.to_json }
+				File.open('botfiles/$unstable.json', 'w') { |f| f.write $unstable.to_json }
 			else
-				event.respond "Only an admin can toggle unstable on a channel"
+				event.respond "Only an admin can toggle $unstable on a channel"
 			end
-			puts "#{event.timestamp}: #{event.user.name}: CMD: unstable"
+			puts "#{event.timestamp}: #{event.user.name}: CMD: $unstable"
 			nil
 		end
 	end

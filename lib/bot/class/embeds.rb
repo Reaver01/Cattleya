@@ -8,8 +8,8 @@ def Embed(e_name, e_desc)
 end
 
 def inventory(id, user_name)
-	desc = "**Zenny:** #{PLAYERS[id]['zenny']}\n\n"
-	PLAYERS[id]['inv'].each do |key, item|
+	desc = "**Zenny:** #{$players[id]['zenny']}\n\n"
+	$players[id]['inv'].each do |key, item|
 		desc += "**#{ITEMS[key.to_i]['name']}:** #{item.to_i}\n"
 	end
 	e = Embed("Here is your inventory #{user_name}!", desc)
@@ -29,10 +29,10 @@ end
 
 def userInfo(id, user_name, avatar)
 	invnum = 0
-	PLAYERS[id]['inv'].each do |key, item|
+	$players[id]['inv'].each do |key, item|
 		invnum += item.to_i
 	end
-	e = Embed("This is info all about #{user_name}!", "**Level:** #{PLAYERS[id]['level']}\n**HR:** #{PLAYERS[id]['hr']}\n**XP:** #{PLAYERS[id]['xp']}\n**Zenny:** #{PLAYERS[id]['zenny']}\n**Inventory:** #{invnum} items")
+	e = Embed("This is info all about #{user_name}!", "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n**XP:** #{$players[id]['xp']}\n**Zenny:** #{$players[id]['zenny']}\n**Inventory:** #{invnum} items")
 	e.author[:icon_url] = avatar
 	e
 end
@@ -69,11 +69,11 @@ end
 
 def HuntEnd(arr)
 	desc = ''
-	players = arr['players'].sort_by {|k,v| v}.reverse.to_h
-	players.each do |k,v|
-		desc += "**#{arr['players2'][k]}:** #{v}\n"
-		if v > 50 + PLAYERS[k]['hr']
-			PLAYERS[k]['hr'] += 1
+	$players = arr['$players'].sort_by {|k,v| v}.reverse.to_h
+	$players.each do |k,v|
+		desc += "**#{arr['$players2'][k]}:** #{v}\n"
+		if v > 50 + $players[k]['hr']
+			$players[k]['hr'] += 1
 		end
 	end
 	e = Embed("#{arr['name']}", desc.chomp("\n"))
