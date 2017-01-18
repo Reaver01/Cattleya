@@ -68,13 +68,46 @@ module Commands
 									if $current_unstable[event.channel.id.to_s]['intrap']
 										chance_to_hit = 0
 									else
+										chance_to_hit = 2
+									end
+								else
+									chance_to_hit = 2
+								end
+								if rand(0..chance_to_hit) == 0
+									$current_unstable[event.channel.id.to_s]['hp'] -= 10
+									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+								else
+									event.respond "**#{event.user.name}** missed!"
+								end
+							elsif item == 'Barrel Bomb L'
+								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
+									if $current_unstable[event.channel.id.to_s]['intrap']
+										chance_to_hit = 0
+									else
+										chance_to_hit = 1
+									end
+								else
+									chance_to_hit = 1
+								end
+								if rand(0..chance_to_hit) == 0
+									$current_unstable[event.channel.id.to_s]['hp'] -= 20
+									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+								else
+									event.respond "**#{event.user.name}** missed!"
+								end
+							end
+							elsif item == 'Dynamite'
+								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
+									if $current_unstable[event.channel.id.to_s]['intrap']
+										chance_to_hit = 0
+									else
 										chance_to_hit = 3
 									end
 								else
 									chance_to_hit = 3
 								end
 								if rand(0..chance_to_hit) == 0
-									$current_unstable[event.channel.id.to_s]['hp'] -= 10
+									$current_unstable[event.channel.id.to_s]['hp'] -= 5
 									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
 								else
 									event.respond "**#{event.user.name}** missed!"
