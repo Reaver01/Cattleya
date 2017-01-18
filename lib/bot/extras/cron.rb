@@ -11,12 +11,14 @@ def cronjobs_start
 			if value
 				a = rand(0..9)
 				if a == 0
-					$curunst[key] = $monsters[rand(0..($monsters.length - 1))]
-					puts $curunst[key]
-					begin
-						$bot.channel(key.to_s).send_embed 'A Monster has entered the channel!', monster($curunst[key], "no", "no")
-						File.open('botfiles/curunst.json', 'w') { |f| f.write $curunst.to_json }
-					rescue
+					unless $curunst.has_key?(key)
+						$curunst[key] = $monsters[rand(0..($monsters.length - 1))]
+						puts $curunst[key]
+						begin
+							$bot.channel(key.to_s).send_embed 'A Monster has entered the channel!', monster($curunst[key], "no", "no")
+							File.open('botfiles/curunst.json', 'w') { |f| f.write $curunst.to_json }
+						rescue
+						end
 					end
 				end
 			end
