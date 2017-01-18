@@ -107,7 +107,7 @@ def huntEnd(arr)
 		icon_url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
 	}
 	e.color = arr['color']
-	e.thumbnail = { url: "http://i.imgur.com/idahYG5.png" }
+	e.thumbnail = { url: "http://i.imgur.com/0MskAc1.png" }
 	e.description = desc.chomp("\n")
 	e
 end
