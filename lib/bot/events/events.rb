@@ -46,6 +46,15 @@ module Events
 					end
 				end
 			end
+			if $curunst.has_key?(event.channel.id.to_s)
+				if $curunst[event.channel.id.to_s].has_key?('intrap')
+					if $curunst[event.channel.id.to_s].has_key?('traptime')		
+						if TimeDifference.between($curunst[event.channel.id.to_s]['traptime'], newtime).in_minutes > 2
+							$curunst[event.channel.id.to_s]['intrap'] = false
+						end
+					end
+				end
+			end
 		end
 	end
 	message(containing: "e") do |event|
@@ -53,12 +62,22 @@ module Events
 			#does nothing
 		else
 			if $curunst.has_key?(event.channel.id.to_s)
+				if $curunst[event.channel.id.to_s].has_key?('intrap')
+					if $curunst[event.channel.id.to_s]['intrap']
+						trap = 1.75
+					else
+						trap = 1
+					end
+				else
+					trap = 1
+				end
 				unless $players.has_key?(event.user.id.to_s)
 					mod = 0
 				else
 					mod = $players[event.user.id.to_s]['hr']
 				end
-				dam = rand(0..(10 + mod))
+				dam = rand(0..(10 + mod)) * trap
+				dam = dam.round
 				$curunst[event.channel.id.to_s]['hp'] -= dam
 				if $curunst[event.channel.id.to_s].has_key?('players')
 					if $curunst[event.channel.id.to_s]['players'].has_key?(event.user.id.to_s)
