@@ -47,11 +47,9 @@ module Events
 				end
 			end
 			if $curunst.has_key?(event.channel.id.to_s)
-				if $curunst[event.channel.id.to_s].has_key?('intrap')
-					if $curunst[event.channel.id.to_s].has_key?('traptime')		
-						if TimeDifference.between($curunst[event.channel.id.to_s]['traptime'], newtime).in_minutes > 2
-							$curunst[event.channel.id.to_s]['intrap'] = false
-						end
+				if $curunst[event.channel.id.to_s].has_key?('traptime')		
+					if TimeDifference.between($curunst[event.channel.id.to_s]['traptime'], newtime).in_minutes > 2
+						$curunst[event.channel.id.to_s]['intrap'] = false
 					end
 				end
 			end
