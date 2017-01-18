@@ -50,6 +50,7 @@ module Events
 				if $curunst[event.channel.id.to_s].has_key?('traptime')		
 					if TimeDifference.between($curunst[event.channel.id.to_s]['traptime'], newtime).in_minutes > 2
 						$curunst[event.channel.id.to_s]['intrap'] = false
+						$curunst[event.channel.id.to_s] = $curunst[event.channel.id.to_s].without('traptime')
 						event.respond "The #{$curunst[event.channel.id.to_s]['name']} has escaped the trap!"
 					end
 				end
