@@ -69,10 +69,18 @@ def monster(arr)
 	anger = "No"
 	trap = "No"
 	if arr.has_key?('intrap')
-		trap = arr['intrap']
+		if arr['intrap']
+			trap = "Yes"
+		else
+			trap = "No"
+		end
 	end
 	if arr.has_key?('angry')
-		trap = arr['angry']
+		if arr['angry']
+			anger = "Yes"
+		else
+			anger = "No"
+		end
 	end
 	e = Discordrb::Webhooks::Embed.new
 	e.author = {
