@@ -6,7 +6,7 @@ module Events
 		else
 			new_time = event.timestamp
 			if $players.key?(event.user.id.to_s)
-				if $players[event.user.id.to_s].has_key?('time')
+				if $players[event.user.id.to_s].key?('time')
 					old_time = $players[event.user.id.to_s]['time']
 				else
 					old_time = "2017-01-01 00:00:00 +0000"
@@ -22,7 +22,7 @@ module Events
 			if $players[event.user.id.to_s]['xp'] > next_level.round
 				new_zenny = (rand(0..9) * 10) + (rand(0..9) * 100) + (($players[event.user.id.to_s]['level'] / 4).floor * 1000)
 				$players[event.user.id.to_s]['level'] += 1
-				if $players[event.user.id.to_s].key?("messages")
+				if $players[event.user.id.to_s].has_key?("messages")
 					if $players[event.user.id.to_s]['messages']
 						BOT.user(event.user.id.to_s).pm("Congratulations! You have leveled up to Level #{$players[event.user.id.to_s]['level']}\nYou have earned yourself #{new_zenny} Zenny and a few items you can trade or use!")
 					end
@@ -92,7 +92,7 @@ module Events
 					$current_unstable[event.channel.id.to_s]['$players2'] = {"#{event.user.id}"=>event.user.name}
 				end
 				if $current_unstable[event.channel.id.to_s]['hp'] < 0
-					event.channel.send_embed 'The monster has been killed! Here are the results:', hunt_end($current_unstable[event.channel.id.to_s])
+					event.channel.send_embed 'The monster has been killed! Here are the results:', HuntEnd($current_unstable[event.channel.id.to_s])
 					$current_unstable = $current_unstable.without(event.channel.id.to_s)
 				end
 			end
