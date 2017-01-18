@@ -8,11 +8,11 @@ Dotenv.load
 
 #load other variables
 $settings = Hash.new
-$settings = LoadJSON($settings, "botfiles/$settings.json")
+$settings = LoadJSON($settings, "botfiles/settings.json")
 $players = Hash.new
-$players = LoadJSON($players, "botfiles/$players.json")
+$players = LoadJSON($players, "botfiles/players.json")
 $unstable = Hash.new
-$unstable = LoadJSON($unstable, "botfiles/$unstable.json")
+$unstable = LoadJSON($unstable, "botfiles/unstable.json")
 $current_unstable = Hash.new
 $current_unstable = LoadJSON($current_unstable, "botfiles/current_unstable.json")
 

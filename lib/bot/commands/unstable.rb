@@ -26,7 +26,7 @@ module Commands
 					$unstable[event.channel.id.to_s] = true
 					event.respond "$unstable has been toggled on for this channel. Monsters will appear in this channel."
 				end
-				File.open('botfiles/$unstable.json', 'w') { |f| f.write $unstable.to_json }
+				File.open('botfiles/unstable.json', 'w') { |f| f.write $unstable.to_json }
 			else
 				event.respond "Only an admin can toggle $unstable on a channel"
 			end
