@@ -63,7 +63,7 @@ module Commands
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(useditem)
 						end
 						if $curunst.has_key?(event.channel.id.to_s)
-							if useditem == 'Shock Trap'
+							if item == 'Shock Trap'
 								if ['shock', 'both'].include? $curunst[event.channel.id.to_s]['trap']
 									$curunst[event.channel.id.to_s]['intrap'] = true
 									$curunst[event.channel.id.to_s]['traptime'] = Time.now
@@ -72,7 +72,7 @@ module Commands
 									event.respond "The #{$curunst[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
 								end
 							end
-							if useditem == 'Pitfall Trap'
+							if item == 'Pitfall Trap'
 								if ['pitfall', 'both'].include? $curunst[event.channel.id.to_s]['trap']
 									$curunst[event.channel.id.to_s]['intrap'] = true
 									$curunst[event.channel.id.to_s]['traptime'] = Time.now
