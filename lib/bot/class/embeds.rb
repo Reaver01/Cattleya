@@ -1,5 +1,5 @@
 def embed(e_name, e_desc)
-  Discordrb::Webhooks::embed.new(
+  Discordrb::Webhooks::Embed.new(
     author: { name: e_name },
     color: "%06x" % (rand * 0xffffff),
     description: e_desc,
