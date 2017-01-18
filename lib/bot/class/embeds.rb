@@ -111,3 +111,18 @@ def huntEnd(arr)
 	e.description = desc.chomp("\n")
 	e
 end
+
+def shop(arr)
+	desc = ''
+	arr.each do |k,v|
+		desc += "**#{arr[k]['name']}:** #{arr[k]['price']}\n"
+	end
+	e = Discordrb::Webhooks::Embed.new
+	e.author = {
+		name: "Here is the shop listing!"
+	}
+	e.color = "%06x" % (rand * 0xffffff)
+	e.description = desc.chomp("\n")
+	e.footer = "use `>buy #` to buy an item!"
+	e
+end
