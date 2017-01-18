@@ -19,7 +19,7 @@ module Commands
 				else
 					$players[event.user.id.to_s]['zenny'] -= $items[opt-1]['price'] * num
 					$players[event.user.id.to_s]['inv']["#{opt-1}"] += 1 * num
-					event.respond "**#{event.user.name}** purchased **#{num} #{$items[opt-1]['name']}"
+					event.respond "**#{event.user.name}** purchased **#{num} #{$items[opt-1]['name']}**"
 				end
 			end
 			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: inventory"
