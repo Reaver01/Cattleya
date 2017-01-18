@@ -13,6 +13,8 @@ $players = Hash.new
 $players = loadJSON($players, "botfiles/players.json")
 $unstable = Hash.new
 $unstable = loadJSON($unstable, "botfiles/unstable.json")
+$curunst = Hash.new
+$curunst = loadJSON($curunst, "botfiles/curunst.json")
 
 #sets bot prefix
 $prefix = '>'
