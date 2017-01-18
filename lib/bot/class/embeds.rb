@@ -61,7 +61,7 @@ def newMonster(arr)
 	}
 	e.color = arr['color']
 	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
-	e.description = "Health: #{arr['hp']}"
+	e.description = "Good luck!"
 	e
 end
 
@@ -80,7 +80,7 @@ def monster(arr)
 	}
 	e.color = arr['color']
 	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
-	e.description = "Health: #{arr['hp']}\nAngry: #{anger}\nIn Trap: #{trap}"
+	e.description = "Angry: #{anger}\nIn Trap: #{trap}"
 	e
 end
 
