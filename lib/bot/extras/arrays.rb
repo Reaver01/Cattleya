@@ -9,7 +9,7 @@ module Arrays
 		{'name'=>'Yellow Caeserber', 'hp'=>500, 'icon'=>'caeserber2', 'trap'=>'both', 'color'=>'0xc5cc6d'},
 		{'name'=>'Gypceros', 'hp'=>500, 'icon'=>'gypceros', 'trap'=>'pitfall', 'color'=>'0x54657c'},
 		{'name'=>'Congalala', 'hp'=>500, 'icon'=>'congalala', 'trap'=>'both', 'color'=>'0xc8979a'},
-		{'name'=>'Chramine', 'hp'=>500, 'icon'=>'chramine', 'trap'=>'ptifall', 'color'=>'0x664c2f'},
+		{'name'=>'Chramine', 'hp'=>500, 'icon'=>'chramine', 'trap'=>'both', 'color'=>'0x664c2f'},
 		{'name'=>'Cephadrome', 'hp'=>500, 'icon'=>'cephadrome', 'trap'=>'both', 'color'=>'0xb0985b'},
 		{'name'=>'Daimyo Hermitaur', 'hp'=>500, 'icon'=>'daimyohermitaur', 'trap'=>'shock', 'color'=>'0xad4934'},
 		{'name'=>'Blue Yian Kut-Ku', 'hp'=>700, 'icon'=>'yiankutku2', 'trap'=>'both', 'color'=>'0x569cc6'},
@@ -21,7 +21,14 @@ module Arrays
 		{'name'=>'Purple Gypceros', 'hp'=>1000, 'icon'=>'gypceros2', 'trap'=>'pitfall', 'color'=>'0x9f46d3'},
 		{'name'=>'Shogun Ceanataur', 'hp'=>2000, 'icon'=>'shogunceanataur', 'trap'=>'shock', 'color'=>'0x365d84'},
 		{'name'=>'Blangonga', 'hp'=>2000, 'icon'=>'blangonga', 'trap'=>'both', 'color'=>'0xefeed7'},
-		{'name'=>'Estrellian', 'hp'=>2500, 'icon'=>'estrellian', 'trap'=>'no', 'color'=>'0x923023'}
+		{'name'=>'Estrellian', 'hp'=>2500, 'icon'=>'estrellian', 'trap'=>'no', 'color'=>'0x923023'},
+		{'name'=>'Ice Chramine', 'hp'=>3000, 'icon'=>'chramine2', 'trap'=>'both', 'color'=>'0x5da8a3'},
+		{'name'=>'Swordmaster Shogun Ceanataur', 'hp'=>3000, 'icon'=>'shogunceanataur', 'trap'=>'shock', 'color'=>'0x365d84'},
+		{'name'=>'Akura Vashimu', 'hp'=>3000, 'icon'=>'akuravashimu', 'trap'=>'no', 'color'=>'0x99170e'},
+		{'name'=>'Silver Hypnocatrice', 'hp'=>3000, 'icon'=>'hypnocatrice2', 'trap'=>'both', 'color'=>'0x7d8f95'},
+		{'name'=>'Ghost Caeserber', 'hp'=>3000, 'icon'=>'caeserber', 'trap'=>'both', 'color'=>'0xac8d45'},
+		{'name'=>'Crystal Basarios', 'hp'=>3000, 'icon'=>'basarios', 'trap'=>'both', 'color'=>'0x8699a0'},
+		{'name'=>'Yian Garuga', 'hp'=>3000, 'icon'=>'yiangaruga', 'trap'=>'both', 'color'=>'76387e'}
 	]
 	$items = [
 		{'name'=>'Potion', 'image'=>'item_icon_01', 'throw'=>false},
