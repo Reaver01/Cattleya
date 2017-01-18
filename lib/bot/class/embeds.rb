@@ -65,7 +65,15 @@ def newMonster(arr)
 	e
 end
 
-def monster(arr, trap, anger)
+def monster(arr)
+	anger = "No"
+	trap = "No"
+	if arr.has_key?('intrap')
+		trap = arr['intrap']
+	end
+	if arr.has_key?('angry')
+		trap = arr['angry']
+	end
 	e = Discordrb::Webhooks::Embed.new
 	e.author = {
 		name: arr['name']
