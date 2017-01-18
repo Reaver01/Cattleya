@@ -54,6 +54,17 @@ def userInfo(id, uname, avatar)
 	e
 end
 
+def newMonster(arr)
+	e = Discordrb::Webhooks::Embed.new
+	e.author = {
+		name: arr['name']
+	}
+	e.color = arr['color']
+	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
+	e.description = "Health: #{arr['hp']}"
+	e
+end
+
 def monster(arr, trap, anger)
 	e = Discordrb::Webhooks::Embed.new
 	e.author = {
@@ -61,7 +72,7 @@ def monster(arr, trap, anger)
 	}
 	e.color = arr['color']
 	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
-	e.description = "Health: #{arr['hp']}"  #\nAngry: #{anger}\nIn Trap: #{trap}
+	e.description = "Health: #{arr['hp']}\nAngry: #{anger}\nIn Trap: #{trap}"
 	e
 end
 
@@ -70,13 +81,10 @@ def huntEnd(arr)
 	players = arr['players'].sort_by {|k,v| v}.reverse.to_h
 	players.each do |k,v|
 		desc += "**#{arr['players2'][k]}:** #{v}\n"
+		if v > 50 + $players[k]['hr']
+			$players[k]['hr'] += 1
+		end
 	end
-	x = 0
-	begin
-		key = players.keys[x]
-		$players[key]['hr'] += 1
-		x += 1
-	end while x < 5
 	e = Discordrb::Webhooks::Embed.new
 	e.author = {
 		name: "#{arr['name']}",
