@@ -79,17 +79,17 @@ module Events
 				damage_dealt = rand(0..(10 + hr_modifier)) * trap_modifier
 				damage_dealt = damage_dealt.round
 				$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
-				if $current_unstable[event.channel.id.to_s].has_key?('$players')
-					if $current_unstable[event.channel.id.to_s]['$players'].has_key?(event.user.id.to_s)
-						$current_unstable[event.channel.id.to_s]['$players'][event.user.id.to_s] += damage_dealt
-						$current_unstable[event.channel.id.to_s]['$players2'][event.user.id.to_s] = event.user.name
+				if $current_unstable[event.channel.id.to_s].has_key?('players')
+					if $current_unstable[event.channel.id.to_s]['players'].has_key?(event.user.id.to_s)
+						$current_unstable[event.channel.id.to_s]['players'][event.user.id.to_s] += damage_dealt
+						$current_unstable[event.channel.id.to_s]['players2'][event.user.id.to_s] = event.user.name
 					else
-						$current_unstable[event.channel.id.to_s]['$players'][event.user.id.to_s] = damage_dealt
-						$current_unstable[event.channel.id.to_s]['$players2'][event.user.id.to_s] = event.user.name
+						$current_unstable[event.channel.id.to_s]['players'][event.user.id.to_s] = damage_dealt
+						$current_unstable[event.channel.id.to_s]['players2'][event.user.id.to_s] = event.user.name
 					end
 				else
-					$current_unstable[event.channel.id.to_s]['$players'] = {"#{event.user.id}"=>damage_dealt}
-					$current_unstable[event.channel.id.to_s]['$players2'] = {"#{event.user.id}"=>event.user.name}
+					$current_unstable[event.channel.id.to_s]['players'] = {"#{event.user.id}"=>damage_dealt}
+					$current_unstable[event.channel.id.to_s]['players2'] = {"#{event.user.id}"=>event.user.name}
 				end
 				if $current_unstable[event.channel.id.to_s]['hp'] < 0
 					event.channel.send_embed 'The monster has been killed! Here are the results:', hunt_end($current_unstable[event.channel.id.to_s])
