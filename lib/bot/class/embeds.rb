@@ -69,9 +69,9 @@ end
 
 def hunt_end(arr)
 	desc = ''
-	players = arr['$players'].sort_by {|k,v| v}.reverse.to_h
+	players = arr['players'].sort_by {|k,v| v}.reverse.to_h
 	players.each do |k,v|
-		desc += "**#{arr['$players2'][k]}:** #{v}\n"
+		desc += "**#{arr['players2'][k]}:** #{v}\n"
 		if v > 50 + $players[k]['hr']
 			$players[k]['hr'] += 1
 		end
