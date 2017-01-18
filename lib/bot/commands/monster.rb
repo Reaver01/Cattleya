@@ -11,7 +11,7 @@ module Commands
 			else
 				event.respond "There isn't a monster in this channel right now."
 			end
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: info"
+			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: monster"
 			nil
 		end
 	end
