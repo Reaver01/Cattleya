@@ -14,7 +14,7 @@ PLAYERS = LoadJSON(PLAYERS, "botfiles/players.json")
 UNSTABLE = Hash.new
 UNSTABLE = LoadJSON(UNSTABLE, "botfiles/unstable.json")
 CURRENT_UNSTABLE = Hash.new
-CURRENT_UNSTABLE = LoadJSON(CURRENT_UNSTABLE, "botfiles/CURRENT_UNSTABLE.json")
+CURRENT_UNSTABLE = LoadJSON(CURRENT_UNSTABLE, "botfiles/curunst.json")
 
 #sets bot prefix
 PREFIX = '>'
