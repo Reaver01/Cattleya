@@ -18,7 +18,11 @@ module Commands
 					event.respond "You don't have enough Zenny to purchase #{num} #{$items[opt-1]['name']}"
 				else
 					$players[event.user.id.to_s]['zenny'] -= $items[opt-1]['price'] * num
-					$players[event.user.id.to_s]['inv']["#{opt-1}"] += 1 * num
+					if $players[event.user.id.to_s]['inv'].has_key?("#{opt-1}")
+						$players[event.user.id.to_s]['inv']["#{opt-1}"] += 1 * num
+					else
+						$players[event.user.id.to_s]['inv']["#{opt-1}"] = 1 * num
+					end
 					event.respond "**#{event.user.name}** purchased **#{num} #{$items[opt-1]['name']}**"
 				end
 			end
