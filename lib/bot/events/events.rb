@@ -5,8 +5,8 @@ module Events
 			#does nothing
 		else
 			new_time = event.timestamp
-			if $players.key?(event.user.id.to_s)
-				if $players[event.user.id.to_s].key?('time')
+			if $players.has_key?(event.user.id.to_s)
+				if $players[event.user.id.to_s].has_key?('time')
 					old_time = $players[event.user.id.to_s]['time']
 				else
 					old_time = "2017-01-01 00:00:00 +0000"
