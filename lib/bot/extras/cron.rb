@@ -12,7 +12,7 @@ def cronjobs_start
 				a = rand(0..9)
 				if a == 0
 					unless $current_unstable.has_key?(key)
-						$current_unstable[key] = MONSTERS[rand(0..(MONSTERS.length - 1))]
+						$current_unstable[key] = $monsters[rand(0..($monsters.length - 1))]
 						puts $current_unstable[key]
 						begin
 							BOT.channel(key.to_s).send_embed 'A Monster has entered the channel!', NewMonster($current_unstable[key])

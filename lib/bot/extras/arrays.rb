@@ -1,5 +1,5 @@
 module Arrays
-	MONSTERS = [
+	$monsters = [
 		{'name'=>'Bulldrome', 'hp'=>500, 'icon'=>'bulldrome', 'trap'=>'both', 'color'=>'0x8b7657'},
 		{'name'=>'Velocidrome', 'hp'=>500, 'icon'=>'velocidrome', 'trap'=>'both', 'color'=>'0x5193bd'},
 		{'name'=>'Caeserber', 'hp'=>500, 'icon'=>'caeserber', 'trap'=>'both', 'color'=>'0xac8d45'},
@@ -30,7 +30,7 @@ module Arrays
 		{'name'=>'Crystal Basarios', 'hp'=>3000, 'icon'=>'basarios', 'trap'=>'both', 'color'=>'0x8699a0'},
 		{'name'=>'Yian Garuga', 'hp'=>3000, 'icon'=>'yiangaruga', 'trap'=>'both', 'color'=>'76387e'}
 	]
-	ITEMS = [
+	$items = [
 		{'name'=>'Potion', 'image'=>'item_icon_01', 'throw'=>false, 'price'=>200},
 		{'name'=>'Antidote', 'image'=>'4', 'throw'=>false, 'price'=>200},
 		{'name'=>'Cool Drink', 'image'=>'item_icon_09', 'throw'=>false, 'price'=>200},

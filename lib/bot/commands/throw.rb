@@ -7,7 +7,7 @@ module Commands
 				useage: "throws <item> <user>"
 		) do |event, *item|
 			user_name = item[-1]
-			items_indexed = Hash[ITEMS.map.with_index.to_a]
+			items_indexed = Hash[$items.map.with_index.to_a]
 			thrown_item = -1
 			if BOT.parse_mention(user_name) !=nil
 				#throw things at somebody
@@ -16,16 +16,16 @@ module Commands
 				threw = false
 				x = 0
 				begin
-					if ITEMS[x]['name'] == item
+					if $items[x]['name'] == item
 						threw = true
-						thrown_item = items_indexed[ITEMS[x]].to_s
+						thrown_item = items_indexed[$items[x]].to_s
 						thrown_item_index = x
 					end
 					x += 1
-				end while x < ITEMS.length
+				end while x < $items.length
 				if threw
 					if $players[event.user.id.to_s]['inv'].has_key?(thrown_item)
-						if ITEMS[thrown_item_index]['throw']
+						if $items[thrown_item_index]['throw']
 							event.respond "**#{event.user.name}** threw a **#{item}** at #{user_name}!"
 							$players[event.user.id.to_s]['inv'][thrown_item] -= 1
 						else
@@ -44,16 +44,16 @@ module Commands
 				threw = false
 				x = 0
 				begin
-					if ITEMS[x]['name'] == item
+					if $items[x]['name'] == item
 						threw = true
-						thrown_item = items_indexed[ITEMS[x]].to_s
+						thrown_item = items_indexed[$items[x]].to_s
 						thrown_item_index = x
 					end
 					x += 1
-				end while x < ITEMS.length
+				end while x < $items.length
 				if threw
 					if $players[event.user.id.to_s]['inv'].has_key?(thrown_item)
-						if ITEMS[thrown_item_index]['throw']
+						if $items[thrown_item_index]['throw']
 							event.respond "**#{event.user.name}** threw a **#{item}**!"
 							$players[event.user.id.to_s]['inv'][thrown_item] -= 1
 						else

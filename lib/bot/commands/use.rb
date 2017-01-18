@@ -7,7 +7,7 @@ module Commands
 				useage: "use <item> <user>"
 		) do |event, *item|
 			user_name = item[-1]
-			items_indexed = Hash[ITEMS.map.with_index.to_a]
+			items_indexed = Hash[$items.map.with_index.to_a]
 			used_item = -1
 			if BOT.parse_mention(user_name) !=nil
 				#throw things at somebody
@@ -16,16 +16,16 @@ module Commands
 				threw = false
 				x = 0
 				begin
-					if ITEMS[x]['name'] == item
+					if $items[x]['name'] == item
 						threw = true
-						used_item = items_indexed[ITEMS[x]].to_s
+						used_item = items_indexed[$items[x]].to_s
 						used_item_index = x
 					end
 					x += 1
-				end while x < ITEMS.length
+				end while x < $items.length
 				if threw
 					if $players[event.user.id.to_s]['inv'].has_key?(used_item)
-						if ITEMS[used_item_index]['throw']
+						if $items[used_item_index]['throw']
 							event.respond "**#{item}s** must be thrown!"
 						else
 							event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
@@ -44,16 +44,16 @@ module Commands
 				threw = false
 				x = 0
 				begin
-					if ITEMS[x]['name'] == item
+					if $items[x]['name'] == item
 						threw = true
-						used_item = items_indexed[ITEMS[x]].to_s
+						used_item = items_indexed[$items[x]].to_s
 						used_item_index = x
 					end
 					x += 1
-				end while x < ITEMS.length
+				end while x < $items.length
 				if threw
 					if $players[event.user.id.to_s]['inv'].has_key?(used_item)
-						if ITEMS[used_item_index]['throw']
+						if $items[used_item_index]['throw']
 							event.respond "**#{item}s** must be thrown!"
 						else
 							event.respond "**#{event.user.name}** used a **#{item}**!"

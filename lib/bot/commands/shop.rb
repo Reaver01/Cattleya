@@ -6,7 +6,7 @@ module Commands
 				description: "Displays shop listing",
 				useage: "shop"
 		) do |event|
-			BOT.user(event.user.id.to_s).pm.send_embed '', shop(ITEMS)
+			BOT.user(event.user.id.to_s).pm.send_embed '', shop($items)
 			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: shop"
 			nil
 		end
