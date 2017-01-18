@@ -95,7 +95,6 @@ module Commands
 								else
 									event.respond "**#{event.user.name}** missed!"
 								end
-							end
 							elsif item == 'Dynamite'
 								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
 									if $current_unstable[event.channel.id.to_s]['intrap']
