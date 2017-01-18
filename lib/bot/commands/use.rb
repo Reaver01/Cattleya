@@ -62,23 +62,23 @@ module Commands
 						if $players[event.user.id.to_s]['inv'][useditem] < 1
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(useditem)
 						end
-						if $curunst.has_key?(event.channel.id.to_s)
+						if $current_unstable.has_key?(event.channel.id.to_s)
 							if useditem == 'Shock Trap'
-								if ['shock', 'both'].include? $curunst[event.channel.id.to_s]['trap']
-									$curunst[event.channel.id.to_s]['intrap'] = true
-									$curunst[event.channel.id.to_s]['traptime'] = Time.now
-									event.respond "The #{$curunst[event.channel.id.to_s]['name']} has been trapped!"
+								if ['shock', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
+									$current_unstable[event.channel.id.to_s]['intrap'] = true
+									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now
+									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
 								else
-									event.respond "The #{$curunst[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
 								end
 							end
 							if useditem == 'Pitfall Trap'
-								if ['pitfall', 'both'].include? $curunst[event.channel.id.to_s]['trap']
-									$curunst[event.channel.id.to_s]['intrap'] = true
-									$curunst[event.channel.id.to_s]['traptime'] = Time.now
-									event.respond "The #{$curunst[event.channel.id.to_s]['name']} has been trapped!"
+								if ['pitfall', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
+									$current_unstable[event.channel.id.to_s]['intrap'] = true
+									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now
+									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
 								else
-									event.respond "The #{$curunst[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
 								end
 							end
 						end
