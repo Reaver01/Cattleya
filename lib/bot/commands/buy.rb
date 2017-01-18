@@ -8,7 +8,7 @@ module Commands
 				min_args: 1,
 				max_args: 2
 		) do |event, opt, num=1|
-			if num < 1
+			if num.to_i < 1
 				num = 1
 			end
 			num = num.to_i.round
