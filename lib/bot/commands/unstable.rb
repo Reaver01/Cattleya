@@ -1,5 +1,5 @@
 module Commands
-	module $unstable
+	module Unstable
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:$unstable,
