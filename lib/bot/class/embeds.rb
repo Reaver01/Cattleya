@@ -125,6 +125,6 @@ def shop(arr)
 	}
 	e.color = "%06x" % (rand * 0xffffff)
 	e.description = desc.chomp("\n")
-	e.footer = "use `>buy #` to buy an item!"
+	e.footer = "use >buy # to buy an item!"
 	e
 end
