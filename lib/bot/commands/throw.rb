@@ -76,6 +76,8 @@ module Commands
 								if rand(0..chance_to_hit) == 0
 									$current_unstable[event.channel.id.to_s]['hp'] -= 10
 									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+								else
+									event.respond "**#{event.user.name}** missed!"
 								end
 							end
 						end
