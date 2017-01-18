@@ -15,7 +15,7 @@ def cronjobs_start
 						$curunst[key] = $monsters[rand(0..($monsters.length - 1))]
 						puts $curunst[key]
 						begin
-							$bot.channel(key.to_s).send_embed 'A Monster has entered the channel!', monster($curunst[key], "no", "no")
+							$bot.channel(key.to_s).send_embed 'A Monster has entered the channel!', newMonster($curunst[key])
 							File.open('botfiles/curunst.json', 'w') { |f| f.write $curunst.to_json }
 						rescue
 						end
