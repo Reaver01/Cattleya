@@ -1,5 +1,5 @@
-def Embed(e_name, e_desc)
-  Discordrb::Webhooks::Embed.new(
+def embed(e_name, e_desc)
+  Discordrb::Webhooks::embed.new(
     author: { name: e_name },
     color: "%06x" % (rand * 0xffffff),
     description: e_desc,
@@ -12,7 +12,7 @@ def inventory(id, user_name)
 	$players[id]['inv'].each do |key, item|
 		desc += "**#{$items[key.to_i]['name']}:** #{item.to_i}\n"
 	end
-	e = Embed("Here is your inventory #{user_name}!", desc)
+	e = embed("Here is your inventory #{user_name}!", desc)
 	e.author[:icon_url] = BOT.profile.avatar_url
 	e
 end
@@ -22,23 +22,23 @@ def new_items(items, user_name)
 	items.each do |item|
 		desc += "**#{$items[item]['name']}**\n"
 	end
-	e = Embed("Here are the new items you recieved #{user_name}!", desc)
+	e = embed("Here are the new items you recieved #{user_name}!", desc)
 	e.author[:icon_url] = BOT.profile.avatar_url
 	e
 end
 
-def userInfo(id, user_name, avatar)
+def user_info(id, user_name, avatar)
 	invnum = 0
 	$players[id]['inv'].each do |key, item|
 		invnum += item.to_i
 	end
-	e = Embed("This is info all about #{user_name}!", "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n**XP:** #{$players[id]['xp']}\n**Zenny:** #{$players[id]['zenny']}\n**Inventory:** #{invnum} items")
+	e = embed("This is info all about #{user_name}!", "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n**XP:** #{$players[id]['xp']}\n**Zenny:** #{$players[id]['zenny']}\n**Inventory:** #{invnum} items")
 	e.author[:icon_url] = avatar
 	e
 end
 
-def NewMonster(arr)
-	e = Embed(arr['name'], "Good luck!")
+def new_monster(arr)
+	e = embed(arr['name'], "Good luck!")
 	e.color = arr['color']
 	e.thumbnail[:url] = "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
 	e
@@ -61,13 +61,13 @@ def monster(arr)
 			is_angry = "No"
 		end
 	end
-	e = Embed(arr['name'], "Angry: #{is_angry}\nIn Trap: #{is_trapped}")
+	e = embed(arr['name'], "Angry: #{is_angry}\nIn Trap: #{is_trapped}")
 	e.color = arr['color']
 	e.thumbnail[:url] = "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
 	e
 end
 
-def HuntEnd(arr)
+def hunt_end(arr)
 	desc = ''
 	$players = arr['$players'].sort_by {|k,v| v}.reverse.to_h
 	$players.each do |k,v|
@@ -76,7 +76,7 @@ def HuntEnd(arr)
 			$players[k]['hr'] += 1
 		end
 	end
-	e = Embed("#{arr['name']}", desc.chomp("\n"))
+	e = embed("#{arr['name']}", desc.chomp("\n"))
 	e.author[:icon_url] = "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
 	e.color = arr['color']
 	e.thumbnail[:url] = "http://i.imgur.com/0MskAc1.png"
@@ -90,5 +90,5 @@ def shop(arr)
 		desc += "**#{x}. #{k['name']}:** #{k['price']}\n"
 		x += 1
 	end
-	Embed("Here is the shop listing!", desc.chomp("\n"))
+	embed("Here is the shop listing!", desc.chomp("\n"))
 end

@@ -92,7 +92,7 @@ module Events
 					$current_unstable[event.channel.id.to_s]['$players2'] = {"#{event.user.id}"=>event.user.name}
 				end
 				if $current_unstable[event.channel.id.to_s]['hp'] < 0
-					event.channel.send_embed 'The monster has been killed! Here are the results:', HuntEnd($current_unstable[event.channel.id.to_s])
+					event.channel.send_embed 'The monster has been killed! Here are the results:', hunt_end($current_unstable[event.channel.id.to_s])
 					$current_unstable = $current_unstable.without(event.channel.id.to_s)
 				end
 			end
