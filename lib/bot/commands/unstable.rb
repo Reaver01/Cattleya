@@ -4,7 +4,7 @@ module Commands
 		command(
 				:unstable,
 				description: "Toggle $unstable status for the current channel.",
-				usage: "$unstable",
+				usage: "unstable",
 				help_available: true
 		) do |event|
 			if event.user.can_manage_channels?
