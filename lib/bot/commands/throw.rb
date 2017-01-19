@@ -75,7 +75,8 @@ module Commands
 									chance_to_hit = 2
 								end
 								if rand(0..chance_to_hit) == 0
-									$current_unstable[event.channel.id.to_s]['hp'] -= 10
+									damage_dealt = 10
+									$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
 									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
 								else
 									event.respond "**#{event.user.name}** missed!"
@@ -91,7 +92,8 @@ module Commands
 									chance_to_hit = 1
 								end
 								if rand(0..chance_to_hit) == 0
-									$current_unstable[event.channel.id.to_s]['hp'] -= 20
+									damage_dealt = 20
+									$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
 									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
 								else
 									event.respond "**#{event.user.name}** missed!"
@@ -107,7 +109,8 @@ module Commands
 									chance_to_hit = 3
 								end
 								if rand(0..chance_to_hit) == 0
-									$current_unstable[event.channel.id.to_s]['hp'] -= 5
+									damage_dealt = 5
+									$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
 									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
 								else
 									event.respond "**#{event.user.name}** missed!"
