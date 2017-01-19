@@ -63,6 +63,7 @@ module Commands
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
 						end
 						if $current_unstable.has_key?(event.channel.id.to_s)
+							puts used_item
 							if used_item == 'Shock Trap'
 								if ['shock', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
 									$current_unstable[event.channel.id.to_s]['intrap'] = true
