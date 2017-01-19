@@ -63,6 +63,7 @@ module Commands
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrown_item)
 						end
 						if $current_unstable.has_key?(event.channel.id.to_s)
+							damage_dealt = 0
 							if item == 'Barrel Bomb S'
 								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
 									if $current_unstable[event.channel.id.to_s]['intrap']
@@ -110,6 +111,21 @@ module Commands
 									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
 								else
 									event.respond "**#{event.user.name}** missed!"
+								end
+							end
+							unless damage_dealt == 0
+								#stores the player that did damage in the unstable array with their damage dealt
+								if $current_unstable[event.channel.id.to_s].has_key?('players')
+									if $current_unstable[event.channel.id.to_s]['players'].has_key?(event.user.id.to_s)
+										$current_unstable[event.channel.id.to_s]['players'][event.user.id.to_s] += damage_dealt
+										$current_unstable[event.channel.id.to_s]['players2'][event.user.id.to_s] = event.user.name
+									else
+										$current_unstable[event.channel.id.to_s]['players'][event.user.id.to_s] = damage_dealt
+										$current_unstable[event.channel.id.to_s]['players2'][event.user.id.to_s] = event.user.name
+									end
+								else
+									$current_unstable[event.channel.id.to_s]['players'] = {"#{event.user.id}"=>damage_dealt}
+									$current_unstable[event.channel.id.to_s]['players2'] = {"#{event.user.id}"=>event.user.name}
 								end
 							end
 						end
