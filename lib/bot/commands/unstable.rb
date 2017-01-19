@@ -2,7 +2,7 @@ module Commands
 	module Unstable
 		extend Discordrb::Commands::CommandContainer
 		command(
-				:$unstable,
+				:unstable,
 				description: "Toggle $unstable status for the current channel.",
 				usage: "$unstable",
 				help_available: true
