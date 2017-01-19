@@ -7,7 +7,7 @@ module Commands
 				useage: "shop"
 		) do |event|
 			BOT.user(event.user.id.to_s).pm.send_embed '', shop($items)
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: shop"
+			command_log("shop", event.user.name)
 			nil
 		end
 	end

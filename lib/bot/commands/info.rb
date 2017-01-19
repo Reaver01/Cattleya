@@ -16,7 +16,7 @@ module Commands
 				avatar = event.user.avatar_url.to_s
 			end
 			event.channel.send_embed '', user_info(user_id, user_name, avatar)
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: info"
+			command_log("info", event.user.name)
 			nil
 		end
 	end

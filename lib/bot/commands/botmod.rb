@@ -65,7 +65,7 @@ module Commands
 					event.respond "Invalid user."
 				end
 			end
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: botmod"
+			command_log("botmod", event.user.name)
 			nil
 		end
 	end

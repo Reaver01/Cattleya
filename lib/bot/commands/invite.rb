@@ -7,7 +7,7 @@ module Commands
 				useage: "invite"
 		) do |event|
 			event.respond  "Invite Link: <#{BOT.invite_url}>"
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: invite"
+			command_log("invite", event.user.name)
 			nil
 		end
 	end

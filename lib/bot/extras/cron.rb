@@ -2,8 +2,9 @@ def cronjobs_start
 	s = Rufus::Scheduler.new
 	#saves the databases every 5 mins
 	s.every '5m' do
-		File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
 		File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
+		File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
+		File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
 	end
 	#every 10 mins generates a random number and will put a monster in the channel if it's a 0
 	s.every '10m' do
@@ -26,8 +27,9 @@ def cronjobs_start
 	end
 	#saves everything and restarts the bot the 5th minute of every 3rd hour for updates
 	s.cron '5 */3 * * *' do
-		File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
 		File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
+		File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
+		File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
 		BOT.stop
 	end
 

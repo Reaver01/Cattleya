@@ -19,7 +19,7 @@ module Commands
 				BOT.user(event.user.id.to_s).pm("PM notifications have been toggled on! I love sending notifications!")
 			end
 			$players[event.user.id.to_s]['messages'] = pm_status
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: notify"
+			command_log("notify", event.user.name)
 			nil
 		end
 	end

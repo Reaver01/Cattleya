@@ -24,7 +24,7 @@ module Commands
 			else
 				event.respond "Only an admin can toggle $unstable on a channel"
 			end
-			puts "#{event.timestamp}: #{event.user.name}: CMD: $unstable"
+			command_log("unstable", event.user.name)
 			nil
 		end
 	end

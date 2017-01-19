@@ -5,14 +5,16 @@ end
 #load env variables
 Dotenv.load
 #load other variables
-$settings = Hash.new
-$settings = LoadJSON($settings, "botfiles/settings.json")
-$players = Hash.new
-$players = LoadJSON($players, "botfiles/players.json")
-$unstable = Hash.new
-$unstable = LoadJSON($unstable, "botfiles/unstable.json")
 $current_unstable = Hash.new
 $current_unstable = LoadJSON($current_unstable, "botfiles/current_unstable.json")
+$logs = Hash.new
+$logs = LoadJSON($logs, "botfiles/logs.json")
+$players = Hash.new
+$players = LoadJSON($players, "botfiles/players.json")
+$settings = Hash.new
+$settings = LoadJSON($settings, "botfiles/settings.json")
+$unstable = Hash.new
+$unstable = LoadJSON($unstable, "botfiles/unstable.json")
 #sets bot prefix
 PREFIX = '>'
 #Loads and establishes BOT object

@@ -7,7 +7,7 @@ module Commands
 				useage: "ping"
 		) do |event|
 			event.respond "Pong! : #{((Time.now - event.timestamp) * 1000).to_i}ms"
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: ping"
+			command_log("ping", event.user.name)
 			nil
 		end
 	end

@@ -15,7 +15,7 @@ module Commands
 				$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'time'=>event.timestamp, 'inv'=>{'0'=>1}, 'messages'=>messages}
 				event.respond "**#{event.user.name}** has been reset."
 			end
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: reset"
+			command_log("reset", event.user.name)
 			nil
 		end
 	end

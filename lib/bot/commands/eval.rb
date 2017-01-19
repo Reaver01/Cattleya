@@ -8,7 +8,7 @@ module Commands
 				help_available: false,
 				permission_level: 800
 		) do |event, *code|
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: eval <#{code.join(' ')}>"
+			command_log("eval", event.user.name)
 			begin
 				eval code.join(' ')
 			rescue StandardError => e

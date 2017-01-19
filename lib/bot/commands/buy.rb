@@ -30,7 +30,7 @@ module Commands
 			else
 				event.respond "That is not a valid option"
 			end
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: buy"
+			command_log("buy", event.user.name)
 			nil
 		end
 	end

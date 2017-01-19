@@ -87,7 +87,7 @@ module Commands
 					end
 				end
 			end
-			puts "[#{event.timestamp.strftime("%d %a %y | %H:%M:%S")}] #{event.user.name}: CMD: use"
+			command_log("use", event.user.name)
 			nil
 		end
 	end
