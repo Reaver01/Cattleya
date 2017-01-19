@@ -4,7 +4,6 @@ module Events
 		if event.message.channel.pm?
 			#does nothing
 		else
-			new_time = event.timestamp
 			if $players.has_key?(event.user.id.to_s)
 				if $players[event.user.id.to_s].has_key?('time')
 					old_time = $players[event.user.id.to_s]['time']
@@ -13,13 +12,13 @@ module Events
 					old_time = "2017-01-01 00:00:00 +0000"
 				end
 				#30 second timeout for gaining xp
-				if TimeDifference.between(old_time, new_time).in_seconds > 30
+				if TimeDifference.between(old_time, event.timestamp).in_seconds > 30
 					$players[event.user.id.to_s]['xp'] += rand(15..25)
-					$players[event.user.id.to_s]['time'] = new_time
+					$players[event.user.id.to_s]['time'] = event.timestamp
 				end
 			else
 				#initial array for new player
-				$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'time'=>new_time, 'inv'=>{'0'=>1}}
+				$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'time'=>event.timestamp, 'inv'=>{'0'=>1}}
 			end
 			#leveling up formula
 			next_level = 0.83333333333 * ($players[event.user.id.to_s]['level'] - 1) * (2 * $players[event.user.id.to_s]['level'] ^ 2 + 23 * $players[event.user.id.to_s]['level'] + 66)
@@ -60,10 +59,20 @@ module Events
 			#checks to see if a monster is in a trap longer than 2 mins and releases it if it is
 			if $current_unstable.has_key?(event.channel.id.to_s)
 				if $current_unstable[event.channel.id.to_s].has_key?('traptime')		
-					if TimeDifference.between($current_unstable[event.channel.id.to_s]['traptime'], new_time).in_minutes > 2
+					if TimeDifference.between($current_unstable[event.channel.id.to_s]['traptime'], event.timestamp).in_minutes > 2
 						$current_unstable[event.channel.id.to_s]['intrap'] = false
 						$current_unstable[event.channel.id.to_s] = $current_unstable[event.channel.id.to_s].without('traptime')
 						event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has escaped the trap!"
+					end
+				end
+			end
+			#checks to see if a monster is angry longer than 3 mins and stops anger if it is
+			if $current_unstable.has_key?(event.channel.id.to_s)
+				if $current_unstable[event.channel.id.to_s].has_key?('angertime')		
+					if TimeDifference.between($current_unstable[event.channel.id.to_s]['angertime'], event.timestamp).in_minutes > 3
+						$current_unstable[event.channel.id.to_s]['angry'] = false
+						$current_unstable[event.channel.id.to_s] = $current_unstable[event.channel.id.to_s].without('angertime')
+						event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} is no longer angry!"
 					end
 				end
 			end
@@ -112,6 +121,31 @@ module Events
 				if $current_unstable[event.channel.id.to_s]['hp'] < 0
 					event.channel.send_embed 'The monster has been killed! Here are the results:', hunt_end($current_unstable[event.channel.id.to_s])
 					$current_unstable = $current_unstable.without(event.channel.id.to_s)
+				end
+			end
+		end
+	end
+	#making monsters angry trigger
+	message(containing: "r") do |event|
+		if event.message.channel.pm?
+			#does nothing
+		else
+			if $current_unstable.has_key?(event.channel.id.to_s)
+				unless $current_unstable[event.channel.id.to_s].has_key?('angry')
+					$current_unstable[event.channel.id.to_s]['angry'] = false
+				end
+				unless $current_unstable[event.channel.id.to_s]['angry']
+					if $current_unstable[event.channel.id.to_s].has_key?('anger')
+						$current_unstable[event.channel.id.to_s]['anger'] += 1
+					else
+						$current_unstable[event.channel.id.to_s]['anger'] = 1
+					end
+					if $current_unstable[event.channel.id.to_s]['anger'] > 50
+						$current_unstable[event.channel.id.to_s]['angry'] = true
+						$current_unstable[event.channel.id.to_s]['angertime'] = Time.now
+						$current_unstable[event.channel.id.to_s]['anger'] = 0
+						event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has become angry!"
+					end
 				end
 			end
 		end
