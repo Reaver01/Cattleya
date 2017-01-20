@@ -14,7 +14,6 @@ def cronjobs_start
 				if a == 0
 					unless $current_unstable.has_key?(key)
 						$current_unstable[key] = $monsters.sample
-						puts $current_unstable[key]
 						begin
 							BOT.channel(key.to_s).send_embed 'A Monster has entered the channel!', new_monster($current_unstable[key])
 							File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
