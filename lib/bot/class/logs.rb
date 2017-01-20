@@ -13,7 +13,7 @@ def mute_log(channel_id)
 	unless $logs.has_key?('muted')
 		$logs['muted'] = {}
 	end
-	unless $logs['muted'].has_key(channel_id.to_s)
+	unless $logs['muted'].has_key?(channel_id.to_s)
 		$logs['muted'][channel_id.to_s] = [Time.now]
 	else
 		$logs['muted'][channel_id.to_s].push(Time.now)
