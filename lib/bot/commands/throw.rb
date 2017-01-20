@@ -3,6 +3,7 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:throw,
+				bucket: :item_use,
 				description: "Throws something at somebody",
 				useage: "throws <item> <user>"
 		) do |event, *item|

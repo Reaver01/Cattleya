@@ -26,6 +26,10 @@ permissions.each do |key, value|
 	BOT.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
 end
 puts "Permission Loaded!"
+#make buckets for commands
+BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
+BOT.bucket :info, limit: 5, time_span: 60, delay: 5
+BOT.bucket :reset, limit: 1, time_span: 60
 #Load all commands
 Commands.constants.each do |x|
 	BOT.include! Commands.const_get x

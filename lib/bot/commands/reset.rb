@@ -3,6 +3,7 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:reset,
+				bucket: :reset,
 				description: "Resets player back to 0",
 				useage: "reset"
 		) do |event|

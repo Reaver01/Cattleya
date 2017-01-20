@@ -3,6 +3,7 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:stats,
+				bucket: :info,
 				description: "Responds with bot stats",
 				useage: "stats"
 		) do |event|

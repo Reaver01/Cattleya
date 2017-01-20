@@ -3,6 +3,7 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:info,
+				bucket: :info,
 				description: "Responds with player info",
 				useage: "info"
 		) do |event, mention|

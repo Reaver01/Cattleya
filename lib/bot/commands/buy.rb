@@ -3,6 +3,7 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:buy,
+				bucket: :item_use,
 				description: "Buys an item from the shop",
 				useage: "buy",
 				min_args: 1,

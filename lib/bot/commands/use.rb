@@ -3,6 +3,7 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:use,
+				bucket: :item_use,
 				description: "Use an item",
 				useage: "use <item> <user>"
 		) do |event, *item|
