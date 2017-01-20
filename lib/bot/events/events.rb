@@ -4,7 +4,7 @@ module Events
 		if event.message.channel.pm?
 			#does nothing
 		else
-			unless event.message.content.include?("-")
+			unless event.message.content.include?(PREFIX)
 				if $players.has_key?(event.user.id.to_s)
 					if $players[event.user.id.to_s].has_key?('time')
 						old_time = $players[event.user.id.to_s]['time']
@@ -101,7 +101,7 @@ module Events
 		if event.message.channel.pm?
 			#does nothing
 		else
-			unless event.message.content.include?("-")
+			unless event.message.content.include?(PREFIX)
 				if $current_unstable.has_key?(event.channel.id.to_s)
 					#checks if the monster is in a trap and modifies damage if it is
 					if $current_unstable[event.channel.id.to_s].has_key?('intrap')
@@ -155,7 +155,7 @@ module Events
 		if event.message.channel.pm?
 			#does nothing
 		else
-			unless event.message.content.include?("-")
+			unless event.message.content.include?(PREFIX)
 				if $current_unstable.has_key?(event.channel.id.to_s)
 					unless $current_unstable[event.channel.id.to_s].has_key?('angry')
 						$current_unstable[event.channel.id.to_s]['angry'] = false
