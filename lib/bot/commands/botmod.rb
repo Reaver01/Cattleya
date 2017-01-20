@@ -21,37 +21,73 @@ module Commands
 			if BOT.parse_mention(mention) !=nil
 				user_id = BOT.parse_mention(mention).id
 				if permissions.has_key?(user_id.to_s)
-					event.respond "User permissions found... Updating permissions."
+					begin
+						event.respond "User permissions found... Updating permissions."
+					rescue
+						mute_log(event.channel.id.to_s)
+					end
 					current_permission_level = permissions[user_id.to_s]['lvl']
-					event.respond "Current permission level: #{current_permission_level}"
+					begin
+						event.respond "Current permission level: #{current_permission_level}"
+					rescue
+						mute_log(event.channel.id.to_s)
+					end
 					if [800, 999].include? current_permission_level
 						if delete_permission == "yes"
 							if force == "yes"
-								event.respond "Force deleteing user's permissions"
+								begin
+									event.respond "Force deleteing user's permissions"
+								rescue
+									mute_log(event.channel.id.to_s)
+								end
 								permissions = permissions.without(user_id)
 							else
-								event.respond "You must force deletetion of admin or botmaster"
+								begin
+									event.respond "You must force deletetion of admin or botmaster"
+								rescue
+									mute_log(event.channel.id.to_s)
+								end
 							end
 						else
 							if force == "yes"
-								event.respond "Forcing permission change to lower level."
+								begin
+									event.respond "Forcing permission change to lower level."
+								rescue
+									mute_log(event.channel.id.to_s)
+								end
 								permissions[user_id.to_s]['lvl'] = level
 							end
 							if force == "no"
-								event.respond "User permissions level is admin or higher, you must force permissions change to set lower."
+								begin
+									event.respond "User permissions level is admin or higher, you must force permissions change to set lower."
+								rescue
+									mute_log(event.channel.id.to_s)
+								end
 							end
 						end
 					else
 						if delete_permission == "yes"
-							event.respond "deleteing user's permissions"
+							begin
+								event.respond "deleteing user's permissions"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 							permissions = permissions.without(user_id.to_s)
 						else
-							event.respond "Changing user's permissions"
+							begin
+								event.respond "Changing user's permissions"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 							permissions[user_id.to_s]['lvl'] = level
 						end
 					end
 				else
-					event.respond "User permissions not found... Adding permissions."
+					begin
+						event.respond "User permissions not found... Adding permissions."
+					rescue
+						mute_log(event.channel.id.to_s)
+					end
 					permissions[user_id.to_s] = {'id'=>user_id, 'lvl'=>level}
 				end
 				File.open("botfiles/permissions.json", 'w') { |f| f.write permissions.to_json }
@@ -62,7 +98,11 @@ module Commands
 				if mention == "check"
 					event << permissions
 				else
-					event.respond "Invalid user."
+					begin
+						event.respond "Invalid user."
+					rescue
+						mute_log(event.channel.id.to_s)
+					end
 				end
 			end
 			command_log("botmod", event.user.name)

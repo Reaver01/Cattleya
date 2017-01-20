@@ -12,7 +12,11 @@ module Commands
 			begin
 				eval code.join(' ')
 			rescue StandardError => e
-				event.respond(e.to_s)
+				begin
+					event.respond(e.to_s)
+				rescue
+					mute_log(event.channel.id.to_s)
+				end
 			end
 		end
 	end

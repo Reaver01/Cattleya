@@ -9,7 +9,11 @@ module Commands
 				permission_level: 800,
 		) do |event|
 			command_log("kill", event.user.name)
-			BOT.send_message(event.message.channel, "Saving data and shutting down... I'll be back.")
+			begin
+				event.respond "Saving data and shutting down... I'll be back."
+			rescue
+				mute_log(event.channel.id.to_s)
+			end
 			File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
 			File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
 			BOT.stop
