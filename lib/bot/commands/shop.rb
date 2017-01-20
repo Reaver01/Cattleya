@@ -6,7 +6,11 @@ module Commands
 				description: "Displays shop listing",
 				useage: "shop"
 		) do |event|
-			BOT.user(event.user.id.to_s).pm.send_embed '', shop($items)
+			begin
+				BOT.user(event.user.id.to_s).pm.send_embed '', shop($items)
+			rescue
+				mute_log(event.user.id.to_s)
+			end
 			command_log("shop", event.user.name)
 			nil
 		end

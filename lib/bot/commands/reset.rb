@@ -14,7 +14,11 @@ module Commands
 					messages = false
 				end
 				$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'time'=>event.timestamp, 'inv'=>{'0'=>1}, 'messages'=>messages}
-				event.respond "**#{event.user.name}** has been reset."
+				begin
+					event.respond "**#{event.user.name}** has been reset."
+				rescue
+					mute_log(event.channel.id.to_s)
+				end
 			end
 			command_log("reset", event.user.name)
 			nil

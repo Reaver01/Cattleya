@@ -27,16 +27,28 @@ module Commands
 				if used
 					if $players[event.user.id.to_s]['inv'].has_key?(used_item)
 						if $items[used_index]['throw']
-							event.respond "**#{item}s** must be thrown!"
+							begin
+								event.respond "**#{item}s** must be thrown!"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 						else
-							event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
+							begin
+								event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 							$players[event.user.id.to_s]['inv'][used_item] -= 1
 						end
 						if $players[event.user.id.to_s]['inv'][used_item] < 1
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
 						end
 					else
-						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+						begin
+							event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+						rescue
+							mute_log(event.channel.id.to_s)
+						end
 					end
 				end
 			else
@@ -55,9 +67,17 @@ module Commands
 				if used
 					if $players[event.user.id.to_s]['inv'].has_key?(used_item)
 						if $items[used_index]['throw']
-							event.respond "**#{item}s** must be thrown!"
+							begin
+								event.respond "**#{item}s** must be thrown!"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 						else
-							event.respond "**#{event.user.name}** used a **#{item}**!"
+							begin
+								event.respond "**#{event.user.name}** used a **#{item}**!"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 							$players[event.user.id.to_s]['inv'][used_item] -= 1
 						end
 						if $players[event.user.id.to_s]['inv'][used_item] < 1
@@ -68,23 +88,43 @@ module Commands
 								if ['shock', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
 									$current_unstable[event.channel.id.to_s]['intrap'] = true
 									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now
-									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+									begin
+										event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								else
-									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									begin
+										event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								end
 							end
 							if item == 'Pitfall Trap'
 								if ['pitfall', 'both'].include? $current_unstable[event.channel.id.to_s]['trap']
 									$current_unstable[event.channel.id.to_s]['intrap'] = true
 									$current_unstable[event.channel.id.to_s]['traptime'] = Time.now
-									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+									begin
+										event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								else
-									event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									begin
+										event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								end
 							end
 						end
 					else
-						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+						begin
+							event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+						rescue
+							mute_log(event.channel.id.to_s)
+						end
 					end
 				end
 			end

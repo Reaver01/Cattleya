@@ -27,16 +27,28 @@ module Commands
 				if threw
 					if $players[event.user.id.to_s]['inv'].has_key?(thrown_item)
 						if $items[thrown_item_index]['throw']
-							event.respond "**#{event.user.name}** threw a **#{item}** at #{user_name}!"
+							begin
+								event.respond "**#{event.user.name}** threw a **#{item}** at #{user_name}!"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 							$players[event.user.id.to_s]['inv'][thrown_item] -= 1
 						else
-							event.respond "You can't throw **#{item}s**!"
+							begin
+								event.respond "You can't throw **#{item}s**!"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 						end
 						if $players[event.user.id.to_s]['inv'][thrown_item] < 1
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrown_item)
 						end
 					else
-						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
+						begin
+							event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
+						rescue
+							mute_log(event.channel.id.to_s)
+						end
 					end
 				end
 			else
@@ -55,10 +67,18 @@ module Commands
 				if threw
 					if $players[event.user.id.to_s]['inv'].has_key?(thrown_item)
 						if $items[thrown_item_index]['throw']
-							event.respond "**#{event.user.name}** threw a **#{item}**!"
+							begin
+								event.respond "**#{event.user.name}** threw a **#{item}**!"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 							$players[event.user.id.to_s]['inv'][thrown_item] -= 1
 						else
-							event.respond "You can't throw **#{item}s**!"
+							begin
+								event.respond "You can't throw **#{item}s**!"
+							rescue
+								mute_log(event.channel.id.to_s)
+							end
 						end
 						if $players[event.user.id.to_s]['inv'][thrown_item] < 1
 							$players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrown_item)
@@ -78,9 +98,17 @@ module Commands
 								if rand(0..chance_to_hit) == 0
 									damage_dealt = 20
 									$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
-									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+									begin
+										event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								else
-									event.respond "**#{event.user.name}** missed!"
+									begin
+										event.respond "**#{event.user.name}** missed!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								end
 							elsif item == 'Barrel Bomb L'
 								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
@@ -95,9 +123,17 @@ module Commands
 								if rand(0..chance_to_hit) == 0
 									damage_dealt = 40
 									$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
-									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+									begin
+										event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								else
-									event.respond "**#{event.user.name}** missed!"
+									begin
+										event.respond "**#{event.user.name}** missed!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								end
 							elsif item == 'Dynamite'
 								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
@@ -112,9 +148,17 @@ module Commands
 								if rand(0..chance_to_hit) == 0
 									damage_dealt = 15
 									$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
-									event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+									begin
+										event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								else
-									event.respond "**#{event.user.name}** missed!"
+									begin
+										event.respond "**#{event.user.name}** missed!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
 								end
 							end
 							unless damage_dealt == 0
@@ -134,7 +178,11 @@ module Commands
 							end
 						end
 					else
-						event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
+						begin
+							event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
+						rescue
+							mute_log(event.channel.id.to_s)
+						end
 					end
 				end
 			end

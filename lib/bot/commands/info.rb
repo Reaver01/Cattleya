@@ -16,7 +16,11 @@ module Commands
 				user_name = event.user.name.to_s
 				avatar = event.user.avatar_url.to_s
 			end
-			event.channel.send_embed '', user_info(user_id, user_name, avatar)
+			begin
+				event.channel.send_embed '', user_info(user_id, user_name, avatar)
+			rescue
+				mute_log(event.channel.id.to_s)
+			end
 			command_log("info", event.user.name)
 			nil
 		end

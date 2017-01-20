@@ -19,6 +19,8 @@ def cronjobs_start
 							BOT.channel(key.to_s).send_embed 'A Monster has entered the channel!', new_monster($current_unstable[key])
 							File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
 						rescue
+							$current_unstable = $current_unstable.without(key)
+							mute_log(key.to_s)
 						end
 					end
 				end

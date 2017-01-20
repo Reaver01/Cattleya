@@ -15,7 +15,11 @@ module Commands
 			end
 			e = embed("Bot statistics:", desc.chomp("\n"))
 			e
-			event.channel.send_embed '', e
+			begin
+				event.channel.send_embed '', e
+			rescue
+				mute_log(event.channel.id.to_s)
+			end
 			command_log("stats", event.user.name)
 			nil
 		end
