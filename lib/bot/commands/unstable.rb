@@ -35,7 +35,7 @@ module Commands
 				File.open('botfiles/unstable.json', 'w') { |f| f.write $unstable.to_json }
 			else
 				begin
-					event.respond "Only an admin can toggle $unstable on a channel"
+					event.respond "Only a channel manager can toggle $unstable on a channel"
 				rescue
 					mute_log(event.channel.id.to_s)
 				end
