@@ -13,6 +13,12 @@ module Commands
 					desc += "**#{key}:** #{value}\n"
 				end
 			end
+			if $logs.has_key?('monsters_killed')
+				desc += "\nMonsters killed:\n"
+				$logs['monsters_killed'].each do |key, value|
+					desc += "**#{key}:** #{value}\n"
+				end
+			end
 			e = embed("Bot statistics:", desc.chomp("\n"))
 			e
 			begin

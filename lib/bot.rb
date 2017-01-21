@@ -15,6 +15,8 @@ $settings = Hash.new
 $settings = LoadJSON($settings, "botfiles/settings.json")
 $unstable = Hash.new
 $unstable = LoadJSON($unstable, "botfiles/unstable.json")
+$hit = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
+$anger = ['b', 'l', 'v', 'y', 'p', 'w', 'f', 'g'].sample
 #sets bot prefix
 PREFIX = '>'
 #Loads and establishes BOT object

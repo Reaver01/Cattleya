@@ -97,7 +97,7 @@ module Events
 		end
 	end
 	#dealing damage to monsters trigger
-	message(containing: "e") do |event|
+	message(containing: $hit) do |event|
 		if event.message.channel.pm?
 			#does nothing
 		else
@@ -140,6 +140,7 @@ module Events
 					if $current_unstable[event.channel.id.to_s]['hp'] < 0
 						end_results = $current_unstable[event.channel.id.to_s]
 						$current_unstable = $current_unstable.without(event.channel.id.to_s)
+						killed_log(event.channel.id.to_s, end_results['name'])
 						begin
 							event.channel.send_embed 'The monster has been killed! Here are the results:', hunt_end(end_results)
 						rescue
@@ -151,7 +152,7 @@ module Events
 		end
 	end
 	#making monsters angry trigger
-	message(containing: "r") do |event|
+	message(containing: $anger) do |event|
 		if event.message.channel.pm?
 			#does nothing
 		else
