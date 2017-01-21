@@ -1,3 +1,7 @@
+Dir["lib/bot/class/*.rb"].each {|file| require_relative file }
+Dir["lib/bot/commands/*.rb"].each {|file| require_relative file }
+Dir["lib/bot/events/*.rb"].each {|file| require_relative file }
+Dir["lib/bot/extras/*.rb"].each {|file| require_relative file }
 #create botfiles directory if it doesn't exist
 unless File.exist?("botfiles")
 	Dir.mkdir("botfiles")
