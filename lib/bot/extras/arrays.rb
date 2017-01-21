@@ -103,7 +103,7 @@ module Arrays
 		{'name'=>'Dung Bomb', 'image'=>'18', 'throw'=>true, 'price'=>7500},
 		{'name'=>'Sonic Grenade', 'image'=>'item_icon_47', 'throw'=>true, 'price'=>5000},
 		{'name'=>'Dynamite', 'image'=>'item_icon_38', 'throw'=>true, 'price'=>7500},
-		{'name'=>'Pickaxe', 'image'=>'prop_tool_03', 'throw'=>false, 'price'=>3000},
+		{'name'=>'Pickaxe', 'image'=>'prop_tool_03', 'throw'=>true, 'price'=>3000},
 		{'name'=>'Bug Net', 'image'=>'prop_tool_04', 'throw'=>false, 'price'=>3000},
 		{'name'=>'Fishing Kit', 'image'=>'prop_tool_10', 'throw'=>false, 'price'=>3000}
 	]

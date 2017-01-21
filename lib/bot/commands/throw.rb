@@ -160,6 +160,32 @@ module Commands
 										mute_log(event.channel.id.to_s)
 									end
 								end
+							
+							elsif item == 'Pickaxe'
+								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
+									if $current_unstable[event.channel.id.to_s]['intrap']
+										chance_to_hit = 0
+									else
+										chance_to_hit = 1
+									end
+								else
+									chance_to_hit = 1
+								end
+								if rand(0..chance_to_hit) == 0
+									damage_dealt = 5
+									$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
+									begin
+										event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
+								else
+									begin
+										event.respond "**#{event.user.name}** missed!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
+								end
 							end
 							unless damage_dealt == 0
 								#stores the player that did damage in the unstable array with their damage dealt
