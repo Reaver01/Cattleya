@@ -4,8 +4,8 @@ module Commands
 		command(
 				:use,
 				bucket: :item_use,
-				description: "Use an item",
-				useage: "use <item> <user>"
+				description: 'Use an item',
+				useage: 'use <item> <user>'
 		) do |event, *item|
 			user_name = item[-1]
 			items_indexed = Hash[$items.map.with_index.to_a]
@@ -128,7 +128,7 @@ module Commands
 					end
 				end
 			end
-			command_log("use", event.user.name)
+			command_log('use', event.user.name)
 			nil
 		end
 	end

@@ -4,8 +4,8 @@ module Commands
 		command(
 				:reset,
 				bucket: :reset,
-				description: "Resets player back to 0",
-				useage: "reset"
+				description: 'Resets player back to 0',
+				useage: 'reset'
 		) do |event|
 			if $players.key?(event.user.id.to_s)
 				if $players[event.user.id.to_s].key?('messages')
@@ -20,7 +20,7 @@ module Commands
 					mute_log(event.channel.id.to_s)
 				end
 			end
-			command_log("reset", event.user.name)
+			command_log('reset', event.user.name)
 			nil
 		end
 	end

@@ -10,7 +10,7 @@ module Events
 						old_time = $players[event.user.id.to_s]['time']
 					else
 						#time in the distant past so it doesn't error
-						old_time = "2017-01-01 00:00:00 +0000"
+						old_time = '2017-01-01 00:00:00 +0000'
 					end
 					#30 second timeout for gaining xp
 					if TimeDifference.between(old_time, event.timestamp).in_seconds > 30
@@ -29,7 +29,7 @@ module Events
 					new_zenny = (rand(0..9) * 10) + (rand(0..9) * 100) + (($players[event.user.id.to_s]['level'] / 4).floor * 1000)
 					#adds a level and messages the player if they have the messages set as true
 					$players[event.user.id.to_s]['level'] += 1
-					if $players[event.user.id.to_s].has_key?("messages")
+					if $players[event.user.id.to_s].has_key?('messages')
 						if $players[event.user.id.to_s]['messages']
 							begin
 								BOT.user(event.user.id.to_s).pm("Congratulations! You have leveled up to Level #{$players[event.user.id.to_s]['level']}\nYou have earned yourself #{new_zenny} Zenny and a few items you can trade or use!")
@@ -55,7 +55,7 @@ module Events
 						end
 					end
 					#checks if player has messages set to true and messages them their new items if true
-					if $players[event.user.id.to_s].key?("messages")
+					if $players[event.user.id.to_s].key?('messages')
 						if $players[event.user.id.to_s]['messages']
 							begin
 								BOT.user(event.user.id.to_s).pm.send_embed '', new_items(new_items, event.user.name.to_s)

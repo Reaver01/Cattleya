@@ -39,27 +39,27 @@ def user_info(id, user_name, avatar)
 end
 #displays the monster that appears in the channels
 def new_monster(arr)
-	e = embed(arr['name'], "Good luck!")
+	e = embed(arr['name'], 'Good luck!')
 	e.color = arr['color']
 	e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
 	e
 end
 #displays info about the monster
 def monster(arr)
-	is_angry = "No"
-	is_trapped = "No"
+	is_angry = 'No'
+	is_trapped = 'No'
 	if arr.has_key?('intrap')
 		if arr['intrap']
-			is_trapped = "Yes"
+			is_trapped = 'Yes'
 		else
-			is_trapped = "No"
+			is_trapped = 'No'
 		end
 	end
 	if arr.has_key?('angry')
 		if arr['angry']
-			is_angry = "Yes"
+			is_angry = 'Yes'
 		else
-			is_angry = "No"
+			is_angry = 'No'
 		end
 	end
 	e = embed(arr['name'], "Angry: #{is_angry}\nIn Trap: #{is_trapped}")
@@ -80,7 +80,7 @@ def hunt_end(arr)
 	e = embed("#{arr['name']}", desc.chomp("\n"))
 	e.author[:icon_url] = "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
 	e.color = arr['color']
-	e.thumbnail = { url: "http://i.imgur.com/0MskAc1.png" }
+	e.thumbnail = { url: 'http://i.imgur.com/0MskAc1.png' }
 	e
 end
 #displays the items and prices
@@ -91,5 +91,5 @@ def shop(arr)
 		desc += "**#{x}. #{k['name']}:** #{k['price']}\n"
 		x += 1
 	end
-	embed("Here is the shop listing!", desc.chomp("\n"))
+	embed('Here is the shop listing!', desc.chomp("\n"))
 end

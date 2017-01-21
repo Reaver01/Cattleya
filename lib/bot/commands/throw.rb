@@ -4,8 +4,8 @@ module Commands
 		command(
 				:throw,
 				bucket: :item_use,
-				description: "Throws something at somebody",
-				useage: "throws <item> <user>"
+				description: 'Throws something at somebody',
+				useage: 'throw <item> <user>'
 		) do |event, *item|
 			user_name = item[-1]
 			items_indexed = Hash[$items.map.with_index.to_a]
@@ -212,7 +212,7 @@ module Commands
 					end
 				end
 			end
-			command_log("throw", event.user.name)
+			command_log('throw', event.user.name)
 			nil
 		end
 	end

@@ -4,8 +4,8 @@ module Commands
 		command(
 				:buy,
 				bucket: :item_use,
-				description: "Buys an item from the shop",
-				useage: "buy",
+				description: 'Buys an item from the shop',
+				useage: 'buy',
 				min_args: 1,
 				max_args: 2
 		) do |event, option_number, amount=1|
@@ -38,12 +38,12 @@ module Commands
 				end
 			else
 				begin
-					event.respond "That is not a valid option"
+					event.respond 'That is not a valid option'
 				rescue
 					mute_log(event.channel.id.to_s)
 				end
 			end
-			command_log("buy", event.user.name)
+			command_log('buy', event.user.name)
 			nil
 		end
 	end

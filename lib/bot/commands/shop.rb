@@ -3,15 +3,15 @@ module Commands
 		extend Discordrb::Commands::CommandContainer
 		command(
 				:shop,
-				description: "Displays shop listing",
-				useage: "shop"
+				description: 'Displays shop listing',
+				useage: 'shop'
 		) do |event|
 			begin
 				BOT.user(event.user.id.to_s).pm.send_embed '', shop($items)
 			rescue
 				mute_log(event.user.id.to_s)
 			end
-			command_log("shop", event.user.name)
+			command_log('shop', event.user.name)
 			nil
 		end
 	end

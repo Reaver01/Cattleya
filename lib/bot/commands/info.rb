@@ -4,8 +4,8 @@ module Commands
 		command(
 				:info,
 				bucket: :info,
-				description: "Responds with player info",
-				useage: "info"
+				description: 'Responds with player info',
+				useage: 'info'
 		) do |event, mention|
 			if BOT.parse_mention(mention) !=nil
 				user_id = BOT.parse_mention(mention).id.to_s
@@ -21,7 +21,7 @@ module Commands
 			rescue
 				mute_log(event.channel.id.to_s)
 			end
-			command_log("info", event.user.name)
+			command_log('info', event.user.name)
 			nil
 		end
 	end

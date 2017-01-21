@@ -22,11 +22,11 @@ def LoadPermissions(loc)
 			ar = Hash.new
 		end
 	else
-		puts "You have not set up any permissions", "Please enter your user id to set admin permissions for your discord account"
+		puts 'You have not set up any permissions', 'Please enter your user id to set admin permissions for your discord account'
 		id = $stdin.gets.chomp.to_i
 		ar[id] = {'id'=>id.to_i, 'lvl'=>999}
 		File.open(loc, 'w') { |f| f.write ar.to_json }
-		puts "Permissions saved!"
+		puts 'Permissions saved!'
 	end
 	return ar
 end
