@@ -49,7 +49,6 @@ else
 end
 #displays the invite url in the console (just in case...)
 puts BOT.invite_url
-#start cron
-cronjobs_start
+
 puts 'Cattleya ready to serve!'
 BOT.sync
