@@ -29,7 +29,7 @@ module Arrays
 		{'name'=>'Ghost Caeserber', 'hp'=>3000, 'icon'=>'caeserber', 'trap'=>'both', 'color'=>'0xac8d45'},
 		{'name'=>'Crystal Basarios', 'hp'=>3000, 'icon'=>'basarios', 'trap'=>'both', 'color'=>'0x8699a0'},
 		{'name'=>'Yian Garuga', 'hp'=>3000, 'icon'=>'yiangaruga', 'trap'=>'both', 'color'=>'76387e'},
-		{'name'=>'Red Khezu', 'hp'=>,3500 'icon'=>'khezu2', 'trap'=>'both', 'color'=>'ac3141'},
+		{'name'=>'Red Khezu', 'hp'=>3500, 'icon'=>'khezu2', 'trap'=>'both', 'color'=>'ac3141'},
 		{'name'=>'One-Eared Yian Garuga', 'hp'=>3500, 'icon'=>'yiangaruga', 'trap'=>'both', 'color'=>'76387e'},
 		{'name'=>'Doom Estrellian', 'hp'=>3500, 'icon'=>'estrellian2', 'trap'=>'no', 'color'=>'443193'},
 		{'name'=>'Rathian', 'hp'=>3500, 'icon'=>'rathian', 'trap'=>'both', 'color'=>'12bf1d'},
