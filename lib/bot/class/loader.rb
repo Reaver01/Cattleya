@@ -1,7 +1,8 @@
 #JSON Loader
-def LoadJSON(ar, loc)
+def LoadJSON(loc)
 	if File.exist?(loc)
 		begin
+			ar = Hash.new
 			ar = JSON.parse File.read loc
 		rescue
 			ar = Hash.new
@@ -12,9 +13,10 @@ def LoadJSON(ar, loc)
 	return ar
 end
 #JSON Loader for Permissions
-def LoadPermissions(ar,loc)
+def LoadPermissions(loc)
 	if File.exist?(loc)
 		begin
+			ar = Hash.new
 			ar = JSON.parse File.read loc
 		rescue
 			ar = Hash.new

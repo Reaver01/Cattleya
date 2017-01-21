@@ -5,16 +5,11 @@ end
 #load env variables
 Dotenv.load
 #load other variables
-$current_unstable = Hash.new
-$current_unstable = LoadJSON($current_unstable, "botfiles/current_unstable.json")
-$logs = Hash.new
-$logs = LoadJSON($logs, "botfiles/logs.json")
-$players = Hash.new
-$players = LoadJSON($players, "botfiles/players.json")
-$settings = Hash.new
-$settings = LoadJSON($settings, "botfiles/settings.json")
-$unstable = Hash.new
-$unstable = LoadJSON($unstable, "botfiles/unstable.json")
+$current_unstable = LoadJSON("botfiles/current_unstable.json")
+$logs = LoadJSON("botfiles/logs.json")
+$players = LoadJSON("botfiles/players.json")
+$settings = LoadJSON("botfiles/settings.json")
+$unstable = LoadJSON("botfiles/unstable.json")
 $hit = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
 $anger = ['b', 'l', 'v', 'y', 'p', 'w', 'f', 'g'].sample
 #sets bot prefix
@@ -22,7 +17,6 @@ PREFIX = '>'
 #Loads and establishes BOT object
 BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false
 #Load permissions from file
-permissions = Hash.new
 permissions = LoadPermissions(permissions,"botfiles/permissions.json")
 permissions.each do |key, value|
 	BOT.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
