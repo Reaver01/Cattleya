@@ -160,7 +160,6 @@ module Commands
 										mute_log(event.channel.id.to_s)
 									end
 								end
-							
 							elsif item == 'Pickaxe'
 								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
 									if $current_unstable[event.channel.id.to_s]['intrap']
@@ -179,6 +178,48 @@ module Commands
 									rescue
 										mute_log(event.channel.id.to_s)
 									end
+								else
+									begin
+										event.respond "**#{event.user.name}** missed!"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
+								end
+							elsif item == 'Dung Bomb'
+								if $current_unstable[event.channel.id.to_s].has_key?('intrap')
+									if $current_unstable[event.channel.id.to_s]['intrap']
+										chance_to_hit = 0
+									else
+										chance_to_hit = 0
+									end
+								else
+									chance_to_hit = 0
+								end
+								if rand(0..chance_to_hit) == 0
+									empty_channels = []
+									$unstable.each do |key, value|
+										if value
+											unless $current_unstable.has_key?(key)
+												empty_channels.push(key)
+											end
+										end
+									end
+									new_channel = empty_channels.sample
+									$current_unstable[new_channel] = $current_unstable[event.channel.id.to_s]
+									begin
+										event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+										event.respond "The monster has moved to **#{BOT.channel(new_channel).name}**"
+									rescue
+										mute_log(event.channel.id.to_s)
+									end
+									$current_unstable = $current_unstable.without(event.channel.id.to_s)		
+									begin
+										BOT.channel(new_channel).send_embed "A Monster has entered the channel!\nThis monster came from **#{event.channel.name} via a Dung Bomb!", new_monster($current_unstable[new_channel])
+									rescue
+										$current_unstable = $current_unstable.without(new_channel)
+										mute_log(new_channel.to_s)
+									end
+									File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
 								else
 									begin
 										event.respond "**#{event.user.name}** missed!"
