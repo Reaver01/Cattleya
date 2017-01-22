@@ -190,10 +190,10 @@ module Commands
 									if $current_unstable[event.channel.id.to_s]['intrap']
 										chance_to_hit = 0
 									else
-										chance_to_hit = 0
+										chance_to_hit = 2
 									end
 								else
-									chance_to_hit = 0
+									chance_to_hit = 2
 								end
 								if rand(0..chance_to_hit) == 0
 									empty_channels = []
