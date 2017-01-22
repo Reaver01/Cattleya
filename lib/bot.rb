@@ -29,7 +29,6 @@ puts 'Permission Loaded!'
 BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
 BOT.bucket :info, limit: 5, time_span: 60, delay: 5
 BOT.bucket :reset, limit: 1, time_span: 60
-#load commands
 #Load all commands
 Commands.constants.each do |x|
 	BOT.include! Commands.const_get x
