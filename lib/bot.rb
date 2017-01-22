@@ -1,4 +1,3 @@
-Dir["bot/class/*.rb"].each {|file| require_relative file }
 #create botfiles directory if it doesn't exist
 unless File.exist?('botfiles')
 	Dir.mkdir('botfiles')
