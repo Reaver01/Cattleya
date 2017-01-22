@@ -19,7 +19,7 @@ MONSTERS = LoadJSON('data/monsters.json')
 PREFIX = '>'
 #load modules
 #Loads and establishes BOT object
-BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false
+BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false, ignore_bots: true
 #Load permissions from file
 permissions = LoadPermissions('botfiles/permissions.json')
 permissions.each do |key, value|
