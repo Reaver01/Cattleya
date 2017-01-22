@@ -1,6 +1,6 @@
 module Events
 	extend Discordrb::EventContainer
-	message(containing: $anger) do |event|
+	message(containing: ANGER) do |event|
 		if event.message.channel.pm?
 			#does nothing
 		else
