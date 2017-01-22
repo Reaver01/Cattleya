@@ -33,7 +33,12 @@ def user_info(id, user_name, avatar)
 	$players[id]['inv'].each do |key, item|
 		invnum += item.to_i
 	end
-	e = embed("This is info all about #{user_name}!", "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n**XP:** #{$players[id]['xp']}\n**Zenny:** #{$players[id]['zenny']}\n**Inventory:** #{invnum} items")
+	unless $players[id].has_key?('max_hp')
+		new_hp = 500 + ($players[id]['level'] * 10)
+		$players[id]['max_hp'] = new_hp
+		$players[id]['current_hp'] = new_hp
+	end
+	e = embed("This is info all about #{user_name}!", "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n**XP:** #{$players[id]['xp']}\n**Current HP:** #{$players[id]['current_hp']}\n**Zenny:** #{$players[id]['zenny']}\n**Inventory:** #{invnum} items")
 	e.author[:icon_url] = avatar
 	e
 end

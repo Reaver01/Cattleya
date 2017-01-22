@@ -49,6 +49,9 @@ module Events
 									$players[event.user.id.to_s]['inv'][item] = 1
 								end
 							end
+							new_hp = 500 + ($players[event.user.id.to_s]['level'] * 10)
+							$players[event.user.id.to_s]['max_hp'] = new_hp
+							$players[event.user.id.to_s]['current_hp'] = new_hp
 							#checks if player has messages set to true and messages them their new items if true
 							if $players[event.user.id.to_s].key?('messages')
 								if $players[event.user.id.to_s]['messages']
@@ -63,7 +66,7 @@ module Events
 					end
 				else
 					#initial array for new player
-					$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'time'=>event.timestamp, 'inv'=>{'0'=>1}}
+					$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'max_hp'=>500, 'current_hp'=>500 'time'=>event.timestamp, 'inv'=>{'0'=>1}}
 				end
 			end
 		end
