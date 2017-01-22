@@ -66,7 +66,7 @@ module Events
 					end
 				else
 					#initial array for new player
-					$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'max_hp'=>500, 'current_hp'=>500 'time'=>event.timestamp, 'inv'=>{'0'=>1}}
+					$players[event.user.id.to_s] = {'xp'=>0, 'level'=>0, 'hr'=>0, 'zenny'=>100, 'max_hp'=>500, 'current_hp'=>500, 'time'=>event.timestamp, 'inv'=>{'0'=>1}}
 				end
 			end
 		end
