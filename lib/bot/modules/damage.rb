@@ -23,6 +23,8 @@ module Events
 								else
 									damage_done = rand(0..value)
 								end
+							else
+								damage_done = rand(0..value)
 							end
 							unless damage_done == 0
 								if $players[key]['messages']
