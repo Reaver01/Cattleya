@@ -22,17 +22,8 @@ module Events
 						if $players[event.user.id.to_s]['xp'] > next_level.round
 							#gives random amount of zenny based on level
 							new_zenny = (rand(0..9) * 10) + (rand(0..9) * 100) + (($players[event.user.id.to_s]['level'] / 4).floor * 1000)
-							#adds a level and messages the player if they have the messages set as true
+							#adds a level
 							$players[event.user.id.to_s]['level'] += 1
-							if $players[event.user.id.to_s].has_key?('messages')
-								if $players[event.user.id.to_s]['messages']
-									begin
-										BOT.user(event.user.id.to_s).pm("Congratulations! You have leveled up to Level #{$players[event.user.id.to_s]['level']}\nYou have earned yourself #{new_zenny} Zenny and a few items you can trade or use!")
-									rescue
-										mute_log(event.user.id.to_s)
-									end
-								end
-							end
 							#adds the new zenny to the players
 							$players[event.user.id.to_s]['zenny'] += new_zenny
 							#generates new items and stores them in an array
@@ -56,7 +47,7 @@ module Events
 							if $players[event.user.id.to_s].key?('messages')
 								if $players[event.user.id.to_s]['messages']
 									begin
-										BOT.user(event.user.id.to_s).pm.send_embed '', new_items(new_items, event.user.name.to_s)
+										BOT.user(event.user.id.to_s).pm.send_embed "Congratulations! You have leveled up to Level #{$players[event.user.id.to_s]['level']}\nYou have earned yourself #{new_zenny} Zenny and a few items you can trade or use!", new_items(new_items, event.user.name.to_s)
 									rescue
 										mute_log(event.user.id.to_s)
 									end
