@@ -49,6 +49,11 @@ module Events
 								end
 							end
 							damaged_players.each do |key, value|
+								unless $players[key].has_key?('current_hp')
+									new_hp = 500 + ($players[key]['level'] * 10)
+									$players[key]['max_hp'] = new_hp
+									$players[key]['current_hp'] = new_hp
+								end
 								$players[key]['current_hp'] -= value
 								if $players[key]['current_hp'] < 0
 									if $players[key]['messages']
