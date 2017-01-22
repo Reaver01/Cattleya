@@ -13,6 +13,7 @@ module Events
 						old_time = '2017-01-01 00:00:00 +0000'
 					end
 					if TimeDifference.between(old_time, event.timestamp).in_minutes > 3
+						$current_unstable[event.channel.id.to_s]['damage_time'] = event.timestamp
 						$current_unstable[event.channel.id.to_s]['players'].each do |key, value|
 							damage_done = 0
 							if $current_unstable[event.channel.id.to_s].has_key?('is_dead')
