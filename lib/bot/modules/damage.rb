@@ -30,6 +30,9 @@ module Events
 								end
 								damage_done = damage_done.round
 								unless damage_done == 0
+									unless $players[key].has_key?('messages')
+										$players[key]['messages'] = false
+									end
 									if $players[key]['messages']
 										begin
 											BOT.user(key).pm("You have taken **#{damage_done} damage** from the **#{$current_unstable[event.channel.id.to_s]['name']}** in **#{event.channel.name}**")
