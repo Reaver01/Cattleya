@@ -8,9 +8,15 @@ module Commands
 				useage: 'info'
 		) do |event, mention|
 			if BOT.parse_mention(mention) !=nil
-				user_id = BOT.parse_mention(mention).id.to_s
-				user_name = BOT.parse_mention(mention).name.to_s
-				avatar = BOT.parse_mention(mention).avatar_url.to_s
+				unless BOT.user(BOT.parse_mention(mention).id).bot_account?
+					user_id = BOT.parse_mention(mention).id.to_s
+					user_name = BOT.parse_mention(mention).name.to_s
+					avatar = BOT.parse_mention(mention).avatar_url.to_s
+				else
+					user_id = event.user.id.to_s
+					user_name = event.user.name.to_s
+					avatar = event.user.avatar_url.to_s
+				end
 			else
 				user_id = event.user.id.to_s
 				user_name = event.user.name.to_s
