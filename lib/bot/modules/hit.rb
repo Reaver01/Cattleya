@@ -1,6 +1,6 @@
 module Events
 	extend Discordrb::EventContainer
-	message(containing: $hit) do |event|
+	message(containing: HIT) do |event|
 		if event.message.channel.pm?
 			#does nothing
 		else

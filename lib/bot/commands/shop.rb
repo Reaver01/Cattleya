@@ -7,7 +7,7 @@ module Commands
 				useage: 'shop'
 		) do |event|
 			begin
-				BOT.user(event.user.id.to_s).pm.send_embed '', shop($items)
+				BOT.user(event.user.id.to_s).pm.send_embed '', shop(ITEMS)
 			rescue
 				mute_log(event.user.id.to_s)
 			end

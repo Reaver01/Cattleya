@@ -15,7 +15,7 @@ module Cronjobs
 				a = rand(0..9)
 				if a == 0
 					unless $current_unstable.has_key?(key)
-						$current_unstable[key] = $monsters.sample
+						$current_unstable[key] = MONSTERS.sample
 						begin
 							BOT.channel(key.to_s).send_embed 'A Monster has entered the channel!', new_monster($current_unstable[key])
 							File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }

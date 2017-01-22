@@ -10,8 +10,10 @@ $logs = LoadJSON('botfiles/logs.json')
 $players = LoadJSON('botfiles/players.json')
 $settings = LoadJSON('botfiles/settings.json')
 $unstable = LoadJSON('botfiles/unstable.json')
-$hit = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
-$anger = ['b', 'l', 'v', 'y', 'p', 'w', 'f', 'g'].sample
+ANGER = ['b', 'l', 'v', 'y', 'p', 'w', 'f', 'g'].sample
+HIT = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
+ITEMS = LoadJSON('data/items.json')
+MONSTERS = LoadJSON('data/monsters.json')
 #sets bot prefix
 PREFIX = '>'
 #Loads and establishes BOT object

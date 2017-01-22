@@ -39,7 +39,7 @@ module Events
 							items_count = rand(3..5)
 							new_items = []
 							items_count.times do
-								item = rand(0..($items.length-1))
+								item = rand(0..(ITEMS.length-1))
 								new_items.push(item)
 								item = item.to_s
 								#adds the new items to the players inventory

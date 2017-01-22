@@ -11,7 +11,7 @@ end
 def inventory(id, user_name)
 	desc = "**Zenny:** #{$players[id]['zenny']}\n\n"
 	$players[id]['inv'].each do |key, item|
-		desc += "**#{$items[key.to_i]['name']}:** #{item.to_i}\n"
+		desc += "**#{ITEMS[key.to_i]['name']}:** #{item.to_i}\n"
 	end
 	e = embed("Here is your inventory #{user_name}!", desc)
 	e.author[:icon_url] = BOT.profile.avatar_url
@@ -21,7 +21,7 @@ end
 def new_items(items, user_name)
 	desc = ""
 	items.each do |item|
-		desc += "**#{$items[item]['name']}**\n"
+		desc += "**#{ITEMS[item]['name']}**\n"
 	end
 	e = embed("Here are the new items you recieved #{user_name}!", desc)
 	e.author[:icon_url] = BOT.profile.avatar_url
