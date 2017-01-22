@@ -1,3 +1,4 @@
+Dir["bot/class/*.rb"].each {|file| require_relative file }
 #create botfiles directory if it doesn't exist
 unless File.exist?('botfiles')
 	Dir.mkdir('botfiles')
@@ -17,7 +18,6 @@ MONSTERS = LoadJSON('data/monsters.json')
 #sets bot prefix
 PREFIX = '>'
 #load all other files
-Dir["bot/class/*.rb"].each {|file| require_relative file }
 Dir["bot/modules/*.rb"].each {|file| require_relative file }
 Dir["bot/commands/*.rb"].each {|file| require_relative file }
 #Loads and establishes BOT object
