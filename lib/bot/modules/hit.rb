@@ -23,9 +23,19 @@ module Events
 						hr_modifier = $players[event.user.id.to_s]['hr']
 					end
 					#final damage dealt calculated and rounded to integer
-					damage_dealt = rand(0..(10 + hr_modifier)) * trap_modifier
-					damage_dealt = damage_dealt.round
-					$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
+					if $current_unstable[event.channel.id.to_s].has_key?('is_dead')
+						if $current_unstable[event.channel.id.to_s]['is_dead'].has_key?(event.user.id.to_s)
+							unless $current_unstable[event.channel.id.to_s]['is_dead'][event.user.id.to_s]
+								damage_dealt = rand(0..(10 + hr_modifier)) * trap_modifier
+								damage_dealt = damage_dealt.round
+								$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
+							end
+						else
+							damage_dealt = rand(0..(10 + hr_modifier)) * trap_modifier
+							damage_dealt = damage_dealt.round
+							$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
+						end
+					end
 					#stores the player that did damage in the unstable array with their damage dealt
 					if $current_unstable[event.channel.id.to_s].has_key?('players')
 						if $current_unstable[event.channel.id.to_s]['players'].has_key?(event.user.id.to_s)
