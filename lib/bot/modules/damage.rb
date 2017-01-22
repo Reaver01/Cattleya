@@ -12,6 +12,7 @@ module Events
 						#time in the distant past so it doesn't error
 						old_time = '2017-01-01 00:00:00 +0000'
 					end
+					damaged_players = Hash.new
 					if TimeDifference.between(old_time, event.timestamp).in_minutes > 3
 						$current_unstable[event.channel.id.to_s]['damage_time'] = event.timestamp
 						if $current_unstable[event.channel.id.to_s].has_key?('players')
@@ -29,7 +30,6 @@ module Events
 									damage_done = rand(0..value) / 2
 								end
 								damage_done = damage_done.round
-								damaged_players = Hash.new
 								unless damage_done == 0
 									if $players.has_key?(key)
 										if $players[key]['messages']
