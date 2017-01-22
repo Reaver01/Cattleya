@@ -16,6 +16,10 @@ ITEMS = LoadJSON('data/items.json')
 MONSTERS = LoadJSON('data/monsters.json')
 #sets bot prefix
 PREFIX = '>'
+#load all other files
+Dir["bot/class/*.rb"].each {|file| require_relative file }
+Dir["bot/modules/*.rb"].each {|file| require_relative file }
+Dir["bot/commands/*.rb"].each {|file| require_relative file }
 #Loads and establishes BOT object
 BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false
 #Load permissions from file
