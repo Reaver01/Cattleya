@@ -29,6 +29,7 @@ module Events
 									damage_done = rand(0..value) / 2
 								end
 								damage_done = damage_done.round
+								damaged_players = Hash.new
 								unless damage_done == 0
 									if $players.has_key?(key)
 										if $players[key]['messages']
@@ -43,23 +44,26 @@ module Events
 											$players[key]['max_hp'] = new_hp
 											$players[key]['current_hp'] = new_hp
 										end
-										$players[key]['current_hp'] -= damage_done
-										if $players[key]['current_hp'] < 0
-											if $players[key]['messages']
-												begin
-													BOT.user(key).pm("You have taken too much damage! The felynes will take approximately 5 minutes to restore you to full power.")
-												rescue
-													mute_log(key)
-												end
-											end
-											unless $current_unstable[event.channel.id.to_s].has_key?('is_dead')
-												$current_unstable[event.channel.id.to_s]['is_dead'] = {key=>true}
-											else
-												$current_unstable[event.channel.id.to_s]['is_dead'][key] = true
-											end
-											$players[key]['death_time'] = event.timestamp
+									end
+									damaged_players[key] = damage_done
+								end
+							end
+							damaged_players.each do |key, value|
+								$players[key]['current_hp'] -= value
+								if $players[key]['current_hp'] < 0
+									if $players[key]['messages']
+										begin
+											BOT.user(key).pm("You have taken too much damage! The felynes will take approximately 5 minutes to restore you to full power.")
+										rescue
+											mute_log(key)
 										end
 									end
+									unless $current_unstable[event.channel.id.to_s].has_key?('is_dead')
+										$current_unstable[event.channel.id.to_s]['is_dead'] = {key=>true}
+									else
+										$current_unstable[event.channel.id.to_s]['is_dead'][key] = true
+									end
+									$players[key]['death_time'] = event.timestamp
 								end
 							end
 						end
