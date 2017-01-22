@@ -30,36 +30,35 @@ module Events
 								end
 								damage_done = damage_done.round
 								unless damage_done == 0
-									unless $players[key].has_key?('messages')
-										$players[key]['messages'] = false
-									end
-									if $players[key]['messages']
-										begin
-											BOT.user(key).pm("You have taken **#{damage_done} damage** from the **#{$current_unstable[event.channel.id.to_s]['name']}** in **#{event.channel.name}**")
-										rescue
-											mute_log(key)
-										end
-									end
-									unless $players[key].has_key?('max_hp')
-										new_hp = 500 + ($players[key]['level'] * 10)
-										$players[key]['max_hp'] = new_hp
-										$players[key]['current_hp'] = new_hp
-									end
-									$players[key]['current_hp'] -= damage_done
-									if $players[key]['current_hp'] < 0
+									if $players.has_key?(key)
 										if $players[key]['messages']
 											begin
-												BOT.user(key).pm("You have taken too much damage! The felynes will take approximately 5 minutes to restore you to full power.")
+												BOT.user(key).pm("You have taken **#{damage_done} damage** from the **#{$current_unstable[event.channel.id.to_s]['name']}** in **#{event.channel.name}**")
 											rescue
 												mute_log(key)
 											end
 										end
-										unless $current_unstable[event.channel.id.to_s].has_key?('is_dead')
-											$current_unstable[event.channel.id.to_s]['is_dead'] = {key=>true}
-										else
-											$current_unstable[event.channel.id.to_s]['is_dead'][key] = true
+										unless $players[key].has_key?('max_hp')
+											new_hp = 500 + ($players[key]['level'] * 10)
+											$players[key]['max_hp'] = new_hp
+											$players[key]['current_hp'] = new_hp
 										end
-										$players[key]['death_time'] = event.timestamp
+										$players[key]['current_hp'] -= damage_done
+										if $players[key]['current_hp'] < 0
+											if $players[key]['messages']
+												begin
+													BOT.user(key).pm("You have taken too much damage! The felynes will take approximately 5 minutes to restore you to full power.")
+												rescue
+													mute_log(key)
+												end
+											end
+											unless $current_unstable[event.channel.id.to_s].has_key?('is_dead')
+												$current_unstable[event.channel.id.to_s]['is_dead'] = {key=>true}
+											else
+												$current_unstable[event.channel.id.to_s]['is_dead'][key] = true
+											end
+											$players[key]['death_time'] = event.timestamp
+										end
 									end
 								end
 							end
