@@ -8,7 +8,6 @@ module Commands
 				help_available: false,
 				permission_level: 800,
 		) do |event|
-			command_log('kill', event.user.name)
 			begin
 				event.respond "Saving data and shutting down... I'll be back."
 			rescue
