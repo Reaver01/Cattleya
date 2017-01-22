@@ -213,7 +213,7 @@ module Commands
 									end
 									$current_unstable = $current_unstable.without(event.channel.id.to_s)		
 									begin
-										BOT.channel(new_channel).send_embed "A Monster has entered the channel!\nThis monster came from **#{event.channel.name} via a Dung Bomb!", new_monster($current_unstable[new_channel])
+										BOT.channel(new_channel).send_embed "A Monster has entered the channel!\nThis monster came from **#{event.channel.name}** via a Dung Bomb!", new_monster($current_unstable[new_channel])
 										event.respond "The monster has moved to **#{BOT.channel(new_channel).name}**"
 									rescue
 										event.respond "**#{BOT.channel(new_channel).name}** has muted me and isn't allowed to spawn monsters."
