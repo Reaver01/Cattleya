@@ -30,6 +30,10 @@ module Events
 								damage_dealt = rand(0..(10 + hr_modifier)) * trap_modifier
 								damage_dealt = damage_dealt.round
 								$current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
+							else
+								if $debug
+									puts "#{event.user.id} is dead and can't deal damage"
+								end
 							end
 						else
 							damage_dealt = rand(0..(10 + hr_modifier)) * trap_modifier
