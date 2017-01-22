@@ -204,25 +204,29 @@ module Commands
 											end
 										end
 									end
-									new_channel = empty_channels.sample
-									$current_unstable[new_channel] = $current_unstable[event.channel.id.to_s]
-									begin
-										event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
-									rescue
-										mute_log(event.channel.id.to_s)
+									unless empty_channels.length == 0
+										new_channel = empty_channels.sample
+										$current_unstable[new_channel] = $current_unstable[event.channel.id.to_s]
+										begin
+											event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+										rescue
+											mute_log(event.channel.id.to_s)
+										end
+										$current_unstable = $current_unstable.without(event.channel.id.to_s)		
+										begin
+											BOT.channel(new_channel).send_embed "A Monster has entered the channel!\nThis monster came from **#{event.channel.name}** via a Dung Bomb!", new_monster($current_unstable[new_channel])
+											event.respond "The monster has moved to **#{BOT.channel(new_channel).name}**"
+										rescue
+											event.respond "**#{BOT.channel(new_channel).name}** has muted me and isn't allowed to spawn monsters."
+											$current_unstable[event.channel.id.to_s] = $current_unstable[new_channel]
+											$current_unstable = $current_unstable.without(new_channel)
+											$unstable[new_channel.to_s] = false
+											mute_log(new_channel.to_s)
+										end
+										File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
+									else
+										event.respond "There are no channels for the monster to go!"
 									end
-									$current_unstable = $current_unstable.without(event.channel.id.to_s)		
-									begin
-										BOT.channel(new_channel).send_embed "A Monster has entered the channel!\nThis monster came from **#{event.channel.name}** via a Dung Bomb!", new_monster($current_unstable[new_channel])
-										event.respond "The monster has moved to **#{BOT.channel(new_channel).name}**"
-									rescue
-										event.respond "**#{BOT.channel(new_channel).name}** has muted me and isn't allowed to spawn monsters."
-										$current_unstable[event.channel.id.to_s] = $current_unstable[new_channel]
-										$current_unstable = $current_unstable.without(new_channel)
-										$unstable[new_channel.to_s] = false
-										mute_log(new_channel.to_s)
-									end
-									File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
 								else
 									begin
 										event.respond "**#{event.user.name}** missed!"
