@@ -19,13 +19,13 @@ module Events
 							if $current_unstable[event.channel.id.to_s].has_key?('is_dead')
 								if $current_unstable[event.channel.id.to_s]['is_dead'].has_key?(key)
 									unless $current_unstable[event.channel.id.to_s]['is_dead'][key]
-										damage_done = rand(0..value) / 4
+										damage_done = rand(0..value) / 2
 									end
 								else
-									damage_done = rand(0..value) / 4
+									damage_done = rand(0..value) / 2
 								end
 							else
-								damage_done = rand(0..value) / 4
+								damage_done = rand(0..value) / 2
 							end
 							damage_done = damage_done.round
 							unless damage_done == 0
