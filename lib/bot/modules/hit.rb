@@ -23,6 +23,7 @@ module Events
 						hr_modifier = $players[event.user.id.to_s]['hr']
 					end
 					#final damage dealt calculated and rounded to integer
+					damage_dealt = 0
 					if $current_unstable[event.channel.id.to_s].has_key?('is_dead')
 						if $current_unstable[event.channel.id.to_s]['is_dead'].has_key?(event.user.id.to_s)
 							unless $current_unstable[event.channel.id.to_s]['is_dead'][event.user.id.to_s]
