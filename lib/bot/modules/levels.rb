@@ -1,8 +1,6 @@
 module Events
 	extend Discordrb::EventContainer
 	message do |event|
-		#leveling up formula
-		next_level = 0.83333333333 * ($players[event.user.id.to_s]['level'] - 1) * (2 * $players[event.user.id.to_s]['level'] ^ 2 + 23 * $players[event.user.id.to_s]['level'] + 66)
 		if event.message.channel.pm?
 			#does nothing
 		else
@@ -17,7 +15,9 @@ module Events
 					#30 second timeout for gaining xp
 					if TimeDifference.between(old_time, event.timestamp).in_seconds > 30
 						$players[event.user.id.to_s]['xp'] += rand(15..25)
-						$players[event.user.id.to_s]['time'] = event.timestamp
+						$players[event.user.id.to_s]['time'] = event.timestamp				
+						#leveling up formula
+						next_level = 0.83333333333 * ($players[event.user.id.to_s]['level'] - 1) * (2 * $players[event.user.id.to_s]['level'] ^ 2 + 23 * $players[event.user.id.to_s]['level'] + 66)
 						#checks players xp against the formula
 						if $players[event.user.id.to_s]['xp'] > next_level.round
 							#gives random amount of zenny based on level
