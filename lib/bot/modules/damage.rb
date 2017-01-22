@@ -62,17 +62,19 @@ module Events
 					end
 				end
 			end
-			if $players[event.user.id.to_s].has_key?('death_time')
-				if TimeDifference.between($players[event.user.id.to_s]['death_time'], event.timestamp).in_minutes > 5
-					$players[event.user.id.to_s] = $players[event.user.id.to_s].without('death_time')
-					if $current_unstable.has_key?(event.channel.id.to_s)
-						if $current_unstable[event.channel.id.to_s].has_key?('is_dead')
-							$current_unstable[event.channel.id.to_s]['is_dead'][event.user.id.to_s] = false
-						else
-							$current_unstable[event.channel.id.to_s]['is_dead'] = {event.user.id.to_s=>false}
+			if $players.has_key?(event.user.id.to_s)
+				if $players[event.user.id.to_s].has_key?('death_time')
+					if TimeDifference.between($players[event.user.id.to_s]['death_time'], event.timestamp).in_minutes > 5
+						$players[event.user.id.to_s] = $players[event.user.id.to_s].without('death_time')
+						if $current_unstable.has_key?(event.channel.id.to_s)
+							if $current_unstable[event.channel.id.to_s].has_key?('is_dead')
+								$current_unstable[event.channel.id.to_s]['is_dead'][event.user.id.to_s] = false
+							else
+								$current_unstable[event.channel.id.to_s]['is_dead'] = {event.user.id.to_s=>false}
+							end
 						end
+						$players[event.user.id.to_s]['current_hp'] = $players[event.user.id.to_s]['max_hp']
 					end
-					$players[event.user.id.to_s]['current_hp'] = $players[event.user.id.to_s]['max_hp']
 				end
 			end
 		end
