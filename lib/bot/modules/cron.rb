@@ -21,6 +21,7 @@ module Cronjobs
 							File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
 						rescue
 							$current_unstable = $current_unstable.without(key)
+							$unstable[key.to_s] = false
 							mute_log(key.to_s)
 						end
 					end
