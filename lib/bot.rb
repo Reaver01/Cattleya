@@ -10,14 +10,13 @@ $logs = LoadJSON('botfiles/logs.json')
 $players = LoadJSON('botfiles/players.json')
 $settings = LoadJSON('botfiles/settings.json')
 $unstable = LoadJSON('botfiles/unstable.json')
-ANGER = ['b', 'l', 'v', 'y', 'p', 'w', 'f', 'g'].sample
-HIT = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
+$anger = ['b', 'l', 'v', 'y', 'p', 'w', 'f', 'g'].sample
+$hit = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
 ITEMS = LoadJSON('data/items.json')
 MONSTERS = LoadJSON('data/monsters.json')
 #sets bot prefix
 PREFIX = '>'
 #load modules
-Dir["bot/modules/*.rb"].each {|file| require_relative file }
 #Loads and establishes BOT object
 BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false
 #Load permissions from file
@@ -31,7 +30,6 @@ BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
 BOT.bucket :info, limit: 5, time_span: 60, delay: 5
 BOT.bucket :reset, limit: 1, time_span: 60
 #load commands
-Dir["bot/commands/*.rb"].each {|file| require_relative file }
 #Load all commands
 Commands.constants.each do |x|
 	BOT.include! Commands.const_get x
