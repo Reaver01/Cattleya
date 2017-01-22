@@ -16,9 +16,8 @@ ITEMS = LoadJSON('data/items.json')
 MONSTERS = LoadJSON('data/monsters.json')
 #sets bot prefix
 PREFIX = '>'
-#load all other files
+#load modules
 Dir["bot/modules/*.rb"].each {|file| require_relative file }
-Dir["bot/commands/*.rb"].each {|file| require_relative file }
 #Loads and establishes BOT object
 BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false
 #Load permissions from file
@@ -31,6 +30,8 @@ puts 'Permission Loaded!'
 BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
 BOT.bucket :info, limit: 5, time_span: 60, delay: 5
 BOT.bucket :reset, limit: 1, time_span: 60
+#load commands
+Dir["bot/commands/*.rb"].each {|file| require_relative file }
 #Load all commands
 Commands.constants.each do |x|
 	BOT.include! Commands.const_get x
