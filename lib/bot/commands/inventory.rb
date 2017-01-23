@@ -9,7 +9,7 @@ module Commands
     ) do |event|
       begin
         BOT.user(event.user.id.to_s).pm.send_embed '', inventory(event.user.id.to_s, event.user.name.to_s)
-        event_message.react('💬')
+        event.message.react('💬')
       rescue
         mute_log(event.user.id.to_s)
       end
@@ -23,7 +23,7 @@ module Commands
     ) do |event|
       begin
         BOT.user(event.user.id.to_s).pm.send_embed '', inventory(event.user.id.to_s, event.user.name.to_s)
-        event_message.react('💬')
+        event.message.react('💬')
       rescue
         mute_log(event.user.id.to_s)
       end

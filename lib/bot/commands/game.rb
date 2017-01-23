@@ -13,7 +13,7 @@ module Commands
       $settings['game'] = text.join(' ')
       BOT.game = $settings['game']
       File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
-      event_message.react('👍')
+      event.message.react('👍')
       command_log('game', event.user.name)
       nil
     end

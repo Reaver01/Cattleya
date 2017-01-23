@@ -12,7 +12,7 @@ module Commands
           pm_status = false
           begin
             BOT.user(event.user.id.to_s).pm('PM notifications have been toggled off. How sad!')
-            event_message.react('💬')
+            event.message.react('💬')
           rescue
             mute_log(event.user.id.to_s)
           end
@@ -20,7 +20,7 @@ module Commands
           pm_status = true
           begin
             BOT.user(event.user.id.to_s).pm('PM notifications have been toggled on! I love sending notifications!')
-            event_message.react('💬')
+            event.message.react('💬')
           rescue
             mute_log(event.user.id.to_s)
           end
@@ -29,7 +29,7 @@ module Commands
         pm_status = true
         begin
           BOT.user(event.user.id.to_s).pm('PM notifications have been toggled on! I love sending notifications!')
-          event_message.react('💬')
+          event.message.react('💬')
         rescue
           mute_log(event.user.id.to_s)
         end

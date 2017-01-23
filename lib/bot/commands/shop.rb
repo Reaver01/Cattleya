@@ -9,7 +9,7 @@ module Commands
     ) do |event|
       begin
         BOT.user(event.user.id.to_s).pm.send_embed '', shop(ITEMS)
-        event_message.react('💬')
+        event.message.react('💬')
       rescue
         mute_log(event.user.id.to_s)
       end
