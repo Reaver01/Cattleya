@@ -1,6 +1,6 @@
 def anger(event_channel)
 	if $current_unstable.has_key?(event_channel.id.to_s)
-		debug(3, "[ANGER] Channel has a monster in it.")
+		debug(3, "[ANGER] #{event_channel.id} has a monster in it.")
 		unless $current_unstable[event_channel.id.to_s].has_key?('angry')
 			debug(5, "[ANGER] Key for anger doesn't exist | Creating and setting false.")
 			$current_unstable[event_channel.id.to_s]['angry'] = false
