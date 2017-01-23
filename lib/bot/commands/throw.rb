@@ -12,47 +12,6 @@ module Commands
       items_indexed = Hash[ITEMS.map.with_index.to_a]
       thrown_item = -1
       if BOT.parse_mention(user_name).nil?
-        item = item.first item.size - 1
-        item = item.join(' ').titleize
-        threw = false
-        x = 0
-        begin
-          if ITEMS[x]['name'] == item
-            threw = true
-            thrown_item = items_indexed[ITEMS[x]].to_s
-            thrown_item_index = x
-          end
-          x += 1
-          break if x == ITEMS.length
-        end
-        if threw
-          if $players[event.user.id.to_s]['inv'].key?(thrown_item)
-            if ITEMS[thrown_item_index]['throw']
-              begin
-                event.respond "**#{event.user.name}** threw a **#{item}** at #{user_name}!"
-              rescue
-                mute_log(event.channel.id.to_s)
-              end
-              $players[event.user.id.to_s]['inv'][thrown_item] -= 1
-            else
-              begin
-                event.respond "You can't throw **#{item}s**!"
-              rescue
-                mute_log(event.channel.id.to_s)
-              end
-            end
-            if $players[event.user.id.to_s]['inv'][thrown_item] < 1
-              $players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrown_item)
-            end
-          else
-            begin
-              event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
-            rescue
-              mute_log(event.channel.id.to_s)
-            end
-          end
-        end
-      else
         item = item.join(' ').titleize
         threw = false
         x = 0
@@ -248,6 +207,47 @@ module Commands
                   $current_unstable[event.channel.id.to_s]['players2'] = { event.user.id.to_s => event.user.name }
                 end
               end
+            end
+          else
+            begin
+              event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
+            rescue
+              mute_log(event.channel.id.to_s)
+            end
+          end
+        end
+      else
+        item = item.first item.size - 1
+        item = item.join(' ').titleize
+        threw = false
+        x = 0
+        begin
+          if ITEMS[x]['name'] == item
+            threw = true
+            thrown_item = items_indexed[ITEMS[x]].to_s
+            thrown_item_index = x
+          end
+          x += 1
+          break if x == ITEMS.length
+        end
+        if threw
+          if $players[event.user.id.to_s]['inv'].key?(thrown_item)
+            if ITEMS[thrown_item_index]['throw']
+              begin
+                event.respond "**#{event.user.name}** threw a **#{item}** at #{user_name}!"
+              rescue
+                mute_log(event.channel.id.to_s)
+              end
+              $players[event.user.id.to_s]['inv'][thrown_item] -= 1
+            else
+              begin
+                event.respond "You can't throw **#{item}s**!"
+              rescue
+                mute_log(event.channel.id.to_s)
+              end
+            end
+            if $players[event.user.id.to_s]['inv'][thrown_item] < 1
+              $players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(thrown_item)
             end
           else
             begin

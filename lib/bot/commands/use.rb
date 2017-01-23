@@ -12,47 +12,6 @@ module Commands
       items_indexed = Hash[ITEMS.map.with_index.to_a]
       used_item = -1
       if BOT.parse_mention(user_name).nil?
-        item = item.first item.size - 1
-        item = item.join(' ').titleize
-        used = false
-        x = 0
-        begin
-          if ITEMS[x]['name'] == item
-            used = true
-            used_item = items_indexed[ITEMS[x]].to_s
-            used_index = x
-          end
-          x += 1
-          break if x == ITEMS.length
-        end
-        if used
-          if $players[event.user.id.to_s]['inv'].key?(used_item)
-            if ITEMS[used_index]['throw']
-              begin
-                event.respond "**#{item}s** must be thrown!"
-              rescue
-                mute_log(event.channel.id.to_s)
-              end
-            else
-              begin
-                event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
-              rescue
-                mute_log(event.channel.id.to_s)
-              end
-              $players[event.user.id.to_s]['inv'][used_item] -= 1
-            end
-            if $players[event.user.id.to_s]['inv'][used_item] < 1
-              $players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
-            end
-          else
-            begin
-              event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
-            rescue
-              mute_log(event.channel.id.to_s)
-            end
-          end
-        end
-      else
         item = item.join(' ').titleize
         used = false
         x = 0
@@ -119,6 +78,47 @@ module Commands
                   end
                 end
               end
+            end
+          else
+            begin
+              event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+            rescue
+              mute_log(event.channel.id.to_s)
+            end
+          end
+        end
+      else
+        item = item.first item.size - 1
+        item = item.join(' ').titleize
+        used = false
+        x = 0
+        begin
+          if ITEMS[x]['name'] == item
+            used = true
+            used_item = items_indexed[ITEMS[x]].to_s
+            used_index = x
+          end
+          x += 1
+          break if x == ITEMS.length
+        end
+        if used
+          if $players[event.user.id.to_s]['inv'].key?(used_item)
+            if ITEMS[used_index]['throw']
+              begin
+                event.respond "**#{item}s** must be thrown!"
+              rescue
+                mute_log(event.channel.id.to_s)
+              end
+            else
+              begin
+                event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
+              rescue
+                mute_log(event.channel.id.to_s)
+              end
+              $players[event.user.id.to_s]['inv'][used_item] -= 1
+            end
+            if $players[event.user.id.to_s]['inv'][used_item] < 1
+              $players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
             end
           else
             begin
