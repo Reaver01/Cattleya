@@ -27,6 +27,7 @@ module Commands
       rescue
         mute_log(event.channel.id.to_s)
       end
+      event.message.delete
       command_log('info', event.user.name)
       nil
     end

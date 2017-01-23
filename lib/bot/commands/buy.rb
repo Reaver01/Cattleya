@@ -40,6 +40,7 @@ module Commands
           end
         end
       end
+      event.message.delete
       command_log('buy', event.user.name)
       nil
     end
