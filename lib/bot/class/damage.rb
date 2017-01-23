@@ -109,19 +109,6 @@ def damage(event_user, event_channel, event_message, event_timestamp)
 				debug(109, "[DAMAGE] Setting player's health to max.")
 				$players[event_user.id.to_s]['current_hp'] = $players[event_user.id.to_s]['max_hp']
 			end
-		else
-			if $current_unstable.has_key?(event_channel.id.to_s)
-				debug(114, "[DAMAGE] Player does not have a key for death time.")
-				if $current_unstable[event_channel.id.to_s].has_key?('is_dead')
-					debug(116, "[DAMAGE] Key exists for is_dead | Reviving player.")
-					$current_unstable[event_channel.id.to_s]['is_dead'][event_user.id.to_s] = false
-				else
-					debug(119, "[DAMAGE] Key doesn't exist for is_dead | Creating one and reviving player.")
-					$current_unstable[event_channel.id.to_s]['is_dead'] = {event_user.id.to_s=>false}
-				end
-			end
-			debug(123, "[DAMAGE] Setting player's health to max.")
-			$players[event_user.id.to_s]['current_hp'] = $players[event_user.id.to_s]['max_hp']
 		end
 	end
 end
