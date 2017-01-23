@@ -20,15 +20,15 @@ def damage(event_user, event_channel, event_message, event_timestamp)
 						if $current_unstable[event_channel.id.to_s]['is_dead'].has_key?(key)
 							debug(21, "[DAMAGE] key for is_dead exists. | Checking if key = false")
 							unless $current_unstable[event_channel.id.to_s]['is_dead'][key]
-								debug(23, "[DAMAGE] key = false | #{key} is not dead. Dealing #{damage_done} damage.")
+								debug(23, "[DAMAGE] key = false | #{key} is not dead. Dealing damage.")
 								damage_done = rand(0..value) / 2
 							end							
 						else
-							debug(27, "[DAMAGE] key for is_dead doesn't exist | #{key} is not dead. Dealing #{damage_done} damage.")
+							debug(27, "[DAMAGE] key for is_dead doesn't exist | #{key} is not dead. Dealing damage.")
 							damage_done = rand(0..value) / 2
 						end
 					else
-						debug(31, "[DAMAGE] is_dead doesn't exist | Nobody is dead. Dealing #{damage_done} damage.")
+						debug(31, "[DAMAGE] is_dead doesn't exist | Nobody is dead. Dealing damage.")
 						damage_done = rand(0..value) / 2
 					end
 					damage_done = damage_done.round
