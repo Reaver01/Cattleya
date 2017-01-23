@@ -12,9 +12,9 @@ module Events
 					hit(event.user, event.channel)
 				end
 				if event.message.content.include? $anger
-					anger(event.channel)					
+					anger(event.channel)
 				end
-				anger_check(event_channel, event_timestamp)
+				anger_check(event.channel, event.timestamp)
 			end
 		end
 	end
