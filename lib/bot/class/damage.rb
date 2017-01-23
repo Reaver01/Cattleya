@@ -1,4 +1,4 @@
-def damage(event_user, event_channel, event_timestamp)
+def damage(event_user, event_channel, event_message, event_timestamp)
 	if $current_unstable.has_key?(event_channel.id.to_s)
 		if $current_unstable[event_channel.id.to_s].has_key?('damage_time')
 			old_time = $current_unstable[event_channel.id.to_s]['damage_time']
@@ -10,6 +10,7 @@ def damage(event_user, event_channel, event_timestamp)
 		if TimeDifference.between(old_time, event_timestamp).in_minutes > 3
 			$current_unstable[event_channel.id.to_s]['damage_time'] = event_timestamp
 			if $current_unstable[event_channel.id.to_s].has_key?('players')
+				event_message.react("🎯")
 				$current_unstable[event_channel.id.to_s]['players'].each do |key, value|
 					damage_done = 0
 					if $current_unstable[event_channel.id.to_s].has_key?('is_dead')
