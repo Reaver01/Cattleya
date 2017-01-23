@@ -20,6 +20,7 @@ module Commands
           mute_log(event.user.id.to_s)
         end
       end
+      event.message.delete
       command_log('minfo', event.user.name)
       nil
     end
