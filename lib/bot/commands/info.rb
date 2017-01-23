@@ -8,7 +8,10 @@ module Commands
       description: 'Responds with player info',
       useage: 'info'
     ) do |event, mention|
-      if BOT.parse_mention(mention).nil?
+      user_id = event.user.id.to_s
+      user_name = event.user.name.to_s
+      avatar = event.user.avatar_url.to_s
+      unless BOT.parse_mention(mention).nil?
         if BOT.user(BOT.parse_mention(mention).id).bot_account?
           user_id = event.user.id.to_s
           user_name = event.user.name.to_s
@@ -18,10 +21,6 @@ module Commands
           user_name = BOT.parse_mention(mention).name.to_s
           avatar = BOT.parse_mention(mention).avatar_url.to_s
         end
-      else
-        user_id = event.user.id.to_s
-        user_name = event.user.name.to_s
-        avatar = event.user.avatar_url.to_s
       end
       begin
         event.channel.send_embed '', user_info(user_id, user_name, avatar)
