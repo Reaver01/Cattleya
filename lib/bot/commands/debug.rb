@@ -32,6 +32,7 @@ module Commands
 				end
 			end
 			$settings['debug'] = debug
+			File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
 			command_log('debug', event.user.name)
 			nil
 		end

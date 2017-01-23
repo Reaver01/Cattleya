@@ -16,9 +16,9 @@ unless $settings.has_key?('debug')
 	$settings['debug'] = false
 end
 if $settings['debug']
-	puts '[STARTUP] Debugging mode on!'
+	puts '[#{Time.now.strftime("%d %a %y | %H:%M:%S")}][STARTUP] Debugging mode on!'
 else
-	puts '[STARTUP] Debugging mode off!'
+	puts '[#{Time.now.strftime("%d %a %y | %H:%M:%S")}][STARTUP] Debugging mode off!'
 end
 ITEMS = LoadJSON('data/items.json')
 MONSTERS = LoadJSON('data/monsters.json')
@@ -32,7 +32,7 @@ permissions = LoadPermissions('botfiles/permissions.json')
 permissions.each do |key, value|
 	BOT.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
 end
-puts '[STARTUP] Permission Loaded!'
+puts '[#{Time.now.strftime("%d %a %y | %H:%M:%S")}][STARTUP] Permission Loaded!'
 #make buckets for commands
 BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
 BOT.bucket :info, limit: 5, time_span: 60, delay: 5
@@ -55,5 +55,5 @@ end
 #displays the invite url in the console (just in case...)
 puts BOT.invite_url
 
-puts '[STARTUP] Cattleya ready to serve!'
+puts '[#{Time.now.strftime("%d %a %y | %H:%M:%S")}][STARTUP] Cattleya ready to serve!'
 BOT.sync

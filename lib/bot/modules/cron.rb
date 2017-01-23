@@ -7,6 +7,7 @@ module Cronjobs
 		File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
 		File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
 		File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
+		File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
 	end
 
 	s.every '10m' do
@@ -33,6 +34,7 @@ module Cronjobs
 		File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
 		File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
 		File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
+		File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
 		BOT.stop
 	end
 
