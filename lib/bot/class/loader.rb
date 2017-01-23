@@ -10,7 +10,7 @@ def LoadJSON(file_location)
 	else
 		puts "[LOADER] No file #{file_location} to load!"
 	end
-	debug(13, "[LOADER] #{file_location} loaded!")
+	puts "[LOADER] #{file_location} loaded!"
 	return array
 end
 #JSON Loader for Permissions
@@ -29,6 +29,6 @@ def LoadPermissions(file_location)
 		File.open(file_location, 'w') { |f| f.write array.to_json }
 		puts '[LOADER] Permissions saved!'
 	end
-	debug(32, "[LOADER] #{file_location} loaded!")
+	puts "[LOADER] #{file_location} loaded!"
 	return array
 end
