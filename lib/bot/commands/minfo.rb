@@ -41,10 +41,7 @@ module Commands
           mute_log(event.user.id.to_s)
         end
       end
-      begin
-        event.message.delete
-      rescue
-      end
+      event.message.delete
       command_log('minfo', event.user.name)
       nil
     end

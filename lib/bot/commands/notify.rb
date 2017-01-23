@@ -34,10 +34,7 @@ module Commands
         end
       end
       $players[event.user.id.to_s]['messages'] = pm_status
-      begin
-        event.message.delete
-      rescue
-      end
+      event.message.delete
       command_log('notify', event.user.name)
       nil
     end

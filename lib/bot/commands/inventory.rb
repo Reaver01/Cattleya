@@ -13,10 +13,7 @@ module Commands
       rescue
         mute_log(event.user.id.to_s)
       end
-      begin
-        event.message.delete
-      rescue
-      end
+      event.message.delete
       command_log('inventory', event.user.name)
       nil
     end
@@ -31,10 +28,7 @@ module Commands
       rescue
         mute_log(event.user.id.to_s)
       end
-      begin
-        event.message.delete
-      rescue
-      end
+      event.message.delete
       command_log('inventory', event.user.name)
       nil
     end
