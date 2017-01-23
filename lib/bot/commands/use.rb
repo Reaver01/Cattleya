@@ -29,12 +29,14 @@ module Commands
             if ITEMS[used_index]['throw']
               begin
                 event.respond "**#{item}s** must be thrown!"
+                event_message.react('🚫')
               rescue
                 mute_log(event.channel.id.to_s)
               end
             else
               begin
                 event.respond "**#{event.user.name}** used a **#{item}**!"
+                event_message.react('👍')
               rescue
                 mute_log(event.channel.id.to_s)
               end
@@ -50,12 +52,14 @@ module Commands
                   $current_unstable[event.channel.id.to_s]['traptime'] = Time.now
                   begin
                     event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+                    event_message.react('👍')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
                 else
                   begin
                     event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+                    event_message.react('🚫')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
@@ -67,12 +71,14 @@ module Commands
                   $current_unstable[event.channel.id.to_s]['traptime'] = Time.now
                   begin
                     event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+                    event_message.react('👍')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
                 else
                   begin
                     event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+                    event_message.react('🚫')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
@@ -82,6 +88,7 @@ module Commands
           else
             begin
               event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+              event_message.react('🚫')
             rescue
               mute_log(event.channel.id.to_s)
             end
@@ -106,12 +113,14 @@ module Commands
             if ITEMS[used_index]['throw']
               begin
                 event.respond "**#{item}s** must be thrown!"
+                event_message.react('🚫')
               rescue
                 mute_log(event.channel.id.to_s)
               end
             else
               begin
                 event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
+                event_message.react('👍')
               rescue
                 mute_log(event.channel.id.to_s)
               end
@@ -123,6 +132,7 @@ module Commands
           else
             begin
               event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+              event_message.react('🚫')
             rescue
               mute_log(event.channel.id.to_s)
             end

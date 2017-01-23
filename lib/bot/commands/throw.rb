@@ -29,6 +29,7 @@ module Commands
             if ITEMS[thrown_item_index]['throw']
               begin
                 event.respond "**#{event.user.name}** threw a **#{item}**!"
+                event_message.react('👍')
               rescue
                 mute_log(event.channel.id.to_s)
               end
@@ -36,6 +37,7 @@ module Commands
             else
               begin
                 event.respond "You can't throw **#{item}s**!"
+                event_message.react('🚫')
               rescue
                 mute_log(event.channel.id.to_s)
               end
@@ -60,12 +62,14 @@ module Commands
                   $current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
                   begin
                     event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+                    event_message.react('👍')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
                 else
                   begin
                     event.respond "**#{event.user.name}** missed!"
+                    event_message.react('😆')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
@@ -85,12 +89,14 @@ module Commands
                   $current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
                   begin
                     event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+                    event_message.react('👍')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
                 else
                   begin
                     event.respond "**#{event.user.name}** missed!"
+                    event_message.react('😆')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
@@ -110,12 +116,14 @@ module Commands
                   $current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
                   begin
                     event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+                    event_message.react('👍')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
                 else
                   begin
                     event.respond "**#{event.user.name}** missed!"
+                    event_message.react('😆')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
@@ -135,12 +143,14 @@ module Commands
                   $current_unstable[event.channel.id.to_s]['hp'] -= damage_dealt
                   begin
                     event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+                    event_message.react('👍')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
                 else
                   begin
                     event.respond "**#{event.user.name}** missed!"
+                    event_message.react('😆')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
@@ -170,6 +180,7 @@ module Commands
                     $current_unstable[new_channel] = $current_unstable[event.channel.id.to_s]
                     begin
                       event.respond "**#{event.user.name}** hit the **#{$current_unstable[event.channel.id.to_s]['name']}** with a **#{item}**!"
+                      event_message.react('💩')
                     rescue
                       mute_log(event.channel.id.to_s)
                     end
@@ -179,6 +190,7 @@ module Commands
                       event.respond "The monster has moved to **#{BOT.channel(new_channel).name}**"
                     rescue
                       event.respond "**#{BOT.channel(new_channel).name}** has muted me and isn't allowed to spawn monsters."
+                      event_message.react('🚫')
                       $current_unstable[event.channel.id.to_s] = $current_unstable[new_channel]
                       $current_unstable = $current_unstable.without(new_channel)
                       $unstable[new_channel.to_s] = false
@@ -189,6 +201,7 @@ module Commands
                 else
                   begin
                     event.respond "**#{event.user.name}** missed!"
+                    event_message.react('😆')
                   rescue
                     mute_log(event.channel.id.to_s)
                   end
@@ -211,6 +224,7 @@ module Commands
           else
             begin
               event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
+              event_message.react('🚫')
             rescue
               mute_log(event.channel.id.to_s)
             end
@@ -235,6 +249,7 @@ module Commands
             if ITEMS[thrown_item_index]['throw']
               begin
                 event.respond "**#{event.user.name}** threw a **#{item}** at #{user_name}!"
+                event_message.react('🤣')
               rescue
                 mute_log(event.channel.id.to_s)
               end
@@ -242,6 +257,7 @@ module Commands
             else
               begin
                 event.respond "You can't throw **#{item}s**!"
+                event_message.react('🚫')
               rescue
                 mute_log(event.channel.id.to_s)
               end
@@ -252,6 +268,7 @@ module Commands
           else
             begin
               event.respond "**#{event.user.name}** doesn't have any **#{item}s** to throw!"
+              event_message.react('🚫')
             rescue
               mute_log(event.channel.id.to_s)
             end
