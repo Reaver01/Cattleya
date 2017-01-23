@@ -90,23 +90,22 @@ def damage(event_user, event_channel, event_message, event_timestamp)
 		end
 	end
 	if $players.has_key?(event_user.id.to_s)
-		debug(93, "[DAMAGE] #{event_user.id} has profile.")
 		if $players[event_user.id.to_s].has_key?('death_time')
-			debug(95, "[DAMAGE] #{event_user.id} has key for death_time.")
+			debug(94, "[DAMAGE] #{event_user.id} has key for death_time.")
 			if TimeDifference.between($players[event_user.id.to_s]['death_time'], event_timestamp).in_minutes > 5
-				debug(97, "[DAMAGE] death_time was > 5 minutes ago | Removing key from death_time.")
+				debug(96, "[DAMAGE] death_time was > 5 minutes ago | Removing key from death_time.")
 				$players[event_user.id.to_s] = $players[event_user.id.to_s].without('death_time')
 				if $current_unstable.has_key?(event_channel.id.to_s)
-					debug(100, "[DAMAGE] There is a monster in the current channel.")
+					debug(99, "[DAMAGE] There is a monster in the current channel.")
 					if $current_unstable[event_channel.id.to_s].has_key?('is_dead')
-						debug(102, "[DAMAGE] Key for is_dead exists | Reviving #{event_user.id}")
+						debug(101, "[DAMAGE] Key for is_dead exists | Reviving #{event_user.id}")
 						$current_unstable[event_channel.id.to_s]['is_dead'][event_user.id.to_s] = false
 					else
-						debug(105, "[DAMAGE] Key for is_dead does not exist | Making one and setting #{event_user.id} to not dead.")
+						debug(104, "[DAMAGE] Key for is_dead does not exist | Making one and setting #{event_user.id} to not dead.")
 						$current_unstable[event_channel.id.to_s]['is_dead'] = {event_user.id.to_s=>false}
 					end
 				end
-				debug(109, "[DAMAGE] Setting #{event_user.id}'s health to max.")
+				debug(108, "[DAMAGE] Setting #{event_user.id}'s health to max.")
 				$players[event_user.id.to_s]['current_hp'] = $players[event_user.id.to_s]['max_hp']
 			end
 		end
