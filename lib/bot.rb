@@ -1,59 +1,56 @@
-#create botfiles directory if it doesn't exist
-unless File.exist?('botfiles')
-	Dir.mkdir('botfiles')
-end
-#load env variables
+# Make botfiles directory if the directory doesn't already exist
+Dir.mkdir('botfiles') unless File.exist?('botfiles')
+# Load the environment variables
 Dotenv.load
-#load other variables
-$current_unstable = LoadJSON('botfiles/current_unstable.json')
-$logs = LoadJSON('botfiles/logs.json')
-$players = LoadJSON('botfiles/players.json')
-$settings = LoadJSON('botfiles/settings.json')
-$unstable = LoadJSON('botfiles/unstable.json')
-$anger = ['b', 'l', 'v', 'y', 'p', 'w', 'f', 'g'].sample
-$hit = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
-unless $settings.has_key?('debug')
-	$settings['debug'] = false
-end
+# Load all global variables
+$current_unstable = load_json('botfiles/current_unstable.json')
+$logs = load_json('botfiles/logs.json')
+$players = load_json('botfiles/players.json')
+$settings = load_json('botfiles/settings.json')
+$unstable = load_json('botfiles/unstable.json')
+$anger = %w(b l v y p w f g).sample
+$hit = %w(c m u d n t e h i o a s r).sample
+# If debug setting doesn't already exist then set it to false by default
+$settings['debug'] = false unless $settings.key?('debug')
 if $settings['debug']
-	puts "[#{Time.now.strftime("%d %a %y | %H:%M:%S")}][STARTUP] Debugging mode on!"
+  puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Debugging mode on!"
 else
-	puts "[#{Time.now.strftime("%d %a %y | %H:%M:%S")}][STARTUP] Debugging mode off!"
+  puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Debugging mode off!"
 end
-ITEMS = LoadJSON('data/items.json')
-MONSTERS = LoadJSON('data/monsters.json')
-#sets bot prefix
-PREFIX = '>'
-#load modules
-#Loads and establishes BOT object
+# Load all constant variables
+ITEMS = load_json('data/items.json')
+MONSTERS = load_json('data/monsters.json')
+PREFIX = '>'.freeze
+# Load the bot constant
 BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false, ignore_bots: true
-#Load permissions from file
-permissions = LoadPermissions('botfiles/permissions.json')
-permissions.each do |key, value|
-	BOT.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
+# Load all permissions from file
+permissions = load_permissions('botfiles/permissions.json')
+permissions.each do |key, _value|
+  BOT.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
 end
-puts "[#{Time.now.strftime("%d %a %y | %H:%M:%S")}][STARTUP] Permission Loaded!"
-#make buckets for commands
+puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Permission Loaded!"
+# Set up command buckets for rate limiting
 BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
 BOT.bucket :info, limit: 5, time_span: 60, delay: 5
 BOT.bucket :reset, limit: 1, time_span: 60
-#Load all commands
+# Load all command modules
 Commands.constants.each do |x|
-	BOT.include! Commands.const_get x
+  BOT.include! Commands.const_get x
 end
-#Load events
+# Load outside event module
 BOT.include! Events
-#Turn off debugging and run async
+# Turn off discordrb debugging
 BOT.debug = false
+# Set run to async
 BOT.run :async
-#Set game status from file
-if $settings.has_key?('game')
-	BOT.game = $settings['game']
-else
-	BOT.game = 0
-end
-#displays the invite url in the console (just in case...)
+# Load game from settings and set to 0 if no game setting exists
+BOT.game = if $settings.key?('game')
+             $settings['game']
+           else
+             0
+           end
+# Put bot invite url in command console just in case
 puts BOT.invite_url
-
-puts "[#{Time.now.strftime("%d %a %y | %H:%M:%S")}][STARTUP] Cattleya ready to serve!"
+puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Cattleya ready to serve!"
+# Sync the bot object
 BOT.sync

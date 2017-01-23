@@ -1,4 +1,4 @@
-#allows deletion of hash keys
+# Allows deletion of hash keys
 class Hash
   def without(*keys)
     cpy = self.dup
