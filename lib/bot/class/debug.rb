@@ -1,5 +1,5 @@
-def debug(message)
+def debug(line, message)
 	if $debug
-		puts "[DEBUG]#{message}"
+		puts "[DEBUG][#{line}]#{message}"
 	end
 end
