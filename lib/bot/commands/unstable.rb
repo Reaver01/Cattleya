@@ -40,7 +40,10 @@ module Commands
           mute_log(event.channel.id.to_s)
         end
       end
-      event.message.delete
+      begin
+        event.message.delete
+      rescue
+      end
       command_log('unstable', event.user.name)
       nil
     end

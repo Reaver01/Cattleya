@@ -137,7 +137,10 @@ module Commands
           end
         end
       end
-      event.message.delete
+      begin
+        event.message.delete
+      rescue
+      end
       command_log('use', event.user.name)
       nil
     end
