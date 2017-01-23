@@ -6,7 +6,7 @@ module Events
 		else
 			unless event.message.content.include?(PREFIX)
 				levels(event.user, event.timestamp)
-				damage(event.user, event.channel, event.timestamp)
+				damage(event.user, event.channel, event.message, event.timestamp)
 				trap(event.channel, event.timestamp)
 				if event.message.content.include? $hit
 					hit(event.user, event.channel)
