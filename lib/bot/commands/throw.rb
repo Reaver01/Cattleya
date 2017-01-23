@@ -293,6 +293,7 @@ module Commands
           end
         end
       end
+      event.message.delete
       command_log('throw', event.user.name)
       nil
     end
