@@ -1,32 +1,34 @@
 #JSON Loader
-def LoadJSON(loc)
-	if File.exist?(loc)
+def LoadJSON(file_location)
+	if File.exist?(file_location)
 		begin
-			ar = Hash.new
-			ar = JSON.parse File.read loc
+			array = Hash.new
+			array = JSON.parse File.read file_location
 		rescue
-			ar = Hash.new
+			array = Hash.new
 		end
 	else
-		puts "No file #{loc} to load!"
+		puts "[LOADER] No file #{file_location} to load!"
 	end
-	return ar
+	debug(13, "[LOADER] #{file_location} loaded!")
+	return array
 end
 #JSON Loader for Permissions
-def LoadPermissions(loc)
-	if File.exist?(loc)
+def LoadPermissions(file_location)
+	if File.exist?(file_location)
 		begin
-			ar = Hash.new
-			ar = JSON.parse File.read loc
+			array = Hash.new
+			array = JSON.parse File.read file_location
 		rescue
-			ar = Hash.new
+			array = Hash.new
 		end
 	else
-		puts 'You have not set up any permissions', 'Please enter your user id to set admin permissions for your discord account'
-		id = $stdin.gets.chomp.to_i
-		ar[id] = {'id'=>id.to_i, 'lvl'=>999}
-		File.open(loc, 'w') { |f| f.write ar.to_json }
-		puts 'Permissions saved!'
+		puts '[LOADER] You have not set up any permissions', '[LOADER] Please enter your user id to set admin permissions for your discord account'
+		user_id = $stdin.gets.chomp.to_i
+		array[user_id] = {'id'=>user_id.to_i, 'lvl'=>999}
+		File.open(file_location, 'w') { |f| f.write array.to_json }
+		puts '[LOADER] Permissions saved!'
 	end
-	return ar
+	debug(32, "[LOADER] #{file_location} loaded!")
+	return array
 end

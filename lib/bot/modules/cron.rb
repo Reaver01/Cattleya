@@ -36,5 +36,5 @@ module Cronjobs
 		BOT.stop
 	end
 
-	puts 'Cron jobs scheduled!'
+	puts '[STARTUP] Cron jobs scheduled!'
 end

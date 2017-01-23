@@ -15,6 +15,11 @@ $hit = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
 unless $settings.has_key?('debug')
 	$settings['debug'] = false
 end
+if $settings['debug']
+	puts '[STARTUP] Debugging mode on!'
+else
+	puts '[STARTUP] Debugging mode off!'
+end
 ITEMS = LoadJSON('data/items.json')
 MONSTERS = LoadJSON('data/monsters.json')
 #sets bot prefix
@@ -27,7 +32,7 @@ permissions = LoadPermissions('botfiles/permissions.json')
 permissions.each do |key, value|
 	BOT.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
 end
-puts 'Permission Loaded!'
+puts '[STARTUP] Permission Loaded!'
 #make buckets for commands
 BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
 BOT.bucket :info, limit: 5, time_span: 60, delay: 5
@@ -50,5 +55,5 @@ end
 #displays the invite url in the console (just in case...)
 puts BOT.invite_url
 
-puts 'Cattleya ready to serve!'
+puts '[STARTUP] Cattleya ready to serve!'
 BOT.sync
