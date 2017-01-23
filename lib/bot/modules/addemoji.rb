@@ -5,5 +5,6 @@ module Events
     next unless event.emoji.name == "\u274C"
     next unless event.message.from_bot?
     puts 'Reaction was placed on bot'
+    event.message.delete
   end
 end
