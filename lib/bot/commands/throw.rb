@@ -23,8 +23,7 @@ module Commands
             thrown_item_index = x
           end
           x += 1
-          break if x == ITEMS.length
-        end
+        end while x < ITEMS.length
         if threw
           debug(29, '[THROW] An item was thrown')
           if $players[event.user.id.to_s]['inv'].key?(thrown_item)
@@ -256,8 +255,7 @@ module Commands
             thrown_item_index = x
           end
           x += 1
-          break if x == ITEMS.length
-        end
+        end while x < ITEMS.length
         if threw
           debug(262, '[THROW] An item was thrown')
           if $players[event.user.id.to_s]['inv'].key?(thrown_item)

@@ -22,8 +22,7 @@ module Commands
             used_index = x
           end
           x += 1
-          break if x == ITEMS.length
-        end
+        end while x < ITEMS.length
         if used
           if $players[event.user.id.to_s]['inv'].key?(used_item)
             if ITEMS[used_index]['throw']
@@ -106,8 +105,7 @@ module Commands
             used_index = x
           end
           x += 1
-          break if x == ITEMS.length
-        end
+        end while x < ITEMS.length
         if used
           if $players[event.user.id.to_s]['inv'].key?(used_item)
             if ITEMS[used_index]['throw']
