@@ -15,7 +15,7 @@ module Cronjobs
       next unless value
       a = rand(0..9)
       next unless a.zero?
-      next unless $current_unstable.key?(key)
+      next if $current_unstable.key?(key)
       $current_unstable[key] = MONSTERS.sample
       begin
         BOT.channel(key.to_s).send_embed 'A Monster has entered the channel!', new_monster($current_unstable[key])
