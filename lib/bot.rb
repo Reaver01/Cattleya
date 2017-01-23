@@ -12,7 +12,9 @@ $settings = LoadJSON('botfiles/settings.json')
 $unstable = LoadJSON('botfiles/unstable.json')
 $anger = ['b', 'l', 'v', 'y', 'p', 'w', 'f', 'g'].sample
 $hit = ['c', 'm', 'u', 'd', 'n', 't', 'e', 'h', 'i', 'o', 'a', 's', 'r'].sample
-$debug = false
+unless $settings.has_key?('debug')
+	$settings['debug'] = false
+end
 ITEMS = LoadJSON('data/items.json')
 MONSTERS = LoadJSON('data/monsters.json')
 #sets bot prefix
