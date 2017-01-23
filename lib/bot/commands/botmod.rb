@@ -15,7 +15,7 @@ module Commands
       delete_permission = 'yes' if level == 'delete'
       level = level.to_i
       permissions = load_permissions('botfiles/permissions.json')
-      if BOT.parse_mention(mention).nil?
+      unless BOT.parse_mention(mention).nil?
         user_id = BOT.parse_mention(mention).id
         if permissions.key?(user_id.to_s)
           begin
@@ -89,7 +89,8 @@ module Commands
         permissions.each do |key, _value|
           BOT.set_user_permission(permissions[key]['id'], permissions[key]['lvl'])
         end
-      elsif mention == 'check'
+      end
+      if mention == 'check'
         event << permissions
       else
         begin
