@@ -22,6 +22,7 @@ module Commands
             thrown_item_index = i
             puts thrown_item_index
           end
+          puts thrown_item_index
         end
         if threw
           debug(29, '[THROW] An item was thrown')
