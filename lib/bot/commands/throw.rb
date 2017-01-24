@@ -21,9 +21,7 @@ module Commands
             threw = true
             thrown_item = items_indexed[ITEMS[i]].to_s
             thrown_item_index = i
-            puts thrown_item_index
           end
-          puts thrown_item_index
         end
         if threw
           debug(29, '[THROW] An item was thrown')
