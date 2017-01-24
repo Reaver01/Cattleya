@@ -31,6 +31,7 @@ end
 puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Permission Loaded!"
 # Set up command buckets for rate limiting
 BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
+BOT.bucket :item_throw, limit: 3, time_span: 60, delay: 10
 BOT.bucket :info, limit: 5, time_span: 60, delay: 5
 BOT.bucket :reset, limit: 1, time_span: 60
 # Load all command modules
