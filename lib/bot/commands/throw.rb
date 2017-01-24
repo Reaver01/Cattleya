@@ -20,6 +20,7 @@ module Commands
             threw = true
             thrown_item = items_indexed[ITEMS[i]].to_s
             thrown_item_index = i
+            puts thrown_item_index
           end
         end
         if threw
@@ -250,6 +251,7 @@ module Commands
             threw = true
             thrown_item = items_indexed[ITEMS[i]].to_s
             thrown_item_index = i
+            puts thrown_item_index
           end
         end
         if threw
