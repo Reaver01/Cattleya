@@ -8,7 +8,7 @@ module Commands
       useage: 'invite'
     ) do |event|
       begin
-        event.respond "Invite Link: <#{BOT.invite_url}>"
+        event.respond "Invite Link: <#{BOT.invite_url(permission_bits: 93248)}>"
       rescue
         mute_log(event.channel.id.to_s)
       end
