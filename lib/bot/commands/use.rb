@@ -14,15 +14,13 @@ module Commands
       if BOT.parse_mention(user_name).nil?
         item = item.join(' ').titleize
         used = false
-        x = 0
-        begin
-          if ITEMS[x]['name'] == item
+        (0..ITEMS.length - 1).each do |i|
+          if ITEMS[i]['name'] == item
             used = true
-            used_item = items_indexed[ITEMS[x]].to_s
-            used_index = x
+            used_item = items_indexed[ITEMS[i]].to_s
+            used_index = i
           end
-          x += 1
-        end while x < ITEMS.length
+        end
         if used
           if $players[event.user.id.to_s]['inv'].key?(used_item)
             if ITEMS[used_index]['throw']
@@ -97,15 +95,13 @@ module Commands
         item = item.first item.size - 1
         item = item.join(' ').titleize
         used = false
-        x = 0
-        begin
-          if ITEMS[x]['name'] == item
+        (0..ITEMS.length - 1).each do |i|
+          if ITEMS[i]['name'] == item
             used = true
-            used_item = items_indexed[ITEMS[x]].to_s
-            used_index = x
+            used_item = items_indexed[ITEMS[i]].to_s
+            used_index = i
           end
-          x += 1
-        end while x < ITEMS.length
+        end
         if used
           if $players[event.user.id.to_s]['inv'].key?(used_item)
             if ITEMS[used_index]['throw']
