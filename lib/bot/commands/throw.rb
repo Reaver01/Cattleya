@@ -15,6 +15,7 @@ module Commands
         debug(15, '[THROW] Nobody was mentioned')
         item = item.join(' ').titleize
         threw = false
+        thrown_item_index = 0
         (0..ITEMS.length - 1).each do |i|
           if ITEMS[i]['name'] == item
             threw = true
