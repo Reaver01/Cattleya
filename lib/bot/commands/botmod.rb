@@ -91,7 +91,7 @@ module Commands
         end
       else
         begin
-          event.respond 'Invalid user'
+          event.respond 'Invalid user' unless mention == 'check'
         rescue
           mute_log(event.channel.id.to_s)
         end
