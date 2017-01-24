@@ -6,6 +6,7 @@ module Commands
       :debug,
       description: 'Toggles debugging',
       useage: 'debug',
+      help_available: false,
       permission_level: 800
     ) do |event|
       if $settings.key?('debug')
