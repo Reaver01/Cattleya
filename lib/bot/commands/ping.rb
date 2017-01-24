@@ -5,7 +5,8 @@ module Commands
     command(
       :ping,
       description: 'Responds with response time',
-      useage: 'ping'
+      useage: 'ping',
+      help_available: false
     ) do |event|
       begin
         event.respond "Pong! : #{((Time.now - event.timestamp) * 1000).to_i}ms"
