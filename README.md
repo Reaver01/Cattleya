@@ -2,7 +2,7 @@
 
 This bot was originally written for the Monster Hunter Online discord, but you are welcome to invite it to your own server!
 
-https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&scope=bot
+https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&permissions=93248&scope=bot
 
 #Current features:
 
