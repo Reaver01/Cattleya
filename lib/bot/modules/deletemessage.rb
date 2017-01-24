@@ -1,4 +1,4 @@
-# Responds to emoji being added
+# Deletes message based on emoji response
 module Events
   extend Discordrb::EventContainer
   reaction_add(emoji: "\u274C") do |event|
