@@ -14,16 +14,17 @@ module Commands
       if BOT.parse_mention(user_name).nil?
         item = item.join(' ').titleize
         used = false
+        used_item_index = 0
         (0..ITEMS.length - 1).each do |i|
           if ITEMS[i]['name'] == item
             used = true
             used_item = items_indexed[ITEMS[i]].to_s
-            used_index = i
+            used_item_index = i
           end
         end
         if used
           if $players[event.user.id.to_s]['inv'].key?(used_item)
-            if ITEMS[used_index]['throw']
+            if ITEMS[used_item_index]['throw']
               begin
                 event.respond "**#{item}s** must be thrown!"
                 event.message.react('🚫')
@@ -95,16 +96,17 @@ module Commands
         item = item.first item.size - 1
         item = item.join(' ').titleize
         used = false
+        used_item_index = 0
         (0..ITEMS.length - 1).each do |i|
           if ITEMS[i]['name'] == item
             used = true
             used_item = items_indexed[ITEMS[i]].to_s
-            used_index = i
+            used_item_index = i
           end
         end
         if used
           if $players[event.user.id.to_s]['inv'].key?(used_item)
-            if ITEMS[used_index]['throw']
+            if ITEMS[used_item_index]['throw']
               begin
                 event.respond "**#{item}s** must be thrown!"
                 event.message.react('🚫')
