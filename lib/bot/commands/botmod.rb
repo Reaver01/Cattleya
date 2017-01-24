@@ -96,9 +96,7 @@ module Commands
           mute_log(event.channel.id.to_s)
         end
       end
-      if mention == 'check'
-        event << permissions
-      end
+      event.respond permissions if mention == 'check'
       command_log('botmod', event.user.name)
       nil
     end
