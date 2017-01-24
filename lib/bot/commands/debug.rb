@@ -5,7 +5,7 @@ module Commands
     command(
       :debug,
       description: 'Toggles debugging',
-      useage: 'debug',
+      usage: 'debug',
       help_available: false,
       permission_level: 800
     ) do |event|

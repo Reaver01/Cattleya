@@ -5,7 +5,7 @@ module Commands
     command(
       :shop,
       description: 'Displays shop listing',
-      useage: 'shop'
+      usage: 'shop'
     ) do |event|
       begin
         BOT.user(event.user.id.to_s).pm.send_embed '', shop(ITEMS)

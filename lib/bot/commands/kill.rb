@@ -5,7 +5,7 @@ module Commands
     command(
       :kill,
       description: 'Kills the bot',
-      useage: 'kill',
+      usage: 'kill',
       help_available: false,
       permission_level: 800
     ) do |event|

@@ -6,7 +6,7 @@ module Commands
       :info,
       bucket: :info,
       description: 'Responds with player info',
-      useage: 'info'
+      usage: 'info'
     ) do |event, mention|
       user_id = event.user.id.to_s
       user_name = event.user.name.to_s

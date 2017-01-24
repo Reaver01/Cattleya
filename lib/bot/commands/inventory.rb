@@ -5,7 +5,7 @@ module Commands
     command(
       :inventory,
       description: 'Sends a PM with your current inventory',
-      useage: 'inventory'
+      usage: 'inventory'
     ) do |event|
       begin
         BOT.user(event.user.id.to_s).pm.send_embed '', inventory(event.user.id.to_s, event.user.name.to_s)
@@ -20,7 +20,7 @@ module Commands
     command(
       :inv,
       description: 'Sends a PM with your current inventory',
-      useage: 'inv'
+      usage: 'inv'
     ) do |event|
       begin
         BOT.user(event.user.id.to_s).pm.send_embed '', inventory(event.user.id.to_s, event.user.name.to_s)

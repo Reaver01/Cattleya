@@ -5,7 +5,7 @@ module Commands
     command(
       :botmod,
       description: 'Adds mod permissions to bot',
-      useage: 'botmod <@name> <level> <force>',
+      usage: 'botmod <@name> <level> <force>',
       permission_level: 800,
       help_available: false,
       min_args: 1,

@@ -6,7 +6,7 @@ module Commands
       :use,
       bucket: :item_use,
       description: 'Use an item',
-      useage: 'use <item> <user>'
+      usage: 'use <item> <user>'
     ) do |event, *item|
       user_name = item[-1]
       items_indexed = Hash[ITEMS.map.with_index.to_a]
@@ -16,11 +16,10 @@ module Commands
         used = false
         used_item_index = 0
         (0..ITEMS.length - 1).each do |i|
-          if ITEMS[i]['name'] == item
-            used = true
-            used_item = items_indexed[ITEMS[i]].to_s
-            used_item_index = i
-          end
+          next unless ITEMS[i]['name'] == item
+          used = true
+          used_item = items_indexed[ITEMS[i]].to_s
+          used_item_index = i
         end
         if used
           if $players[event.user.id.to_s]['inv'].key?(used_item)
@@ -98,11 +97,10 @@ module Commands
         used = false
         used_item_index = 0
         (0..ITEMS.length - 1).each do |i|
-          if ITEMS[i]['name'] == item
-            used = true
-            used_item = items_indexed[ITEMS[i]].to_s
-            used_item_index = i
-          end
+          next unless ITEMS[i]['name'] == item
+          used = true
+          used_item = items_indexed[ITEMS[i]].to_s
+          used_item_index = i
         end
         if used
           if $players[event.user.id.to_s]['inv'].key?(used_item)

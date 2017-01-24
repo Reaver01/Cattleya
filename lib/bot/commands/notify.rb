@@ -5,7 +5,7 @@ module Commands
     command(
       :notify,
       description: 'Toggles pm notifications of level',
-      useage: 'notify'
+      usage: 'notify'
     ) do |event|
       if $players[event.user.id.to_s].key?('messages')
         if $players[event.user.id.to_s]['messages']

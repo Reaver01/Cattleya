@@ -6,7 +6,7 @@ module Commands
       :reset,
       bucket: :reset,
       description: 'Resets player back to 0',
-      useage: 'reset'
+      usage: 'reset'
     ) do |event|
       if $players.key?(event.user.id.to_s)
         messages = if $players[event.user.id.to_s].key?('messages')

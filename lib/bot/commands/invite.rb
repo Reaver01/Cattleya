@@ -5,7 +5,7 @@ module Commands
     command(
       :invite,
       description: 'Shows the invite link for the bot',
-      useage: 'invite'
+      usage: 'invite'
     ) do |event|
       begin
         event.respond "Invite Link: <#{BOT.invite_url(permission_bits: 93248)}>"

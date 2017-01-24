@@ -6,7 +6,7 @@ module Commands
       :throw,
       bucket: :item_throw,
       description: 'Throws something at somebody',
-      useage: 'throw <item> <user>'
+      usage: 'throw <item> <user>'
     ) do |event, *item|
       user_name = item[-1]
       items_indexed = Hash[ITEMS.map.with_index.to_a]
@@ -17,11 +17,10 @@ module Commands
         threw = false
         thrown_item_index = 0
         (0..ITEMS.length - 1).each do |i|
-          if ITEMS[i]['name'] == item
-            threw = true
-            thrown_item = items_indexed[ITEMS[i]].to_s
-            thrown_item_index = i
-          end
+          next unless ITEMS[i]['name'] == item
+          threw = true
+          thrown_item = items_indexed[ITEMS[i]].to_s
+          thrown_item_index = i
         end
         if threw
           debug(29, '[THROW] An item was thrown')
@@ -248,12 +247,10 @@ module Commands
         threw = false
         thrown_item_index = 0
         (0..ITEMS.length - 1).each do |i|
-          if ITEMS[i]['name'] == item
-            threw = true
-            thrown_item = items_indexed[ITEMS[i]].to_s
-            thrown_item_index = i
-            puts thrown_item_index
-          end
+          next unless ITEMS[i]['name'] == item
+          threw = true
+          thrown_item = items_indexed[ITEMS[i]].to_s
+          thrown_item_index = i
         end
         if threw
           debug(262, '[THROW] An item was thrown')

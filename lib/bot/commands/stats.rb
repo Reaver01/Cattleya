@@ -6,7 +6,7 @@ module Commands
       :stats,
       bucket: :info,
       description: 'Responds with bot stats',
-      useage: 'stats'
+      usage: 'stats'
     ) do |event|
       desc = "Commands used:\n"
       if $logs.key?('commands')

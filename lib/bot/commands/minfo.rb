@@ -5,7 +5,7 @@ module Commands
     command(
       :minfo,
       description: 'Responds with monster info',
-      useage: 'minfo'
+      usage: 'minfo'
     ) do |event|
       if $current_unstable.key?(event.channel.id.to_s)
         begin
@@ -27,7 +27,7 @@ module Commands
     command(
       :monster,
       description: 'Responds with monster info',
-      useage: 'monster'
+      usage: 'monster'
     ) do |event|
       if $current_unstable.key?(event.channel.id.to_s)
         begin

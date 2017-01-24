@@ -5,7 +5,7 @@ module Commands
     command(
       :eval,
       description: 'Evaluates code',
-      useage: 'eval <code>',
+      usage: 'eval <code>',
       help_available: false,
       permission_level: 800
     ) do |event, *code|

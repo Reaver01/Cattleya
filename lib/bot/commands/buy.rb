@@ -6,7 +6,7 @@ module Commands
       :buy,
       bucket: :item_use,
       description: 'Buys an item from the shop',
-      useage: 'buy',
+      usage: 'buy',
       min_args: 1,
       max_args: 2
     ) do |event, option_number, amount = 1|

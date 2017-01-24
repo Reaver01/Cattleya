@@ -5,7 +5,7 @@ module Commands
     command(
       :ping,
       description: 'Responds with response time',
-      useage: 'ping',
+      usage: 'ping',
       help_available: false
     ) do |event|
       begin
