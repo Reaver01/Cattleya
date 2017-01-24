@@ -15,15 +15,13 @@ module Commands
         debug(15, '[THROW] Nobody was mentioned')
         item = item.join(' ').titleize
         threw = false
-        x = 0
-        begin
-          if ITEMS[x]['name'] == item
+        (0..ITEMS.length - 1).each do |i|
+          if ITEMS[i]['name'] == item
             threw = true
-            thrown_item = items_indexed[ITEMS[x]].to_s
-            thrown_item_index = x
+            thrown_item = items_indexed[ITEMS[i]].to_s
+            thrown_item_index = i
           end
-          x += 1
-        end while x < ITEMS.length
+        end
         if threw
           debug(29, '[THROW] An item was thrown')
           if $players[event.user.id.to_s]['inv'].key?(thrown_item)
@@ -247,15 +245,13 @@ module Commands
         item = item.first item.size - 1
         item = item.join(' ').titleize
         threw = false
-        x = 0
-        begin
-          if ITEMS[x]['name'] == item
+        (0..ITEMS.length - 1).each do |i|
+          if ITEMS[i]['name'] == item
             threw = true
-            thrown_item = items_indexed[ITEMS[x]].to_s
-            thrown_item_index = x
+            thrown_item = items_indexed[ITEMS[i]].to_s
+            thrown_item_index = i
           end
-          x += 1
-        end while x < ITEMS.length
+        end
         if threw
           debug(262, '[THROW] An item was thrown')
           if $players[event.user.id.to_s]['inv'].key?(thrown_item)
