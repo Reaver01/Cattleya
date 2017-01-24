@@ -4,7 +4,7 @@ module Commands
     extend Discordrb::Commands::CommandContainer
     command(
       :throw,
-      bucket: :item_use,
+      bucket: :item_throw,
       description: 'Throws something at somebody',
       useage: 'throw <item> <user>'
     ) do |event, *item|
