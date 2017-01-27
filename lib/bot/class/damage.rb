@@ -2,8 +2,8 @@ def damage(user, channel, message, timestamp)
   if $current_unstable.key?(channel.id.to_s)
     if rand(0..9).zero?
       if $current_unstable[channel.id.to_s].key?('players')
-        value = if $current_unstable[channel.id.to_s]['players'].key?(users.id.to_s)
-                  $current_unstable[channel.id.to_s]['players'][users.id.to_s]
+        value = if $current_unstable[channel.id.to_s]['players'].key?(user.id.to_s)
+                  $current_unstable[channel.id.to_s]['players'][user.id.to_s]
                 else
                   0
                 end
