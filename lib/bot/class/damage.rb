@@ -2,6 +2,7 @@ def damage(user, channel, message, timestamp)
   if $current_unstable.key?(channel.id.to_s)
     if rand(0..9).zero?
       if $current_unstable[channel.id.to_s].key?('players')
+        value = $current_unstable[channel.id.to_s]['players'][users.id.to_s]
         if $players.key?(user.id.to_s)
           message.react('💥')
           damage_done = 0
