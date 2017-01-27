@@ -3,7 +3,7 @@ Dir.mkdir('botfiles') unless File.exist?('botfiles')
 # Load the environment variables
 Dotenv.load
 # Load all global variables
-$current_unstable = load_json('botfiles/current_unstable.json')
+$cur_unst = load_json('botfiles/current_unstable.json')
 $logs = load_json('botfiles/logs.json')
 $players = load_json('botfiles/players.json')
 $settings = load_json('botfiles/settings.json')
@@ -13,16 +13,22 @@ $hit = %w(c m u d n t e h i o a s r).sample
 # If debug setting doesn't already exist then set it to false by default
 $settings['debug'] = false unless $settings.key?('debug')
 if $settings['debug']
-  puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Debugging mode on!"
+  puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Debugging mode" \
+       ' on!'
 else
-  puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Debugging mode off!"
+  puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Debugging mode" \
+       ' off!'
 end
 # Load all constant variables
 ITEMS = load_json('data/items.json')
 MONSTERS = load_json('data/monsters.json')
 PREFIX = '>'.freeze
 # Load the bot constant
-BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], client_id: ENV['CLIENT'], prefix: PREFIX, advanced_functionality: false, ignore_bots: true
+BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'],
+                                          client_id: ENV['CLIENT'],
+                                          prefix: PREFIX,
+                                          advanced_functionality: false,
+                                          ignore_bots: true
 # Load all permissions from file
 permissions = load_permissions('botfiles/permissions.json')
 permissions.each do |key, _value|
@@ -52,6 +58,7 @@ BOT.game = if $settings.key?('game')
            end
 # Put bot invite url in command console just in case
 puts BOT.invite_url
-puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Cattleya ready to serve!"
+puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Cattleya ready " \
+     'to serve!'
 # Sync the bot object
 BOT.sync

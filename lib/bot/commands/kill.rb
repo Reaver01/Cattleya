@@ -14,7 +14,9 @@ module Commands
       rescue
         mute_log(event.channel.id.to_s)
       end
-      File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
+      File.open('botfiles/current_unstable.json', 'w') do |f|
+        f.write $cur_unst.to_json
+      end
       File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
       File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
       File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }

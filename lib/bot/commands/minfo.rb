@@ -7,9 +7,11 @@ module Commands
       description: 'Responds with monster info',
       usage: 'minfo'
     ) do |event|
-      if $current_unstable.key?(event.channel.id.to_s)
+      if $cur_unst.key?(event.channel.id.to_s)
         begin
-          event.channel.send_embed '', monster($current_unstable[event.channel.id.to_s])
+          event.channel.send_embed '', monster(
+            $cur_unst[event.channel.id.to_s]
+          )
         rescue
           mute_log(event.channel.id.to_s)
         end
@@ -29,9 +31,11 @@ module Commands
       description: 'Responds with monster info',
       usage: 'monster'
     ) do |event|
-      if $current_unstable.key?(event.channel.id.to_s)
+      if $cur_unst.key?(event.channel.id.to_s)
         begin
-          event.channel.send_embed '', monster($current_unstable[event.channel.id.to_s])
+          event.channel.send_embed '', monster(
+            $cur_unst[event.channel.id.to_s]
+          )
         rescue
           mute_log(event.channel.id.to_s)
         end

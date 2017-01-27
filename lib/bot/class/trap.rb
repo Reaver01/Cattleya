@@ -1,15 +1,22 @@
-def trap(event_channel, event_timestamp)
-  if $current_unstable.key?(event_channel.id.to_s)
-    if $current_unstable[event_channel.id.to_s].key?('traptime')
+def trap(channel, event_timestamp)
+  channel_id = channel.id.to_s
+  if $cur_unst.key?(channel_id)
+    if $cur_unst[channel_id].key?('traptime')
       debug(4, '[TRAP] Monster has a traptime value.')
-      if TimeDifference.between($current_unstable[event_channel.id.to_s]['traptime'], event_timestamp).in_minutes > 2
-        debug(6, '[TRAP] Monster has been in the trap for longer than 2 minutes | Releasing from trap.')
-        $current_unstable[event_channel.id.to_s]['intrap'] = false
-        $current_unstable[event_channel.id.to_s] = $current_unstable[event_channel.id.to_s].without('traptime')
+      if TimeDifference.between(
+        $cur_unst[channel_id]['traptime'],
+        event_timestamp
+      ).in_minutes > 2
+        $cur_unst[channel_id]['intrap'] = false
+        $cur_unst[channel_id] = $cur_unst[channel_id].without(
+          'traptime'
+        )
         begin
-          BOT.channel(event_channel.id.to_s).send_message("The #{$current_unstable[event_channel.id.to_s]['name']} has escaped the trap!")
+          BOT.channel(channel_id).send_message(
+            "The #{$cur_unst[channel_id]['name']} has escaped the trap!"
+          )
         rescue
-          mute_log(event_channel.id.to_s)
+          mute_log(channel_id)
         end
       end
     end

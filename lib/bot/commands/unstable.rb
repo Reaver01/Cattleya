@@ -12,14 +12,16 @@ module Commands
           if $unstable[event.channel.id.to_s]
             $unstable[event.channel.id.to_s] = false
             begin
-              event.respond 'Unstable has been toggled off for this channel. Monsters will no longer appear!'
+              event.respond 'Unstable has been toggled off for this channel. ' \
+                            'Monsters will no longer appear!'
             rescue
               mute_log(event.channel.id.to_s)
             end
           else
             $unstable[event.channel.id.to_s] = true
             begin
-              event.respond 'Unstable has been toggled on for this channel. Monsters will appear in this channel!'
+              event.respond 'Unstable has been toggled on for this channel. ' \
+                            'Monsters will appear in this channel!'
             rescue
               mute_log(event.channel.id.to_s)
             end
@@ -27,15 +29,19 @@ module Commands
         else
           $unstable[event.channel.id.to_s] = true
           begin
-            event.respond 'Unstable has been toggled on for this channel. Monsters will appear in this channel!'
+            event.respond 'Unstable has been toggled on for this channel. ' \
+                          'Monsters will appear in this channel!'
           rescue
             mute_log(event.channel.id.to_s)
           end
         end
-        File.open('botfiles/unstable.json', 'w') { |f| f.write $unstable.to_json }
+        File.open('botfiles/unstable.json', 'w') do |f|
+          f.write $unstable.to_json
+        end
       else
         begin
-          event.respond 'Only a channel manager can toggle $unstable on a channel'
+          event.respond 'Only a channel manager can toggle $unstable on a ' \
+                        'channel'
         rescue
           mute_log(event.channel.id.to_s)
         end

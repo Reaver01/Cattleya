@@ -37,7 +37,14 @@ def user_info(id, user_name, avatar)
     $players[id]['max_hp'] = new_hp
     $players[id]['current_hp'] = new_hp
   end
-  e = embed("This is info all about #{user_name}!", "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n**XP:** #{$players[id]['xp']}\n**Current HP:** #{$players[id]['current_hp']}\n**Zenny:** #{$players[id]['zenny']}\n**Inventory:** #{invnum} items")
+  e = embed(
+    "This is info all about #{user_name}!",
+    "**Level:** #{$players[id]['level']}\n**HR:** #{$players[id]['hr']}\n" \
+    "**XP:** #{$players[id]['xp']}\n" \
+    "**Current HP:** #{$players[id]['current_hp']}\n" \
+    "**Zenny:** #{$players[id]['zenny']}\n" \
+    "**Inventory:** #{invnum} items"
+  )
   e.author[:icon_url] = avatar
   e
 end
@@ -45,7 +52,9 @@ end
 def new_monster(arr)
   e = embed(arr['name'], 'Good luck!')
   e.color = arr['color']
-  e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
+  e.thumbnail = {
+    url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
+  }
   e
 end
 
@@ -68,7 +77,9 @@ def monster(arr)
   end
   e = embed(arr['name'], "Angry: #{is_angry}\nIn Trap: #{is_trapped}")
   e.color = arr['color']
-  e.thumbnail = { url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png" }
+  e.thumbnail = {
+    url: "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
+  }
   e
 end
 
@@ -80,7 +91,8 @@ def hunt_end(arr)
     $players[key]['hr'] += 1 if value > 50 + $players[key]['hr']
   end
   e = embed(arr['name'], desc.chomp("\n"))
-  e.author[:icon_url] = "http://monsterhunteronline.in/monsters/images/#{arr['icon']}.png"
+  e.author[:icon_url] = 'http://monsterhunteronline.in/monsters/images/' +
+                        arr['icon'].to_s + '.png'
   e.color = arr['color']
   e.thumbnail = { url: 'http://i.imgur.com/0MskAc1.png' }
   e

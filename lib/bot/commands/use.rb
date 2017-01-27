@@ -8,6 +8,8 @@ module Commands
       description: 'Use an item',
       usage: 'use <item> <user>'
     ) do |event, *item|
+      user_id = event.user.id.to_s
+      channel_id = event.channel.id.to_s
       user_name = item[-1]
       items_indexed = Hash[ITEMS.map.with_index.to_a]
       used_item = -1
@@ -22,72 +24,79 @@ module Commands
           used_item_index = i
         end
         if used
-          if $players[event.user.id.to_s]['inv'].key?(used_item)
+          if $players[user_id]['inv'].key?(used_item)
             if ITEMS[used_item_index]['throw']
               begin
                 event.respond "**#{item}s** must be thrown!"
                 event.message.react('🚫')
               rescue
-                mute_log(event.channel.id.to_s)
+                mute_log(channel_id)
               end
             else
               begin
                 event.respond "**#{event.user.name}** used a **#{item}**!"
                 event.message.react('👍')
               rescue
-                mute_log(event.channel.id.to_s)
+                mute_log(channel_id)
               end
-              $players[event.user.id.to_s]['inv'][used_item] -= 1
+              $players[user_id]['inv'][used_item] -= 1
             end
-            if $players[event.user.id.to_s]['inv'][used_item] < 1
-              $players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
+            if $players[user_id]['inv'][used_item] < 1
+              $players[user_id]['inv'] = $players[user_id]['inv'].without(
+                used_item
+              )
             end
-            if $current_unstable.key?(event.channel.id.to_s)
+            if $cur_unst.key?(channel_id)
               if item == 'Shock Trap'
-                if %w(shock both).include? $current_unstable[event.channel.id.to_s]['trap']
-                  $current_unstable[event.channel.id.to_s]['intrap'] = true
-                  $current_unstable[event.channel.id.to_s]['traptime'] = Time.now
+                if %w(shock both).include? $cur_unst[channel_id]['trap']
+                  $cur_unst[channel_id]['intrap'] = true
+                  $cur_unst[channel_id]['traptime'] = Time.now
                   begin
-                    event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+                    event.respond "The #{$cur_unst[channel_id]['name']} has " \
+                                  'been trapped!'
                     event.message.react('👍')
                   rescue
-                    mute_log(event.channel.id.to_s)
+                    mute_log(channel_id)
                   end
                 else
                   begin
-                    event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+                    event.respond "The #{$cur_unst[channel_id]['name']} can't" \
+                                  ' be trapped by this type of trap!'
                     event.message.react('🚫')
                   rescue
-                    mute_log(event.channel.id.to_s)
+                    mute_log(channel_id)
                   end
                 end
               end
               if item == 'Pitfall Trap'
-                if %w(pitfall both).include? $current_unstable[event.channel.id.to_s]['trap']
-                  $current_unstable[event.channel.id.to_s]['intrap'] = true
-                  $current_unstable[event.channel.id.to_s]['traptime'] = Time.now
+                if %w(pitfall both).include? $cur_unst[channel_id]['trap']
+                  $cur_unst[channel_id]['intrap'] = true
+                  $cur_unst[channel_id]['traptime'] = Time.now
                   begin
-                    event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} has been trapped!"
+                    event.respond "The #{$cur_unst[channel_id]['name']} has " \
+                                  'been trapped!'
                     event.message.react('👍')
                   rescue
-                    mute_log(event.channel.id.to_s)
+                    mute_log(channel_id)
                   end
                 else
                   begin
-                    event.respond "The #{$current_unstable[event.channel.id.to_s]['name']} can't be trapped by this type of trap!"
+                    event.respond "The #{$cur_unst[channel_id]['name']} can't" \
+                                  ' be trapped by this type of trap!'
                     event.message.react('🚫')
                   rescue
-                    mute_log(event.channel.id.to_s)
+                    mute_log(channel_id)
                   end
                 end
               end
             end
           else
             begin
-              event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+              event.respond "**#{event.user.name}** doesn't have any " \
+                            "**#{item}s** to use!"
               event.message.react('🚫')
             rescue
-              mute_log(event.channel.id.to_s)
+              mute_log(channel_id)
             end
           end
         end
@@ -103,32 +112,36 @@ module Commands
           used_item_index = i
         end
         if used
-          if $players[event.user.id.to_s]['inv'].key?(used_item)
+          if $players[user_id]['inv'].key?(used_item)
             if ITEMS[used_item_index]['throw']
               begin
                 event.respond "**#{item}s** must be thrown!"
                 event.message.react('🚫')
               rescue
-                mute_log(event.channel.id.to_s)
+                mute_log(channel_id)
               end
             else
               begin
-                event.respond "**#{event.user.name}** used a **#{item}** on #{user_name}!"
+                event.respond "**#{event.user.name}** used a **#{item}** on " \
+                              "#{user_name}!"
                 event.message.react('👍')
               rescue
-                mute_log(event.channel.id.to_s)
+                mute_log(channel_id)
               end
-              $players[event.user.id.to_s]['inv'][used_item] -= 1
+              $players[user_id]['inv'][used_item] -= 1
             end
-            if $players[event.user.id.to_s]['inv'][used_item] < 1
-              $players[event.user.id.to_s]['inv'] = $players[event.user.id.to_s]['inv'].without(used_item)
+            if $players[user_id]['inv'][used_item] < 1
+              $players[user_id]['inv'] = $players[user_id]['inv'].without(
+                used_item
+              )
             end
           else
             begin
-              event.respond "**#{event.user.name}** doesn't have any **#{item}s** to use!"
+              event.respond "**#{event.user.name}** doesn't have any " \
+                            "**#{item}s** to use!"
               event.message.react('🚫')
             rescue
-              mute_log(event.channel.id.to_s)
+              mute_log(channel_id)
             end
           end
         end

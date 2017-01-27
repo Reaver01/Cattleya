@@ -8,7 +8,9 @@ module Commands
       usage: 'inventory'
     ) do |event|
       begin
-        BOT.user(event.user.id.to_s).pm.send_embed '', inventory(event.user.id.to_s, event.user.name.to_s)
+        BOT.user(event.user.id.to_s).pm.send_embed '', inventory(
+          event.user.id.to_s, event.user.name.to_s
+        )
         event.message.react('💬')
       rescue
         mute_log(event.user.id.to_s)
@@ -23,7 +25,9 @@ module Commands
       usage: 'inv'
     ) do |event|
       begin
-        BOT.user(event.user.id.to_s).pm.send_embed '', inventory(event.user.id.to_s, event.user.name.to_s)
+        BOT.user(event.user.id.to_s).pm.send_embed '', inventory(
+          event.user.id.to_s, event.user.name.to_s
+        )
         event.message.react('💬')
       rescue
         mute_log(event.user.id.to_s)

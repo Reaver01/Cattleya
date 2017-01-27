@@ -11,7 +11,9 @@ module Commands
         if $players[event.user.id.to_s]['messages']
           pm_status = false
           begin
-            BOT.user(event.user.id.to_s).pm('PM notifications have been toggled off. How sad!')
+            BOT.user(event.user.id.to_s).pm(
+              'PM notifications have been toggled off. How sad!'
+            )
             event.message.react('💬')
           rescue
             mute_log(event.user.id.to_s)
@@ -19,7 +21,10 @@ module Commands
         else
           pm_status = true
           begin
-            BOT.user(event.user.id.to_s).pm('PM notifications have been toggled on! I love sending notifications!')
+            BOT.user(event.user.id.to_s).pm(
+              'PM notifications have been toggled on! I love sending ' \
+              'notifications!'
+            )
           rescue
             mute_log(event.user.id.to_s)
           end
@@ -27,7 +32,10 @@ module Commands
       else
         pm_status = true
         begin
-          BOT.user(event.user.id.to_s).pm('PM notifications have been toggled on! I love sending notifications!')
+          BOT.user(event.user.id.to_s).pm(
+            'PM notifications have been toggled on! I love sending ' \
+            'notifications!'
+          )
           event.message.react('💬')
         rescue
           mute_log(event.user.id.to_s)

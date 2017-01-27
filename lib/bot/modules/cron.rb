@@ -4,7 +4,9 @@ module Cronjobs
   s = Rufus::Scheduler.new
 
   s.every '5m' do
-    File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
+    File.open('botfiles/current_unstable.json', 'w') do |f|
+      f.write $cur_unst.to_json
+    end
     File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
     File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
     File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
@@ -15,20 +17,25 @@ module Cronjobs
       next unless value
       a = rand(0..9)
       next unless a.zero?
-      next if $current_unstable.key?(key)
-      $current_unstable[key] = MONSTERS.sample
+      next if $cur_unst.key?(key)
+      $cur_unst[key] = MONSTERS.sample
       begin
-        BOT.channel(key.to_s).send_embed 'A Monster has entered the channel!', new_monster($current_unstable[key])
-        File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
+        BOT.channel(key.to_s).send_embed 'A Monster has entered the channel!',
+                                         new_monster($cur_unst[key])
+        File.open('botfiles/current_unstable.json', 'w') do |f|
+          f.write $cur_unst.to_json
+        end
       rescue
-        $current_unstable = $current_unstable.without(key)
+        $cur_unst = $cur_unst.without(key)
         mute_log(key.to_s)
       end
     end
   end
 
   s.cron '5 */3 * * *' do
-    File.open('botfiles/current_unstable.json', 'w') { |f| f.write $current_unstable.to_json }
+    File.open('botfiles/current_unstable.json', 'w') do |f|
+      f.write $cur_unst.to_json
+    end
     File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
     File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
     File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }

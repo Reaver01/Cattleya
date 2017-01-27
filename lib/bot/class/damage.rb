@@ -1,20 +1,20 @@
 def damage(user, channel, message, timestamp)
   channel_id = channel.id.to_s
   user_id = user.id.to_s
-  if $current_unstable.key?(channel_id)
+  if $cur_unst.key?(channel_id)
     if rand(0..9).zero?
-      if $current_unstable[channel_id].key?('players')
-        value = if $current_unstable[channel_id]['players'].key?(user_id)
-                  $current_unstable[channel_id]['players'][user_id]
+      if $cur_unst[channel_id].key?('players')
+        value = if $cur_unst[channel_id]['players'].key?(user_id)
+                  $cur_unst[channel_id]['players'][user_id]
                 else
                   0
                 end
         if $players.key?(user_id)
           message.react('💥')
           damage_done = 0
-          if $current_unstable[channel_id].key?('is_dead')
-            if $current_unstable[channel_id]['is_dead'].key?(user_id)
-              unless $current_unstable[channel_id]['is_dead'][user_id]
+          if $cur_unst[channel_id].key?('is_dead')
+            if $cur_unst[channel_id]['is_dead'].key?(user_id)
+              unless $cur_unst[channel_id]['is_dead'][user_id]
                 damage_done = rand(0..value)
               end
             else
@@ -29,7 +29,7 @@ def damage(user, channel, message, timestamp)
               begin
                 BOT.user(user_id).pm(
                   "You have taken **#{damage_done} damage** from the " \
-                  "**#{$current_unstable[channel_id]['name']}**"
+                  "**#{$cur_unst[channel_id]['name']}**"
                 )
               rescue
                 mute_log(user_id)
@@ -51,10 +51,10 @@ def damage(user, channel, message, timestamp)
                   mute_log(user_id)
                 end
               end
-              if $current_unstable[event_channel_id].key?('is_dead')
-                $current_unstable[event_channel_id]['is_dead'][user_id] = true
+              if $cur_unst[event_channel_id].key?('is_dead')
+                $cur_unst[event_channel_id]['is_dead'][user_id] = true
               else
-                $current_unstable[event_channel_id]['is_dead'] = {
+                $cur_unst[event_channel_id]['is_dead'] = {
                   user_id => true
                 }
               end
@@ -73,11 +73,11 @@ def damage(user, channel, message, timestamp)
         $players[user_id] = $players[user_id].without(
           'death_time'
         )
-        if $current_unstable.key?(channel_id)
-          if $current_unstable[channel_id].key?('is_dead')
-            $current_unstable[channel_id]['is_dead'][user_id] = false
+        if $cur_unst.key?(channel_id)
+          if $cur_unst[channel_id].key?('is_dead')
+            $cur_unst[channel_id]['is_dead'][user_id] = false
           else
-            $current_unstable[channel_id]['is_dead'] = {
+            $cur_unst[channel_id]['is_dead'] = {
               user_id => false
             }
           end
