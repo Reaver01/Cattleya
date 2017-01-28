@@ -189,7 +189,7 @@ module Commands
                   empty_channels = []
                   $unstable.each do |key, value|
                     if value
-                      next unless $cur_unst.key?(key)
+                      next if $cur_unst.key?(key)
                       empty_channels.push(key)
                     end
                   end
