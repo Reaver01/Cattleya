@@ -2,7 +2,6 @@ def trap(channel, event_timestamp)
   channel_id = channel.id.to_s
   if $cur_unst.key?(channel_id)
     if $cur_unst[channel_id].key?('traptime')
-      debug(4, '[TRAP] Monster has a traptime value.')
       if TimeDifference.between(
         $cur_unst[channel_id]['traptime'],
         event_timestamp

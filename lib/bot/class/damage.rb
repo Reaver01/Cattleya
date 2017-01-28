@@ -1,8 +1,26 @@
 def damage(user, channel, message, timestamp)
   channel_id = channel.id.to_s
   user_id = user.id.to_s
+  chance = if $cur_unst[channel_id].key?('angry')
+             if $cur_unst[channel_id]['angry']
+               9
+             else
+               19
+             end
+           else
+             19
+           end
+  anger_mod = if $cur_unst[channel_id].key?('angry')
+                if $cur_unst[channel_id]['angry']
+                  2
+                else
+                  1
+                end
+              else
+                1
+              end
   if $cur_unst.key?(channel_id)
-    if rand(0..19).zero?
+    if rand(0..chance).zero?
       if $cur_unst[channel_id].key?('players')
         value = if $cur_unst[channel_id]['players'].key?(user_id)
                   $cur_unst[channel_id]['players'][user_id]
@@ -23,9 +41,7 @@ def damage(user, channel, message, timestamp)
           else
             damage_done = rand(0..value)
           end
-          damage_done = damage_done.round
-          puts damage_done
-          puts value
+          damage_done = damage_done.round * anger_mod
           unless damage_done.zero?
             if $players[user_id]['messages']
               begin
