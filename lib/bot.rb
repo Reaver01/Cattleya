@@ -59,7 +59,7 @@ BOT.game = if $settings.key?('game')
              0
            end
 # Put bot invite url in command console just in case
-puts BOT.invite_url
+puts BOT.invite_url(permission_bits: 93_248)
 puts "[#{Time.now.strftime('%d %a %y | %H:%M:%S')}][STARTUP] Cattleya ready " \
      'to serve!'
 # Sync the bot object
