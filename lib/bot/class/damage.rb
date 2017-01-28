@@ -60,31 +60,10 @@ def damage(user, channel, message, timestamp)
                   user_id => true
                 }
               end
-              $players[user_id]['death_time'] = event_timestamp
+              $players[user_id]['death_time'] = timestamp
             end
           end
         end
-      end
-    end
-  end
-  if $players.key?(user_id)
-    if $players[user_id].key?('death_time')
-      if TimeDifference.between(
-        $players[user_id]['death_time'], timestamp
-      ).in_minutes > 5
-        $players[user_id] = $players[user_id].without(
-          'death_time'
-        )
-        if $cur_unst.key?(channel_id)
-          if $cur_unst[channel_id].key?('is_dead')
-            $cur_unst[channel_id]['is_dead'][user_id] = false
-          else
-            $cur_unst[channel_id]['is_dead'] = {
-              user_id => false
-            }
-          end
-        end
-        $players[user_id]['current_hp'] = $players[user_id]['max_hp']
       end
     end
   end

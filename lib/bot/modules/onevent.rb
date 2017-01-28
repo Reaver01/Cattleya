@@ -5,6 +5,7 @@ module Events
     if event.message.channel.pm?
     else
       unless event.message.content.include?(PREFIX)
+        revive(event.user, event.channel, event.timestamp)
         levels(event.user, event.timestamp)
         damage(event.user, event.channel, event.message, event.timestamp)
         trap(event.channel, event.timestamp)
