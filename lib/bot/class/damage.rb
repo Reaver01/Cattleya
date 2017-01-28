@@ -2,7 +2,7 @@ def damage(user, channel, message, timestamp)
   channel_id = channel.id.to_s
   user_id = user.id.to_s
   if $cur_unst.key?(channel_id)
-    if rand(0..9).zero?
+    if rand(0..19).zero?
       if $cur_unst[channel_id].key?('players')
         value = if $cur_unst[channel_id]['players'].key?(user_id)
                   $cur_unst[channel_id]['players'][user_id]

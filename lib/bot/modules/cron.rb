@@ -15,7 +15,7 @@ module Cronjobs
   s.every '10m' do
     $unstable.each do |key, value|
       next unless value
-      a = rand(0..9)
+      a = rand(0..14)
       next unless a.zero?
       next if $cur_unst.key?(key)
       $cur_unst[key] = MONSTERS.sample
