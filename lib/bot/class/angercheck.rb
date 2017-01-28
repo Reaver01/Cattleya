@@ -2,7 +2,6 @@ def anger_check(channel, event_timestamp)
   channel_id = channel.id.to_s
   if $cur_unst.key?(channel_id)
     if $cur_unst[channel_id].key?('angertime')
-      debug(5, '[ANGERCHECK] Monster has angertime key.')
       if TimeDifference.between(
         $cur_unst[channel_id]['angertime'], event_timestamp
       ).in_minutes > 3
