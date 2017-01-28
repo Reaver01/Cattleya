@@ -1,14 +1,14 @@
 def hit(user, channel)
   if $cur_unst.key?(channel.id.to_s)
-    if $cur_unst[channel.id.to_s].key?('intrap')
-      trap_modifier = if $cur_unst[channel.id.to_s]['intrap']
+    trap_modifier = if $cur_unst[channel.id.to_s].key?('intrap')
+                      if $cur_unst[channel.id.to_s]['intrap']
                         1.75
                       else
                         1
                       end
-    else
-      trap_modifier = 1
-    end
+                    else
+                      1
+                    end
     hr_modifier = if $players.key?(user.id.to_s)
                     $players[user.id.to_s]['hr']
                   else
@@ -29,6 +29,10 @@ def hit(user, channel)
         damage = damage.round
         $cur_unst[channel.id.to_s]['hp'] -= damage
       end
+    else
+      damage = rand(0..(10 + hr_modifier)) * trap_modifier
+      damage = damage.round
+      $cur_unst[channel.id.to_s]['hp'] -= damage
     end
     if $cur_unst[channel.id.to_s].key?('players')
       if $cur_unst[channel.id.to_s]['players'].key?(user.id.to_s)
