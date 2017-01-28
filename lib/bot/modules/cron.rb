@@ -33,13 +33,15 @@ module Cronjobs
   end
 
   s.cron '5 */3 * * *' do
-    File.open('botfiles/current_unstable.json', 'w') do |f|
-      f.write $cur_unst.to_json
-    end
-    File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
-    File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
-    File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
-    BOT.stop
+    # File.open('botfiles/current_unstable.json', 'w') do |f|
+    #   f.write $cur_unst.to_json
+    # end
+    # File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
+    # File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
+    # File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
+    # BOT.stop
+    $anger = %w(b l v y p w f g).sample
+    $hit = %w(c m u d n t e h i o a s r).sample
   end
 
   puts '[STARTUP] Cron jobs scheduled!'
