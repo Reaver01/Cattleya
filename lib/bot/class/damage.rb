@@ -25,6 +25,7 @@ def damage(user, channel, message, timestamp)
           end
           damage_done = damage_done.round
           puts damage_done
+          puts value
           unless damage_done.zero?
             if $players[user_id]['messages']
               begin
