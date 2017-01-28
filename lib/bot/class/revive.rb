@@ -20,8 +20,8 @@ def revive(user, channel, timestamp)
         end
         $players[user_id]['current_hp'] = $players[user_id]['max_hp']
       end
-    elsif $players[user_id]['current_hp'] < 0
-      $players[user_id]['current_hp'] = $players[user_id]['max_hp']
+    elsif $players[user_id].key?('current_hp')
+      $players[user_id]['current_hp'] = $players[user_id]['max_hp'] if $players[user_id]['current_hp'] < 0
     end
   end
 end
