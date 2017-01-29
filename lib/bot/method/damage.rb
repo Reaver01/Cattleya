@@ -69,10 +69,10 @@ def damage(user, channel, message, timestamp)
                   mute_log(user_id)
                 end
               end
-              if $cur_unst[event_channel_id].key?('is_dead')
-                $cur_unst[event_channel_id]['is_dead'][user_id] = true
+              if $cur_unst[channel_id].key?('is_dead')
+                $cur_unst[channel_id]['is_dead'][user_id] = true
               else
-                $cur_unst[event_channel_id]['is_dead'] = {
+                $cur_unst[channel_id]['is_dead'] = {
                   user_id => true
                 }
               end
