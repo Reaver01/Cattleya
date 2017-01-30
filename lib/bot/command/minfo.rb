@@ -22,7 +22,7 @@ module Commands
           mute_log(event.user.id.to_s)
         end
       end
-      event.message.delete
+      event.message.delete unless event.message.channel.pm?
       command_log('minfo', event.user.name)
       nil
     end
@@ -46,7 +46,7 @@ module Commands
           mute_log(event.user.id.to_s)
         end
       end
-      event.message.delete
+      event.message.delete unless event.message.channel.pm?
       command_log('minfo', event.user.name)
       nil
     end

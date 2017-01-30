@@ -46,7 +46,7 @@ module Commands
           mute_log(event.channel.id.to_s)
         end
       end
-      event.message.delete
+      event.message.delete unless event.message.channel.pm?
       command_log('unstable', event.user.name)
       nil
     end

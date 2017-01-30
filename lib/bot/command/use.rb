@@ -146,7 +146,7 @@ module Commands
           end
         end
       end
-      event.message.delete
+      event.message.delete unless event.message.channel.pm?
       command_log('use', event.user.name)
       nil
     end

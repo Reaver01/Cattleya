@@ -15,7 +15,7 @@ module Commands
       rescue
         mute_log(event.user.id.to_s)
       end
-      event.message.delete
+      event.message.delete unless event.message.channel.pm?
       command_log('inventory', event.user.name)
       nil
     end
@@ -32,7 +32,7 @@ module Commands
       rescue
         mute_log(event.user.id.to_s)
       end
-      event.message.delete
+      event.message.delete unless event.message.channel.pm?
       command_log('inventory', event.user.name)
       nil
     end

@@ -42,7 +42,7 @@ module Commands
         end
       end
       $players[event.user.id.to_s]['messages'] = pm_status
-      event.message.delete
+      event.message.delete unless event.message.channel.pm?
       command_log('notify', event.user.name)
       nil
     end
