@@ -11,7 +11,7 @@ def levels(event_user, event_timestamp)
       next_level = 0.83333333333 * ($players[event_user.id.to_s]['level'] - 1) *
                    (2 * $players[event_user.id.to_s]['level'] ^ 2 + 23 *
                    $players[event_user.id.to_s]['level'] + 66)
-      if $players[event_user.id.to_s]['xp'] > next_level.round
+      if $players[event_user.id.to_s]['xp'] > next_level
         new_zenny = (rand(0..9) * 10) + (rand(0..9) * 100) +
                     (($players[event_user.id.to_s]['level'] / 4).floor * 1000)
         $players[event_user.id.to_s]['level'] += 1
