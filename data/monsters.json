@@ -429,8 +429,8 @@
   {
     "color": "910dc1",
     "hp": 7500,
-    "icon": "",
-    "name": "Berioros",
+    "icon": "barioth",
+    "name": "Barioth",
     "trap": "both"
   },
   {
