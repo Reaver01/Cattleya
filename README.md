@@ -68,4 +68,4 @@ https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&permission
 
 ##Emoji response
 - Bot will respond to some commands with emoji
-- A 🎯 emoji (`:dart:`) will be posted on the chat message that triggers the 3 minute damage cooldown from the monster.
+- A 💥 emoji (`:boom:`) will be posted on the chat message that triggers the 3 minute damage cooldown from the monster.
