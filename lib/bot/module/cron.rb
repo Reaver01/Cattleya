@@ -32,14 +32,38 @@ module Cronjobs
     end
   end
 
+  s.every '30m' do
+    $settings['game'] = 'with ' +
+                        [
+                          'Akura Jebia', 'Akura Vashimu', 'Arbiter Estrellian',
+                          'Azure Rathalos', 'Baelidae', 'Basarios', 'Berioros',
+                          'Blangonga', 'Blue Yian Kut-Ku', 'Bulldrome',
+                          'Caeserber', 'Cephadrome', 'Chameleos', 'Chramine',
+                          'Conflagration Rathian', 'Congalala',
+                          'Crystal Basarios', 'Daimyo Hermitaur', 'Deviljho',
+                          'Diablos', 'Doom Estrellian', 'Dread Baelidae',
+                          'Elemental Merphistophelin', 'Estrellian',
+                          'Flame Blangonga', 'Gendrome', 'Ghost Caeserber',
+                          'Gold Congalala', 'Gold Hypnocatrice',
+                          'GonnGenn Hermitaur', 'Gravios', 'Gypceros',
+                          'Hypnocatrice', 'Ice Chramine', 'Khezu', 'Kirin',
+                          'Kushala Daora', 'Lavasioth', 'Lightenna',
+                          'Merphistophelin', 'Monoblos',
+                          'One-Eared Yian Garuga', 'Onimusha', 'Pink Rathian',
+                          'Purple Gypceros', 'Purple Slicemargl', 'Rajang',
+                          'Rathalos', 'Rathian', 'Red Khezu',
+                          'Rusted Kushala Daora', 'Sandstone Basarios',
+                          'Shattered Monoblos', 'Shogun Ceanataur',
+                          'Silver Hypnocatrice', 'Slicemargl',
+                          'Swordmaster Shogun Ceanataur', 'Tartaronis',
+                          'Tigrex', 'Velocidrome', 'White Monoblos',
+                          'Yellow Caeserber', 'Yian Garuga', 'Yian Kut-Ku',
+                          'Zinogre'
+                        ].sample
+    BOT.game = $settings['game']
+  end
+
   s.cron '5 */3 * * *' do
-    # File.open('botfiles/current_unstable.json', 'w') do |f|
-    #   f.write $cur_unst.to_json
-    # end
-    # File.open('botfiles/logs.json', 'w') { |f| f.write $logs.to_json }
-    # File.open('botfiles/players.json', 'w') { |f| f.write $players.to_json }
-    # File.open('botfiles/settings.json', 'w') { |f| f.write $settings.to_json }
-    # BOT.stop
     $anger = %w(b l v y p w f g).sample
     $hit = %w(c m u d n t e h i o a s r).sample
   end
