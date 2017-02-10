@@ -109,7 +109,7 @@ def shop(arr)
 end
 
 def armor_piece(arr)
-  desc = "Monster: #{arr[2]}\n" \
+  desc = "Monster: #{translate(arr[2])}\n" \
          "Defense: #{arr[6]}\n" \
          "[Attributes]\n"
   desc += "   Water Res: #{arr[7]}\n" unless arr[7].to_i.zero?
@@ -119,11 +119,11 @@ def armor_piece(arr)
   desc += "   Ice Res: #{arr[11]}\n" unless arr[11].to_i.zero?
   desc += "   Mosaic Slots: #{arr[5]}\n" \
           "[Passive Skills]\n"
-  desc += "   #{arr[38]}: #{arr[39]}\n" unless arr[39].to_i.zero?
-  desc += "   #{arr[40]}: #{arr[41]}\n" unless arr[41].to_i.zero?
-  desc += "   #{arr[42]}: #{arr[43]}\n" unless arr[43].to_i.zero?
-  desc += "   #{arr[44]}: #{arr[45]}\n" unless arr[45].to_i.zero?
-  desc += "   #{arr[46]}: #{arr[47]}\n" unless arr[47].to_i.zero?
+  desc += "   #{translate(arr[38])}: #{arr[39]}\n" unless arr[39].to_i.zero?
+  desc += "   #{translate(arr[40])}: #{arr[41]}\n" unless arr[41].to_i.zero?
+  desc += "   #{translate(arr[42])}: #{arr[43]}\n" unless arr[43].to_i.zero?
+  desc += "   #{translate(arr[44])}: #{arr[45]}\n" unless arr[45].to_i.zero?
+  desc += "   #{translate(arr[46])}: #{arr[47]}\n" unless arr[47].to_i.zero?
   thumbnail_color = Miro::DominantColors.new(
     "http://monsterhunteronline.in/images/item/#{arr[13]}.png"
   )
