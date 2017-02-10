@@ -125,7 +125,8 @@ def armor_piece(arr)
   desc += "#{arr[44]}: #{arr[45]}" unless arr[45].to_i.zero?
   desc += "#{arr[46]}: #{arr[47]}" unless arr[47].to_i.zero?
   e = embed(arr[1], desc)
-  e.thumbnail = 'http://monsterhunteronline.in/images/item/' +
-                arr[13] + '.png'
+  e.thumbnail = {
+    url: "http://monsterhunteronline.in/images/item/#{arr[13]}.png"
+  }
   e
 end
