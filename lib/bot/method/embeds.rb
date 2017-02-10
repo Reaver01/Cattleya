@@ -128,5 +128,6 @@ def armor_piece(arr)
   e.thumbnail = {
     url: "http://monsterhunteronline.in/images/item/#{arr[13]}.png"
   }
+  e.timestamp = arr[0]
   e
 end
