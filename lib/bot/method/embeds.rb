@@ -107,3 +107,24 @@ def shop(arr)
   end
   embed('Here is the shop listing!', desc.chomp("\n"))
 end
+
+def armor_piece(arr)
+  desc = "Monster: #{arr[2]}\n" \
+         "Defense: #{arr[6]}\n" \
+         '[Attributes]'
+  desc += "Water Res: #{arr[7]}" unless arr[7].zero?
+  desc += "Fire Res: #{arr[8]}" unless arr[8].zero?
+  desc += "Thunder Res: #{arr[9]}" unless arr[9].zero?
+  desc += "Dragon Res: #{arr[10]}" unless arr[10].zero?
+  desc += "Ice Res: #{arr[11]}" unless arr[11].zero?
+  desc += "Mosaic Slots: #{arr[5]}\n" \
+          '[Passive Skills]'
+  desc += "#{arr[38]}: #{arr[39]}" unless arr[39].zero?
+  desc += "#{arr[40]}: #{arr[41]}" unless arr[41].zero?
+  desc += "#{arr[42]}: #{arr[43]}" unless arr[43].zero?
+  desc += "#{arr[44]}: #{arr[45]}" unless arr[45].zero?
+  desc += "#{arr[46]}: #{arr[47]}" unless arr[47].zero?
+  e = embed(arr[1], desc)
+  e.thumbnail = 'http://monsterhunteronline.in/images/item' +
+                arr[13].to_s + '.png'
+end
