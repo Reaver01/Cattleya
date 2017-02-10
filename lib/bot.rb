@@ -20,6 +20,7 @@ else
        ' off!'
 end
 # Load all constant variables
+ARMOR = load_json('data/armor.json')
 ITEMS = load_json('data/items.json')
 MONSTERS = load_json('data/monsters.json')
 PREFIX = '>'.freeze
