@@ -127,4 +127,5 @@ def armor_piece(arr)
   e = embed(arr[1], desc)
   e.thumbnail = 'http://monsterhunteronline.in/images/item' +
                 arr[13].to_s + '.png'
+  e
 end
