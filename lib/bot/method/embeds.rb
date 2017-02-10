@@ -111,19 +111,19 @@ end
 def armor_piece(arr)
   desc = "Monster: #{arr[2]}\n" \
          "Defense: #{arr[6]}\n" \
-         '[Attributes]'
-  desc += "Water Res: #{arr[7]}" unless arr[7].to_i.zero?
-  desc += "Fire Res: #{arr[8]}" unless arr[8].to_i.zero?
-  desc += "Thunder Res: #{arr[9]}" unless arr[9].to_i.zero?
-  desc += "Dragon Res: #{arr[10]}" unless arr[10].to_i.zero?
-  desc += "Ice Res: #{arr[11]}" unless arr[11].to_i.zero?
+         "[Attributes]\n"
+  desc += "Water Res: #{arr[7]}\n" unless arr[7].to_i.zero?
+  desc += "Fire Res: #{arr[8]}\n" unless arr[8].to_i.zero?
+  desc += "Thunder Res: #{arr[9]}\n" unless arr[9].to_i.zero?
+  desc += "Dragon Res: #{arr[10]}\n" unless arr[10].to_i.zero?
+  desc += "Ice Res: #{arr[11]}\n" unless arr[11].to_i.zero?
   desc += "Mosaic Slots: #{arr[5]}\n" \
-          '[Passive Skills]'
-  desc += "#{arr[38]}: #{arr[39]}" unless arr[39].to_i.zero?
-  desc += "#{arr[40]}: #{arr[41]}" unless arr[41].to_i.zero?
-  desc += "#{arr[42]}: #{arr[43]}" unless arr[43].to_i.zero?
-  desc += "#{arr[44]}: #{arr[45]}" unless arr[45].to_i.zero?
-  desc += "#{arr[46]}: #{arr[47]}" unless arr[47].to_i.zero?
+          "[Passive Skills]\n"
+  desc += "#{arr[38]}: #{arr[39]}\n" unless arr[39].to_i.zero?
+  desc += "#{arr[40]}: #{arr[41]}\n" unless arr[41].to_i.zero?
+  desc += "#{arr[42]}: #{arr[43]}\n" unless arr[43].to_i.zero?
+  desc += "#{arr[44]}: #{arr[45]}\n" unless arr[45].to_i.zero?
+  desc += "#{arr[46]}: #{arr[47]}\n" unless arr[47].to_i.zero?
   e = embed(arr[1], desc)
   e.thumbnail = {
     url: "http://monsterhunteronline.in/images/item/#{arr[13]}.png"
