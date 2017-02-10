@@ -3,6 +3,7 @@ gem 'discordrb', git: 'https://github.com/meew0/discordrb.git',
                  branch: 'master'
 gem 'dotenv'
 gem 'json'
+gem 'miro'
 gem 'rufus-scheduler'
 gem 'sys-uptime'
 gem 'time_difference'
