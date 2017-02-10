@@ -124,10 +124,16 @@ def armor_piece(arr)
   desc += "   #{arr[42]}: #{arr[43]}\n" unless arr[43].to_i.zero?
   desc += "   #{arr[44]}: #{arr[45]}\n" unless arr[45].to_i.zero?
   desc += "   #{arr[46]}: #{arr[47]}\n" unless arr[47].to_i.zero?
+  thumbnail_color = Miro::DominantColors.new(
+    "http://monsterhunteronline.in/images/item/#{arr[13]}.png"
+  )
+  thumbnail_color = thumbnail_color.to_hex[0]
+  thumbnail_color = thumbnail_color.slice! '#'
   e = embed(arr[1], desc)
   e.thumbnail = {
     url: "http://monsterhunteronline.in/images/item/#{arr[13]}.png"
   }
   e.footer = { text: arr[0] }
+  e.color = "0x#{thumbnail_color}"
   e
 end
