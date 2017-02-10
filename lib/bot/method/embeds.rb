@@ -134,6 +134,6 @@ def armor_piece(arr)
     url: "http://monsterhunteronline.in/images/item/#{arr[13]}.png"
   }
   e.footer = { text: arr[0] }
-  e.color = "0x#{thumbnail_color}"
+  e.color = "0x#{thumbnail_color}".hex
   e
 end
