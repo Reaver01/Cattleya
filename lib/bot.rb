@@ -26,6 +26,7 @@ end
 ARMOR = load_json('data/armor.json')
 ITEMS = load_json('data/items.json')
 MONSTERS = load_json('data/monsters.json')
+TRANSLATIONS = load_json('data/translations.json')
 PREFIX = '>'.freeze
 # Load the bot constant
 BOT = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'],
