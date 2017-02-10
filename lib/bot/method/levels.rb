@@ -3,7 +3,7 @@ def levels(event_user, event_timestamp)
     old_time = if $players[event_user.id.to_s].key?('time')
                  $players[event_user.id.to_s]['time']
                else
-                 '2017-01-01 00:00:00 +0000'
+                 Time.new '2017'
                end
     if TimeDifference.between(old_time, event_timestamp).in_seconds > 30
       $players[event_user.id.to_s]['xp'] += rand(15..25)
