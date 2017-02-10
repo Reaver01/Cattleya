@@ -127,7 +127,7 @@ def armor_piece(arr)
   thumbnail_color = Miro::DominantColors.new(
     "http://monsterhunteronline.in/images/item/#{arr[13]}.png"
   )
-  thumbnail_color = thumbnail_color.to_hex[0].delete('#')
+  thumbnail_color = thumbnail_color.to_hex[1].delete('#')
   e = embed(arr[1], desc)
   e.thumbnail = {
     url: "http://monsterhunteronline.in/images/item/#{arr[13]}.png"

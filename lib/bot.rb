@@ -4,7 +4,7 @@ Dir.mkdir('botfiles') unless File.exist?('botfiles')
 Dotenv.load
 # Set Miro options
 Miro.options[:resolution] = '32x32'
-Miro.options[:color_count] = 1
+Miro.options[:color_count] = 2
 # Load all global variables
 $cur_unst = load_json('botfiles/current_unstable.json')
 $logs = load_json('botfiles/logs.json')
