@@ -3,7 +3,7 @@ module Commands
   module Notify
     extend Discordrb::Commands::CommandContainer
     command(
-      :notify,
+      [:notify, :dm, :pm],
       description: 'Toggles pm notifications of level',
       usage: 'notify'
     ) do |event|

@@ -3,7 +3,7 @@ module Commands
   module Kill
     extend Discordrb::Commands::CommandContainer
     command(
-      :kill,
+      [:kill, :k],
       description: 'Kills the bot',
       usage: 'kill',
       help_available: false,

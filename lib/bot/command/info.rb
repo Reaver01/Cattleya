@@ -3,7 +3,7 @@ module Commands
   module Info
     extend Discordrb::Commands::CommandContainer
     command(
-      :info,
+      [:info, :i, :me],
       bucket: :info,
       description: 'Responds with player info',
       usage: 'info'

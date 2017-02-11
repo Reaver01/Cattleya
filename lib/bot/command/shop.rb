@@ -3,7 +3,7 @@ module Commands
   module Shop
     extend Discordrb::Commands::CommandContainer
     command(
-      :shop,
+      [:shop, :store, :s],
       description: 'Displays shop listing',
       usage: 'shop'
     ) do |event|
