@@ -88,7 +88,10 @@ def hunt_end(arr)
   players = arr['players'].sort_by { |_key, value| value }.reverse.to_h
   players.each do |key, value|
     desc += "**#{arr['players2'][key]}:** #{value}\n"
-    $players[key]['hr'] += 1 if value > 50 + $players[key]['hr']
+    if value > 50 + $players[key]['hr'] && $players[key]['hr'] < 100
+      $players[key]['hr'] += 1
+    end
+    $players[key]['hr'] = 100 if $players[key]['hr'] > 100
   end
   e = embed(arr['name'], desc.chomp("\n"))
   e.author[:icon_url] = 'http://monsterhunteronline.in/monsters/images/' +
