@@ -8,7 +8,7 @@ module Commands
       usage: 'hosting'
     ) do |event|
       begin
-        event.respond "This bot is hosted on DigitalOcean Servers.\n" \
+        m = "This bot is hosted on DigitalOcean Servers.\n" \
         'Host your own bot/app with $10 credit using my referral link: ' \
         "<https://m.do.co/c/71922c060e60>\nThis will help me keep the bot " \
         'live as long as you keep using their hosting after the first $10 ' \
@@ -17,7 +17,7 @@ module Commands
         mute_log(event.channel.id.to_s)
       end
       command_log('hosting', event.user.name)
-      nil
+      m
     end
   end
 end

@@ -14,7 +14,6 @@ module Commands
       items_indexed = Hash[ITEMS.map.with_index.to_a]
       thrown_item = -1
       if BOT.parse_mention(user_name).nil?
-        debug(15, '[THROW] Nobody was mentioned')
         item = item.join(' ').titleize
         threw = false
         thrown_item_index = 0
@@ -25,11 +24,8 @@ module Commands
           thrown_item_index = i
         end
         if threw
-          debug(29, '[THROW] An item was thrown')
           if $players[user_id]['inv'].key?(thrown_item)
-            debug(31, '[THROW] user has at least one of the item')
             if ITEMS[thrown_item_index]['throw']
-              debug(33, '[THROW] Item can be thrown')
               begin
                 event.respond "**#{event.user.name}** threw a **#{item}**!"
                 event.message.react('👍')
@@ -38,7 +34,6 @@ module Commands
               end
               $players[user_id]['inv'][thrown_item] -= 1
             else
-              debug(42, '[THROW] Item cannot be thrown')
               begin
                 event.respond "You can't throw **#{item}s**!"
                 event.message.react('🚫')
@@ -47,16 +42,13 @@ module Commands
               end
             end
             if $players[user_id]['inv'][thrown_item] < 1
-              debug(51, '[THROW] Player has no more of that item')
               $players[user_id]['inv'] = $players[user_id]['inv'].without(
                 thrown_item
               )
             end
             if $cur_unst.key?(channel_id)
-              debug(55, '[THROW] There is a monster in the channel')
               damage = 0
               if item == 'Barrel Bomb S'
-                debug(58, '[THROW] Item is a Barrel Bomb S')
                 chance_to_hit = if $cur_unst[channel_id].key?('intrap')
                                   if $cur_unst[channel_id]['intrap']
                                     0
@@ -66,9 +58,7 @@ module Commands
                                 else
                                   2
                                 end
-                debug(68, "[THROW] Chance to hit is #{chance_to_hit}")
                 if rand(0..chance_to_hit).zero?
-                  debug(70, '[THROW] Monster was hit')
                   damage = 20
                   $cur_unst[channel_id]['hp'] -= damage
                   begin
@@ -80,7 +70,6 @@ module Commands
                     mute_log(channel_id)
                   end
                 else
-                  debug(80, '[THROW] Monster was not hit')
                   begin
                     event.respond "**#{event.user.name}** missed!"
                     event.message.react('😆')
@@ -241,7 +230,6 @@ module Commands
                 end
               end
               unless damage.zero?
-                debug(222, '[THROW] Damage was dealt to monster')
                 if $cur_unst[channel_id].key?('players')
                   if $cur_unst[channel_id]['players'].key?(user_id)
                     $cur_unst[channel_id]['players'][user_id] += damage
@@ -260,7 +248,6 @@ module Commands
               end
             end
           else
-            debug(237, '[THROW] User does not have that item to throw')
             begin
               event.respond "**#{event.user.name}** doesn't have any " \
                             "**#{item}s** to throw!"
@@ -271,7 +258,6 @@ module Commands
           end
         end
       else
-        debug(247, '[THROW] A user was mentioned')
         item = item.first item.size - 1
         item = item.join(' ').titleize
         threw = false
@@ -283,11 +269,8 @@ module Commands
           thrown_item_index = i
         end
         if threw
-          debug(262, '[THROW] An item was thrown')
           if $players[user_id]['inv'].key?(thrown_item)
-            debug(264, '[THROW] User has that item in their inventory')
             if ITEMS[thrown_item_index]['throw']
-              debug(266, '[THROW] Item can be thrown')
               begin
                 event.respond "**#{event.user.name}** threw a **#{item}** at " \
                               "#{user_name}!"
@@ -297,7 +280,6 @@ module Commands
               end
               $players[user_id]['inv'][thrown_item] -= 1
             else
-              debug(275, '[THROW] Item cannot be thrown')
               begin
                 event.respond "You can't throw **#{item}s**!"
                 event.message.react('🚫')
@@ -306,13 +288,11 @@ module Commands
               end
             end
             if $players[user_id]['inv'][thrown_item] < 1
-              debug(284, '[THROW] Player has no more of that item')
               $players[user_id]['inv'] = $players[user_id]['inv'].without(
                 thrown_item
               )
             end
           else
-            debug(288, '[THROW] Player does not have any of that item')
             begin
               event.respond "**#{event.user.name}** doesn't have any " \
                             "**#{item}s** to throw!"

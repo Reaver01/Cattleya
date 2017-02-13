@@ -16,7 +16,7 @@ module Commands
       option_number = option_number.to_i.round
       if option_number < 1 || option_number > ITEMS.length - 1
         begin
-          event.respond 'That is not a valid option'
+          m = 'That is not a valid option'
         rescue
           mute_log(event.channel.id.to_s)
         end
@@ -25,7 +25,7 @@ module Commands
                                                         1]['price'].to_i *
                                                         amount.to_i)
           begin
-            event.respond "You don't have enough Zenny to purchase #{amount} " \
+            m = "You don't have enough Zenny to purchase #{amount} " \
                           "#{ITEMS[option_number - 1]['name']}"
           rescue
             mute_log(event.channel.id.to_s)
@@ -39,7 +39,7 @@ module Commands
             $players[user_id]['inv'][(option_number - 1).to_s] = 1 * amount
           end
           begin
-            event.respond "**#{event.user.name}** purchased **#{amount} " \
+            m = "**#{event.user.name}** purchased **#{amount} " \
                           "#{ITEMS[option_number - 1]['name']}**"
           rescue
             mute_log(event.channel.id.to_s)
@@ -48,7 +48,7 @@ module Commands
       end
       event.message.delete unless event.message.channel.pm?
       command_log('buy', event.user.name)
-      nil
+      m
     end
   end
 end

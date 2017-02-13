@@ -20,13 +20,13 @@ module Commands
           'messages' => messages
         }
         begin
-          event.respond "**#{event.user.name}** has been reset."
+          m = "**#{event.user.name}** has been reset."
         rescue
           mute_log(event.channel.id.to_s)
         end
       end
       command_log('reset', event.user.name)
-      nil
+      m
     end
   end
 end

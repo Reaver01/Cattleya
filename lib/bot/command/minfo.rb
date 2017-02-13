@@ -17,14 +17,14 @@ module Commands
         end
       else
         begin
-          event.respond "There isn't a monster in this channel right now."
+          m = "There isn't a monster in this channel right now."
         rescue
           mute_log(event.user.id.to_s)
         end
       end
       event.message.delete unless event.message.channel.pm?
       command_log('minfo', event.user.name)
-      nil
+      m
     end
   end
 end
