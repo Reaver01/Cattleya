@@ -37,20 +37,20 @@ module Game
     attr_reader :contents
 
     def initialize
-      @contents = { '0' => 1 }
+      @contents = { 0 => 1 }
     end
 
     def add(item)
-      if @contents.key?(item.to_s)
-        @contents[item.to_s] += 1
+      if @contents.key?(item)
+        @contents[item] += 1
       else
-        @contents[item.to_s] = 1
+        @contents[item] = 1
       end
     end
 
     def remove(item)
-      if @contents.key?(item.to_s)
-        @contents[item.to_s] -= 1 unless @contents[item.to_s].zero?
+      if @contents.key?(item)
+        @contents[item] -= 1 unless @contents[item].zero?
       end
     end
   end
