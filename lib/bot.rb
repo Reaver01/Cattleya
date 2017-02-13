@@ -53,6 +53,7 @@ Commands.constants.each do |x|
 end
 # Load outside event module
 BOT.include! Events
+BOT.include! Game
 # Turn off discordrb debugging
 BOT.debug = false
 # Set run to async
