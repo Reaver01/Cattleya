@@ -1,10 +1,11 @@
+.bundle
+.env
+.lock
+.yardoc
+/log
+/run.sh
+bin
 botfiles
 docs
 userbase
-/log
-/run.sh
-.env
 vendor
-bin
-.bundle
-.lock
