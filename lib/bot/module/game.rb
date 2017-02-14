@@ -150,7 +150,7 @@ module Game
 
     def level_up
       @level += 1
-      raise_max_hp
+      # raise_max_hp
     end
 
     def raise_max_hp
