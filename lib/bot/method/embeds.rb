@@ -9,7 +9,7 @@ end
 
 def inventory(id, user_name)
   desc = "**Zenny:** #{$players[id]['zenny']}\n\n"
-  $players[id]['inv'].each do |key, item|
+  $players[id]['inventory'].each do |key, item|
     desc += "**#{ITEMS[key.to_i]['name']}:** #{item.to_i}\n"
   end
   e = embed("Here is your inventory #{user_name}!", desc)
@@ -29,7 +29,7 @@ end
 
 def user_info(id, user_name, avatar)
   invnum = 0
-  $players[id]['inv'].each do |_key, item|
+  $players[id]['inventory'].each do |_key, item|
     invnum += item.to_i
   end
   unless $players[id].key?('max_hp')

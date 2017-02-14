@@ -1,6 +1,35 @@
 module Game
+  # Inventory module
+  module Inventory
+    def inventory
+      @inventory ||= []
+    end
+
+    def item(id)
+      @inventory[id] || 0
+    end
+
+    def add_item(id)
+      @inventory[id] = item(id) + 1
+    end
+
+    def remove_item(id)
+      @inventory[id] = if item(id) <= 1
+                         0
+                       else
+                         item(id) - 1
+                       end
+    end
+
+    def set_item(id, quantity)
+      @inventory[id] = quantity
+    end
+  end
+
   # Defines the player
   class Player
+    include Inventory
+
     attr_reader :xp
 
     attr_reader :level
@@ -19,7 +48,7 @@ module Game
 
     def initialize(
       xp = 0, level = 0, hr = 0, zenny = 100, max_hp = 500, current_hp = 500,
-      time = Time.now, inventory = Inventory.new
+      time = Time.now
     )
       @xp = xp
       @level = level
@@ -28,30 +57,19 @@ module Game
       @max_hp = max_hp
       @current_hp = current_hp
       @time = time
-      @inventory = inventory
-    end
-  end
-
-  # Defines the inventory
-  class Inventory
-    attr_reader :contents
-
-    def initialize
-      @contents = { '0' => 1 }
     end
 
-    def add(item)
-      if @contents.key?(item.to_s)
-        @contents[item.to_s] += 1
-      else
-        @contents[item.to_s] = 1
-      end
-    end
-
-    def remove(item)
-      if @contents.key?(item.to_s)
-        @contents[item.to_s] -= 1 unless @contents[item.to_s].zero?
-      end
+    def self.from_json(data)
+      new(
+        xp: data['xp'],
+        level: data['level'],
+        hr: data['hr'],
+        zenny: data['zenny'],
+        max_hp: data['max_hp'],
+        current_hp: data['current_hp'],
+        time: data['time'],
+        inventory: data['inventory']
+      )
     end
   end
 end

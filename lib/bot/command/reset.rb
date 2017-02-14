@@ -16,7 +16,7 @@ module Commands
                    end
         $players[event.user.id.to_s] = {
           'xp' => 0, 'level' => 0, 'hr' => 0, 'zenny' => 100, 'max_hp' => 500,
-          'current_hp' => 500, 'time' => event_timestamp, 'inv' => { '0' => 1 },
+          'current_hp' => 500, 'time' => event_timestamp, 'inventory' => { '0' => 1 },
           'messages' => messages
         }
         begin

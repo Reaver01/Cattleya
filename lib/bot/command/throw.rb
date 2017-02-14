@@ -24,7 +24,7 @@ module Commands
           thrown_item_index = i
         end
         if threw
-          if $players[user_id]['inv'].key?(thrown_item)
+          if $players[user_id]['inventory'].key?(thrown_item)
             if ITEMS[thrown_item_index]['throw']
               begin
                 event.respond "**#{event.user.name}** threw a **#{item}**!"
@@ -32,7 +32,7 @@ module Commands
               rescue
                 mute_log(channel_id)
               end
-              $players[user_id]['inv'][thrown_item] -= 1
+              $players[user_id]['inventory'][thrown_item] -= 1
             else
               begin
                 event.respond "You can't throw **#{item}s**!"
@@ -41,8 +41,8 @@ module Commands
                 mute_log(channel_id)
               end
             end
-            if $players[user_id]['inv'][thrown_item] < 1
-              $players[user_id]['inv'] = $players[user_id]['inv'].without(
+            if $players[user_id]['inventory'][thrown_item] < 1
+              $players[user_id]['inventory'] = $players[user_id]['inventory'].without(
                 thrown_item
               )
             end
@@ -269,7 +269,7 @@ module Commands
           thrown_item_index = i
         end
         if threw
-          if $players[user_id]['inv'].key?(thrown_item)
+          if $players[user_id]['inventory'].key?(thrown_item)
             if ITEMS[thrown_item_index]['throw']
               begin
                 event.respond "**#{event.user.name}** threw a **#{item}** at " \
@@ -278,7 +278,7 @@ module Commands
               rescue
                 mute_log(channel_id)
               end
-              $players[user_id]['inv'][thrown_item] -= 1
+              $players[user_id]['inventory'][thrown_item] -= 1
             else
               begin
                 event.respond "You can't throw **#{item}s**!"
@@ -287,8 +287,8 @@ module Commands
                 mute_log(channel_id)
               end
             end
-            if $players[user_id]['inv'][thrown_item] < 1
-              $players[user_id]['inv'] = $players[user_id]['inv'].without(
+            if $players[user_id]['inventory'][thrown_item] < 1
+              $players[user_id]['inventory'] = $players[user_id]['inventory'].without(
                 thrown_item
               )
             end

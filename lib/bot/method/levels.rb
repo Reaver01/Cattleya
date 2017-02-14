@@ -22,10 +22,10 @@ def levels(event_user, event_timestamp)
           item = rand(0..(ITEMS.length - 1))
           new_items.push(item)
           item = item.to_s
-          if $players[event_user.id.to_s]['inv'].key?(item)
-            $players[event_user.id.to_s]['inv'][item] += 1
+          if $players[event_user.id.to_s]['inventory'].key?(item)
+            $players[event_user.id.to_s]['inventory'][item] += 1
           else
-            $players[event_user.id.to_s]['inv'][item] = 1
+            $players[event_user.id.to_s]['inventory'][item] = 1
           end
         end
         new_hp = 500 + ($players[event_user.id.to_s]['level'] * 10)
@@ -51,7 +51,7 @@ def levels(event_user, event_timestamp)
   else
     $players[event_user.id.to_s] = {
       'xp' => 0, 'level' => 0, 'hr' => 0, 'zenny' => 100, 'max_hp' => 500,
-      'current_hp' => 500, 'time' => event_timestamp, 'inv' => { '0' => 1 }
+      'current_hp' => 500, 'time' => event_timestamp, 'inventory' => { '0' => 1 }
     }
   end
 end

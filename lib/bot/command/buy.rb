@@ -33,10 +33,10 @@ module Commands
         else
           $players[user_id]['zenny'] -= ITEMS[option_number - 1]['price'] *
                                         amount
-          if $players[user_id]['inv'].key?((option_number - 1).to_s)
-            $players[user_id]['inv'][(option_number - 1).to_s] += 1 * amount
+          if $players[user_id]['inventory'].key?((option_number - 1).to_s)
+            $players[user_id]['inventory'][(option_number - 1).to_s] += 1 * amount
           else
-            $players[user_id]['inv'][(option_number - 1).to_s] = 1 * amount
+            $players[user_id]['inventory'][(option_number - 1).to_s] = 1 * amount
           end
           begin
             m = "**#{event.user.name}** purchased **#{amount} " \

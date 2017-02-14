@@ -24,7 +24,7 @@ module Commands
           used_item_index = i
         end
         if used
-          if $players[user_id]['inv'].key?(used_item)
+          if $players[user_id]['inventory'].key?(used_item)
             if ITEMS[used_item_index]['throw']
               begin
                 event.respond "**#{item}s** must be thrown!"
@@ -39,10 +39,10 @@ module Commands
               rescue
                 mute_log(channel_id)
               end
-              $players[user_id]['inv'][used_item] -= 1
+              $players[user_id]['inventory'][used_item] -= 1
             end
-            if $players[user_id]['inv'][used_item] < 1
-              $players[user_id]['inv'] = $players[user_id]['inv'].without(
+            if $players[user_id]['inventory'][used_item] < 1
+              $players[user_id]['inventory'] = $players[user_id]['inventory'].without(
                 used_item
               )
             end
@@ -112,7 +112,7 @@ module Commands
           used_item_index = i
         end
         if used
-          if $players[user_id]['inv'].key?(used_item)
+          if $players[user_id]['inventory'].key?(used_item)
             if ITEMS[used_item_index]['throw']
               begin
                 event.respond "**#{item}s** must be thrown!"
@@ -128,10 +128,10 @@ module Commands
               rescue
                 mute_log(channel_id)
               end
-              $players[user_id]['inv'][used_item] -= 1
+              $players[user_id]['inventory'][used_item] -= 1
             end
-            if $players[user_id]['inv'][used_item] < 1
-              $players[user_id]['inv'] = $players[user_id]['inv'].without(
+            if $players[user_id]['inventory'][used_item] < 1
+              $players[user_id]['inventory'] = $players[user_id]['inventory'].without(
                 used_item
               )
             end
