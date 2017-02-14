@@ -122,6 +122,14 @@ module Game
       @xp ||= 0
     end
 
+    def max_hp
+      @max_hp ||= 500
+    end
+
+    def hp
+      @hp ||= @max_hp
+    end
+
     def next_level
       0.8333333333 * (@level - 1) * (2 * @level ^ 2 + 23 * @level + 66)
     end
@@ -142,6 +150,16 @@ module Game
 
     def level_up
       @level += 1
+      raise_max_hp
+    end
+
+    def raise_max_hp
+      @max_hp += 10
+      set_hp_to_max
+    end
+
+    def set_hp_to_max
+      @hp = @max_hp
     end
   end
 
@@ -167,12 +185,8 @@ module Game
 
     def initialize(id)
       @id = id
-      @xp = 0
-      @level = 0
       @hr = 0
       @zenny = 100
-      @max_hp = 500
-      @hp = 500
       @time = Time.now
       @death_time = nil
     end
