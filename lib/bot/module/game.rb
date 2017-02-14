@@ -150,7 +150,7 @@ module Game
 
     def level_up
       @level += 1
-      # raise_max_hp
+      raise_max_hp
     end
 
     def raise_max_hp
@@ -185,6 +185,7 @@ module Game
       @id = id
       @hr = 0
       @level = 0
+      @xp = 0
       @max_hp = 500
       @zenny = 100
       @time = Time.now
