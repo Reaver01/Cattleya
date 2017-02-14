@@ -1,25 +1,25 @@
 module Game
   # Mixin that allows an object to have a dynamic inventory
   module Inventory
-    # Returns the inventory or an empty array if there is nothing in the
-    # inventory.
+    # @return [Array<inventory>] Array of quantities of items in inventory
     def inventory
       @inventory ||= []
     end
 
-    # Returns the amount of the specified item or 0 if item does not exist in
-    # the invenory.
+    # @param id [Integer] item id
+    # @return [Integer] Amount of the item with given id
     def item(id)
       @inventory[id] || 0
     end
 
-    # Adds one of the specified item into the inventory.
+    # @param id [Integer] item id
+    # @return [Integer] New amount of the item with given id
     def add_item(id)
       @inventory[id] = item(id) + 1
     end
 
-    # Removes one of the specified item from the inventory.
-    # If no items of that id exist in the inventory it will stay at zero
+    # @param id [Integer] item id
+    # @return [Integer] New amount of the item with given id
     def remove_item(id)
       @inventory[id] = if item(id) <= 1
                          0
@@ -28,7 +28,9 @@ module Game
                        end
     end
 
-    # Used to set the quantity directly of the specified item.
+    # @param id [Integer] item id
+    # @param quantity [Integer] item quantity
+    # @return [Integer] Given quantity of the item with given id
     def set_item(id, quantity)
       @inventory[id] = quantity
     end
@@ -37,7 +39,10 @@ module Game
   # Mixin that allows an object to be attacked by other objects.
   # Object must have hp to be attacked!
   module Hitpoints
-    # Used to attack the object. Called by attacked. (Do not call from outside!)
+    # @param id [Integer] object id
+    # @param damage [Integer] damage done
+    # @param attacker [Object] object of attacker
+    # @return [Integer] damage done to object
     class Attack
       attr_reader :id
 
@@ -56,56 +61,60 @@ module Game
       end
     end
 
-    # Returns the objects remaining health, or sets the objects health to a
-    # specific value.
+    # @param set [Integer] new hp value
+    # @return [Integer] objects current hp value
     def hp(set = nil)
       return @hp ||= 1 unless set
       @hp = set
     end
 
-    # Returns true if the object is dead.
+    # @return [Boolean] true if dead
     def dead?
       @hp <= 0
     end
 
-    # Returns true if the object is alive.
+    # @return [Boolean] true if alive
     def alive?
       @hp > 0
     end
 
-    # Shows an id array of all the attacks made on the object.
+    # @return [Array] attacks made
     def attacks
       @attacks ||= []
     end
 
-    # Lists all of the attacks by defined id
+    # @param id [Integer] object id
+    # @return [Array] attacks by id
     def attacks_by(id = nil)
       @attacks.select { |a| a.id == id }
     end
 
-    # Checks how much damage has been done by a specified id.
+    # @param id [Integer] object id
+    # @return [Integer] damage done by id
     def damage_from(id)
       attacks_by(id).map(&:damage).reduce(:+)
     end
 
-    # Shows the ids of all attackers.
+    # @return [Array] attacks by id
     def attacked_ids
       attacks.map(&:id)
     end
 
-    # Checks if the object was attacked by a specific id.
+    # @param id [Integer] object id
+    # @return [Boolean] true if attacked by id
     def attacked_by?(id)
       attacked_ids.include? id
     end
 
-    # Attacks an Object with another Object.
-    # Monster.attacked(Player, 5) for example will do 5 damage to Player from
-    # Monster.
+    # @param target [Object] target object
+    # @param damage [Integer] damage done
+    # @return [Integer] New hp value of target
     def attacked(target, damage)
       target.add_attack(Attack.new(attacker: self, damage: damage))
     end
 
-    # Used by attacked() to attack something. (Do not call ouside!)
+    # @param attack [Object] new attack object
+    # @return [Integer] New hp value
     def add_attack(attack)
       attacks
       @attacks << attack
@@ -115,38 +124,38 @@ module Game
 
   # Mixin that allows objects to have levels with scaling health.
   module Levels
-    # Returns objects level or zero if not set.
+    # @return level [Integer] current level
     def level
       @level ||= 0
     end
 
-    # Returns objects experience or zero if not set.
+    # @return xp [Integer] current xp
     def xp
       @xp ||= 0
     end
 
-    # Returns objects max health or 500 if not set.
+    # @return max_hp [Integer] max hp
     def max_hp
       @max_hp ||= 500
     end
 
-    # Returns objects health or it's max health if not set.
+    # @return hp [Integer] current hp
     def hp
       @hp ||= @max_hp
     end
 
-    # Checks xp required for next level based on current level using a way too
-    # complicated level curve algorithm.
+    # @return [Float] xp to next level
     def next_level
       0.8333333333 * (@level - 1) * (2 * @level ^ 2 + 23 * @level + 66)
     end
 
-    # Checks if the object has enough xp to level up.
+    # @return [Boolean] can object level up
     def enough_xp?
       @xp > next_level
     end
 
-    # Adds a specified amount of xp to the object.
+    # @param amount [Integer] xp amount
+    # @return [Boolean] true if object leveled up
     def add_xp(amount)
       @xp += amount
       if enough_xp?
@@ -157,19 +166,19 @@ module Game
       end
     end
 
-    # Levels up the object!  (Do not call ouside!)
+    # Levels up the object
     def level_up
       @level += 1
       raise_max_hp
     end
 
-    # Raises max HP of the object. (Do not call ouside!)
+    # Raises max HP of the object
     def raise_max_hp
       @max_hp += 10
       set_hp_to_max
     end
 
-    # Sets objects health back to max.
+    # Sets objects health back to max
     def set_hp_to_max
       @hp = @max_hp
     end
@@ -181,24 +190,24 @@ module Game
       @anger_level ||= 0
     end
 
-    # Returns the last time the object started being angry.
+    # @return angry_since [Object] time
     def angry_since
       @angry_since ||= Time.new '2017'
     end
 
-    # Returns the amount of minutes since the object last started being angry.
+    # @return [Object] minutes
     def angry_for
       TimeDifference.between(@angry_since, Time.now).in_minutes
     end
 
-    # Returns true until the amount of minutes since the object last started
-    # being angry is greater than 3 minutes.
+    # @return [Boolean] has the object been angry for less than 3 minutes?
     def angry?
       angry_for < 3
     end
 
-    # Adds a specified amount to the objects anger level or 1 if none specified.
-    # Anger level will not rise if the object is already angry.
+    # @param amount [Integer] adds anger
+    # @return [Integer] new anger level
+    # @return [Object] time
     def add_anger(amount = 1)
       @anger_level += amount unless angry?
       become_angry if anger_level > 50
@@ -207,6 +216,7 @@ module Game
     # Drops the anger level back down to 0 so the object can start being angry
     # again when it's no longer angry.
     # Sets angry_since to the current time.
+    # @return [Object] time
     def become_angry
       @anger_level = 0
       @angry_since = Time.now
@@ -215,31 +225,30 @@ module Game
 
   # Mixin to allow objects to be trapped
   module Trap
-    # Returns the last time the object was trapped.
+    # @return trapped_since [Object] time
     def trapped_since
       @trapped_since ||= Time.new '2017'
     end
 
-    # Returns the amount of minutes since the object was last trapped.
+    # @return [Object] minutes
     def trapped_for
       TimeDifference.between(@trapped_since, Time.now).in_minutes
     end
 
-    # Returns true if it has been longer than 2 minutes since the object was
-    # last trapped.
+    # @return [Boolean] has the object been trapped for more than 2 minutes?
     def trap_expired?
       trapped_for > 2
     end
 
-    # Sets the trapped_since variable to the current time causing trap_expired
-    # to return false for the next 2 minutes.
+    # @return [Object] time
     def become_trapped
       @trapped_since = Time.now
     end
   end
 
-  # Defines a human player of the game. Must be initialized using a unique
-  # player id. (usually the users id from discord)
+  # Defines a human player of the game.
+  # @param id [Integer] user.id
+  # @return [Object] new player object
   class Player
     include Inventory
 
@@ -269,27 +278,10 @@ module Game
       @death_time = Time.new '2017'
     end
 
-    # Loads a player object from stored JSON. (This will soon be deprecated)
-    def self.from_json(data)
-      new(
-        xp: data['xp'],
-        level: data['level'],
-        hr: data['hr'],
-        zenny: data['zenny'],
-        max_hp: data['max_hp'],
-        hp: data['hp'],
-        time: data['time'],
-        inventory: data['inventory'],
-        death_time: data['death_time'] || Time.new('2017')
-      )
-    end
-  end
-
   # Defines a monster and is used to create a new Monster object.
-  # Monster must be initialized with a monster hash from MONSTERS (usually
-  # MONSTERS.sample) or a custom hash as long as all variables are present in
-  # the hash (color, hp, icon, name, trap)
   # an ID will be randomly generated for the new monster.
+  # @param data [Hash]
+  # @return [Object] new monster object
   class Monster
     include Hitpoints
 
