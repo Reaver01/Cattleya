@@ -77,6 +77,11 @@ module Game
       @attacks ||= []
     end
 
+    # Lists all of the attacks by defined id
+    def attacks_by(id = nil)
+      @attacks.select { |a| a.id == id }
+    end
+
     # Used to check how much damage has been done by a specified id.
     def damage_from(id)
       attacks_by(id).map(&:damage).reduce(:+)
