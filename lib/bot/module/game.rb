@@ -93,7 +93,7 @@ module Game
 
     def attacked(id, damage)
       attacks
-      @attacks << Attack.new(id, damage)
+      @attacks << Attack.new(id: id, damage: damage)
       @hp -= damage
     end
   end
@@ -103,8 +103,6 @@ module Game
     include Inventory
 
     include Hitpoints
-
-    alias current_hp hp
 
     attr_reader :xp
 
@@ -126,7 +124,7 @@ module Game
       @hr = 0
       @zenny = 100
       @max_hp = 500
-      @current_hp = 500
+      @hp = 500
       @time = Time.now
     end
 
@@ -138,7 +136,7 @@ module Game
         hr: data['hr'],
         zenny: data['zenny'],
         max_hp: data['max_hp'],
-        current_hp: data['hp'],
+        hp: data['hp'],
         time: data['time'],
         inventory: data['inventory']
       )
