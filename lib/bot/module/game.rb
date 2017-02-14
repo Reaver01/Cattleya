@@ -177,8 +177,6 @@ module Game
 
     attr_reader :zenny
 
-    attr_reader :max_hp
-
     attr_reader :time
 
     attr_reader :death_time
