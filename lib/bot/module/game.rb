@@ -174,7 +174,7 @@ module Game
     end
 
     def angry?
-      TimeDifference.between(@anger_time, Time.now).in_minutes > 3
+      TimeDifference.between(@anger_time, Time.now).in_minutes < 3
     end
 
     def add_anger(amount = 1)
@@ -194,7 +194,7 @@ module Game
     end
 
     def trapped?
-      TimeDifference.between(@trap_time, Time.now).in_minutes > 2
+      TimeDifference.between(@trap_time, Time.now).in_minutes < 2
     end
 
     def become_trapped
