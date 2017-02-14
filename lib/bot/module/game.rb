@@ -112,17 +112,48 @@ module Game
     end
   end
 
+  # Allows objects to have levels
+  module Levels
+    def level
+      @level ||= 0
+    end
+
+    def xp
+      @xp ||= 0
+    end
+
+    def next_level
+      0.8333333333 * (@level - 1) * (2 * @level ^ 2 + 23 * @level + 66)
+    end
+
+    def enough_xp?
+      @xp > next_level
+    end
+
+    def add_xp(amount)
+      @xp += amount
+      if enough_xp?
+        level_up
+        true
+      else
+        false
+      end
+    end
+
+    def level_up
+      @level += 1
+    end
+  end
+
   # Defines the player
   class Player
     include Inventory
 
     include Hitpoints
 
+    include Levels
+
     attr_reader :id
-
-    attr_reader :xp
-
-    attr_reader :level
 
     attr_reader :hr
 
@@ -132,7 +163,7 @@ module Game
 
     attr_reader :time
 
-    attr_reader :inventory
+    attr_reader :death_time
 
     def initialize(id)
       @id = id
@@ -143,6 +174,7 @@ module Game
       @max_hp = 500
       @hp = 500
       @time = Time.now
+      @death_time = nil
     end
 
     # Loads a player object from stored JSON.
@@ -155,7 +187,8 @@ module Game
         max_hp: data['max_hp'],
         hp: data['hp'],
         time: data['time'],
-        inventory: data['inventory']
+        inventory: data['inventory'],
+        death_time: data['death_time'] || nil
       )
     end
   end
