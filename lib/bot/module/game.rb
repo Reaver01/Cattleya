@@ -96,7 +96,7 @@ module Game
     # Monster.attacked(Player, 5) for example will do 5 damage to Player from
     # Monster.
     def attacked(target, damage)
-      target.add_attack Attack.new(attacker: self, damage: damage)
+      target.add_attack(Attack.new(attacker: self, damage: damage))
     end
 
     # Used by attacked() to attack something.
