@@ -1,18 +1,25 @@
 module Game
-  # Inventory module
+  # Allows an object to have a dynamic inventory
   module Inventory
+    # Returns the inventory or an empty array if there is nothing in the
+    # inventory.
     def inventory
       @inventory ||= []
     end
 
+    # Returns the amount of the specified item or 0 if item does not exist in
+    # the invenory.
     def item(id)
       @inventory[id] || 0
     end
 
+    # Adds one of the specified item into the inventory.
     def add_item(id)
       @inventory[id] = item(id) + 1
     end
 
+    # Removes one of the specified item from the inventory.
+    # If no items of that id exist in the inventory it will stay at zero
     def remove_item(id)
       @inventory[id] = if item(id) <= 1
                          0
@@ -21,14 +28,83 @@ module Game
                        end
     end
 
+    # Used to set the quantity directly of the specified item.
     def set_item(id, quantity)
       @inventory[id] = quantity
+    end
+  end
+
+  # Allows an object to have hitpoints and be attacked by players.
+  module Hitpoints
+    alias current_hp hp
+
+    # Used to attack the object. Called by attacked
+    class Attack
+      attr_reader :id
+
+      attr_reader :attacker
+
+      attr_reader :damage
+
+      def initialize(id: nil, damage: 1, attacker: nil)
+        if attacker
+          @attacker = attacker
+          @id = attacker.id
+        end
+
+        @id ||= id
+        @damage = damage
+      end
+    end
+
+    # Returns the objects remaining health, or sets the objects health to a
+    # specific value.
+    def hp(set = nil)
+      return @hp ||= 1 unless set
+      @hp = set
+    end
+
+    # Used to determine if the object is dead.
+    def dead?
+      @hp <= 0
+    end
+
+    # Used to determine if the object is alive.
+    def alive?
+      @hp > 0
+    end
+
+    # Shows an id array of all the attacks made on the object.
+    def attacks
+      @attacks ||= []
+    end
+
+    # Used to check how much damage has been done by a specified id
+    def damage_from(id)
+      attacks_by(id).map(&:damage).reduce(:+)
+    end
+
+    #
+    def attacked_ids
+      attacks.map(&:id)
+    end
+
+    def attacked_by?(id)
+      attacked_ids.include? id
+    end
+
+    def attacked(id, damage)
+      attacks
+      @attacks << Attack.new(id, damage)
+      @hp -= damage
     end
   end
 
   # Defines the player
   class Player
     include Inventory
+
+    include Hitpoints
 
     attr_reader :xp
 
@@ -39,8 +115,6 @@ module Game
     attr_reader :zenny
 
     attr_reader :max_hp
-
-    attr_reader :current_hp
 
     attr_reader :time
 
@@ -56,6 +130,7 @@ module Game
       @time = Time.now
     end
 
+    # Loads a player object from stored JSON.
     def self.from_json(data)
       new(
         xp: data['xp'],
@@ -63,60 +138,10 @@ module Game
         hr: data['hr'],
         zenny: data['zenny'],
         max_hp: data['max_hp'],
-        current_hp: data['current_hp'],
+        current_hp: data['hp'],
         time: data['time'],
         inventory: data['inventory']
       )
-    end
-  end
-
-  # Hitpoints module
-  module Hitpoints
-    # Defines attacking
-    class Attack
-      attr_reader :id
-
-      attr_reader :damage
-
-      def initialize(id, damage = 1)
-        @id = id
-        @damage = damage
-      end
-    end
-
-    def hp(set = nil)
-      return @hp ||= 1 unless set
-      @hp = set
-    end
-
-    def dead?
-      @hp <= 0
-    end
-
-    def alive?
-      @hp > 0
-    end
-
-    def attacks_by(id = nil)
-      return @attacks_by ||= [] unless id
-      @attacks_by.select { |a| a.id == id }
-    end
-
-    def damage_from(id)
-      attacks_by(id).map(&:damage).reduce(:+)
-    end
-
-    def attacked_ids
-      @attacks_by.map(&:id)
-    end
-
-    def attacked_by?(id)
-      attacked_ids.include? id
-    end
-
-    def attacked(id, damage)
-      @attacks_by << Attack.new(id, damage)
-      @hp -= damage
     end
   end
 
