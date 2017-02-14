@@ -113,6 +113,8 @@ module Game
 
     include Hitpoints
 
+    attr_reader :id
+
     attr_reader :xp
 
     attr_reader :level
@@ -156,6 +158,8 @@ module Game
   # Defines a monster and is used to create a new Monster object.
   class Monster
     include Hitpoints
+
+    attr_reader :id
 
     attr_reader :color
 
