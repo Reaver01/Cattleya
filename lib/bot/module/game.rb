@@ -127,7 +127,8 @@ module Game
 
     attr_reader :inventory
 
-    def initialize
+    def initialize(id)
+      @id = id
       @xp = 0
       @level = 0
       @hr = 0
@@ -177,6 +178,7 @@ module Game
     attr_reader :anger_time
 
     def initialize(data)
+      @id = rand(100_000_000..999_999_999)
       @color = data['color']
       @hp = data['hp']
       @icon = data['icon']
