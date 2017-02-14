@@ -163,6 +163,45 @@ module Game
     end
   end
 
+  # module to allow objects to become angry
+  module Anger
+    def anger_level
+      @anger_level ||= 0
+    end
+
+    def anger_time
+      @anger_time ||= Time.new '2017'
+    end
+
+    def angry?
+      TimeDifference.between(@anger_time, Time.now).in_minutes > 3
+    end
+
+    def add_anger(amount = 1)
+      @anger_level += amount
+      become_angry if anger_level > 50
+    end
+
+    def become_angry
+      @anger_time = Time.now
+    end
+  end
+
+  # Module to allow objects to be trapped
+  module Trap
+    def trap_time
+      @trap_time ||= Time.new '2017'
+    end
+
+    def trapped?
+      TimeDifference.between(@trap_time, Time.now).in_minutes > 2
+    end
+
+    def become_trapped
+      @trap_time = Time.now
+    end
+  end
+
   # Defines the player
   class Player
     include Inventory
@@ -190,7 +229,7 @@ module Game
       @zenny = 100
       @inventory = []
       @time = Time.now
-      @death_time = nil
+      @death_time = Time.new '2017'
     end
 
     # Loads a player object from stored JSON.
@@ -204,7 +243,7 @@ module Game
         hp: data['hp'],
         time: data['time'],
         inventory: data['inventory'],
-        death_time: data['death_time'] || nil
+        death_time: data['death_time'] || Time.new('2017')
       )
     end
   end
@@ -225,16 +264,6 @@ module Game
 
     attr_reader :trap
 
-    attr_reader :in_trap
-
-    attr_reader :trap_time
-
-    attr_reader :is_angry
-
-    attr_reader :anger_level
-
-    attr_reader :anger_time
-
     def initialize(data)
       @id = rand(100_000_000..999_999_999)
       @color = data['color']
@@ -242,11 +271,9 @@ module Game
       @icon = data['icon']
       @name = data['name']
       @trap = data['trap']
-      @in_trap = nil
-      @trap_time = nil
-      @is_angry = nil
-      @anger_level = nil
-      @anger_time = nil
+      @trap_time = Time.new '2017'
+      @anger_level = 0
+      @anger_time = Time.new '2017'
     end
   end
 end
