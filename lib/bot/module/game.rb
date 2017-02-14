@@ -184,6 +184,8 @@ module Game
     def initialize(id)
       @id = id
       @hr = 0
+      @level = 0
+      @max_hp = 500
       @zenny = 100
       @time = Time.now
       @death_time = nil
