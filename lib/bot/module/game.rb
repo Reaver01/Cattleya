@@ -188,6 +188,7 @@ module Game
       @xp = 0
       @max_hp = 500
       @zenny = 100
+      @inventory = []
       @time = Time.now
       @death_time = nil
     end
