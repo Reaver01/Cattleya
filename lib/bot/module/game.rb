@@ -77,23 +77,32 @@ module Game
       @attacks ||= []
     end
 
-    # Used to check how much damage has been done by a specified id
+    # Used to check how much damage has been done by a specified id.
     def damage_from(id)
       attacks_by(id).map(&:damage).reduce(:+)
     end
 
-    #
+    # Used to show the ids of all attackers.
     def attacked_ids
       attacks.map(&:id)
     end
 
+    # Used to check if the object was attacked by a specific id.
     def attacked_by?(id)
       attacked_ids.include? id
     end
 
-    def attacked(id, damage)
+    # Used to attack an Object with another Object.
+    # Monster.attacked(Player, 5) for example will do 5 damage to Player from
+    # Monster.
+    def attacked(target, damage)
+      target.add_attack Attack.new(attacker: self, damage: damage)
+    end
+
+    # Used by attacked() to attack something.
+    def add_attack(attack)
       attacks
-      @attacks << Attack.new(id: id, damage: damage)
+      @attacks << attack
       @hp -= damage
     end
   end
@@ -143,7 +152,7 @@ module Game
     end
   end
 
-  # Defines a monster
+  # Defines a monster and is used to create a new Monster object.
   class Monster
     include Hitpoints
 
