@@ -103,7 +103,7 @@ module Game
     def add_attack(attack)
       attacks
       @attacks << attack
-      @hp -= damage
+      @hp -= attack.damage
     end
   end
 
