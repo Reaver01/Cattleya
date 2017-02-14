@@ -252,6 +252,10 @@ module Game
   class Monster
     include Hitpoints
 
+    include Anger
+
+    include Trap
+
     attr_reader :id
 
     attr_reader :color
