@@ -36,8 +36,6 @@ module Game
 
   # Allows an object to have hitpoints and be attacked by players.
   module Hitpoints
-    alias current_hp hp
-
     # Used to attack the object. Called by attacked
     class Attack
       attr_reader :id
@@ -105,6 +103,8 @@ module Game
     include Inventory
 
     include Hitpoints
+
+    alias current_hp hp
 
     attr_reader :xp
 
