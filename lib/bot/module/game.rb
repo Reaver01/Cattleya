@@ -277,6 +277,7 @@ module Game
       @time = Time.now
       @death_time = Time.new '2017'
     end
+  end
 
   # Defines a monster and is used to create a new Monster object.
   # an ID will be randomly generated for the new monster.
