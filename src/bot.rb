@@ -14,7 +14,6 @@ module Bot
 
   # Make directories if they don't already exist
   Dir.mkdir('botfiles') unless File.exist?('botfiles')
-  Dir.mkdir('database') unless File.exist?('database')
 
   # Load hit and anger variables
   $anger = %w(b l v y p w f g).sample

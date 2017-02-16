@@ -297,7 +297,7 @@ module Bot
       @max_hp = 500
       @hp = 500
       @zenny = 100
-      @inventory = []
+      @inventory = '[]'
       @time = Time.now
       @death_time = Time.new '2017'
       @notifications = false
@@ -313,8 +313,9 @@ module Bot
       embed.color = rand(0xffffff)
       embed.description = "**Level:** #{@level}\n**HR:** #{@hr}\n**XP:** " \
                           "#{@xp}\n**Current HP:** #{@hp}\n**Zenny:** " \
-                          "#{@zenny}\n**Inventory:** " \
-                          "#{@inventory.compact.reduce(0, :+)} items"
+                          "#{@zenny}\n**Inventory:** " +
+                          JSON.parse(@inventory).compact.reduce(0, :+).to_s +
+                          'items'
       embed.timestamp = Time.now
       embed
     end

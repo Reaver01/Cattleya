@@ -13,7 +13,6 @@ module Bot
         event.respond "Saving data and shutting down... I'll be back."
         BOT.stop
         exit
-        nil
       end
     end
   end

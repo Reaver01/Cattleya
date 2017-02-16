@@ -7,7 +7,10 @@ module Bot
         if event.message.channel.pm?
         else
           unless event.message.content.include?(PREFIX)
-            # gain xp
+            # Gain xp and send a pm to the player if they want notifications
+            if Database::Player.resolve_id(event.user.id).add_xp(rand(15..25))[0]
+
+            end
             # revive if dead
             # damage player
             # check if in trap

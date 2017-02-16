@@ -5,24 +5,13 @@ module Bot
   # Database module for bot
   module Database
     # Connect to database
-    DB = Sequel.connect('sqlite://data.db')
+    DB = Sequel.connect('sqlite://botfiles/data.db')
 
-    DB.create_table?(:players) do
-      primary_key :id
-      Integer :playerid
-      Integer :hr
-      Integer :level
-      Integer :xp
-      Integer :max_hp
-      Integer :hp
-      Integer :zenny
-      String :inventory
-      String :time
-      String :death_time
-      TrueClass :notifications
-    end
+    # Load migrations
+    Sequel.extension :migration
+    Sequel::Migrator.run(DB, 'src/modules/database/migrations')
 
-    class Player < Sequel::Model
-    end
+    # Load models
+    Dir['src/modules/database/*.rb'].each { |mod| load mod }
   end
 end
