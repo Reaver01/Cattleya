@@ -8,7 +8,6 @@
 /Gemfile.lock
 bin
 botfiles
-database
 doc
 userbase
 vendor
