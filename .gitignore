@@ -5,6 +5,7 @@
 .yardoc
 /log
 /run.sh
+/Gemfile.lock
 bin
 botfiles
 database
