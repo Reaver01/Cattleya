@@ -32,17 +32,33 @@ module Bot
         update(xp: xp + amount) if can_gain_xp?
         if enough_xp?
           new_zenny = level_up_zenny
-          level_up(new_zenny)
-          [true, new_zenny]
+          new_items = []
+          rand(3..5).times do
+            new_items.push(rand(1..(Database::ItemDefinition.count)))
+          end
+          level_up(new_zenny, new_items)
+          [true, new_zenny, new_items_embed(new_items)]
         else
           [false]
         end
       end
 
       # Levels up the object
-      def level_up(new_zenny)
+      def level_up(new_zenny, new_items)
         update(level: level + 1, zenny: zenny + new_zenny)
+        new_items.each { |x| give_item Database::ItemDefinition[x] }
         raise_max_hp
+      end
+
+      def new_items_embed(new_items)
+        embed = Discordrb::Webhooks::Embed.new
+        embed.title = 'Here are the new items you recieved!'
+        embed.color = rand(0xffffff)
+        embed.description = ''
+        new_items.each do |item|
+          embed.description += "**#{Database::ItemDefinition[item].name}**\n"
+        end
+        embed
       end
 
       # Raises max HP of the object
