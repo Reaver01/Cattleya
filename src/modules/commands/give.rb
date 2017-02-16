@@ -6,7 +6,7 @@ module Bot
       command(
         :give
       ) do |event|
-        Database::Player.resolve_id(event.user.id).add_item id: 1
+        Database::Player.resolve_id(event.user.id).add_item item_definition_id: 5
       end
     end
   end
