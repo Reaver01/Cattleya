@@ -10,8 +10,10 @@ module Bot
         status = unstable
         if status
           update(unstable: false)
+          false
         else
           update(unstable: true)
+          true
         end
       end
     end

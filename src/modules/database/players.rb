@@ -13,6 +13,10 @@ module Bot
         find(discord_id: id) || create(discord_id: id)
       end
 
+      def user
+        BOT.user discord_id
+      end
+
       def toggle_notifications
         status = notifications
         if status
@@ -24,6 +28,21 @@ module Bot
 
       def dead_for
         TimeDifference.between(death_time, Time.now).in_minutes
+      end
+
+      def add_damage(amount)
+        new_hp = hp - amount
+        update(hp: new_hp)
+        new_hp
+      end
+
+      def dead?
+        hp < 1
+      end
+
+      def died
+        update(death_time: Time.now)
+        death_time
       end
 
       def carting?
@@ -39,13 +58,22 @@ module Bot
         !!item(item)
       end
 
-      def give_item(new_item, quantity = 1)
+      def give_item(new_item, quantity = nil)
         existing_item = item(new_item)
         if existing_item
-          quantity ||= existing_item.quantity + 1
-          existing_item.update quantity: quantity
+          amount = if quantity.nil?
+                     existing_item.quantity + 1
+                   else
+                     quantity
+                   end
+          existing_item.update quantity: amount
         else
-          add_item item_definition_id: new_item.id, quantity: quantity
+          amount = if quantity.nil?
+                     1
+                   else
+                     quantity
+                   end
+          add_item item_definition_id: new_item.id, quantity: amount
         end
       end
 
@@ -53,20 +81,31 @@ module Bot
         existing_item = item(new_item)
         if existing_item
           quantity = existing_item.quantity - 1
-          existing_item.update quantity: quantity unless quantity < 0
+          existing_item.update quantity: quantity unless quantity.negative?
         end
       end
 
       def info_embed
         embed = Discordrb::Webhooks::Embed.new
-        username = BOT.parse_mention("<@#{discord_id}>").name
-        avatar = BOT.parse_mention("<@#{discord_id}>").avatar_url
-        embed.title = "This is info all about #{username}!"
-        embed.thumbnail = { url: avatar }
+        embed.title = "This is info all about #{user.name}!"
+        embed.thumbnail = { url: user.avatar_url }
         embed.color = rand(0xffffff)
         embed.description = "**Level:** #{level}\n**HR:** #{hr}\n**XP:** " \
           "#{xp}\n**Current HP:** #{hp}\n**Zenny:** #{zenny}\n**Inventory:** " \
           "#{items.map(&:quantity).reduce(:+) || 0} items"
+        embed.timestamp = Time.now
+        embed
+      end
+
+      def inventory_embed
+        embed = Discordrb::Webhooks::Embed.new
+        embed.title = 'Here is your inventory'
+        embed.thumbnail = { url: user.avatar_url }
+        embed.color = rand(0xffffff)
+        embed.description = "**Zenny:** #{zenny}\n\n"
+        items.each do |item|
+          embed.description += "**#{item.item_definition.name}:** #{item.quantity}\n"
+        end
         embed.timestamp = Time.now
         embed
       end

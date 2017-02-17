@@ -2,16 +2,17 @@ module Bot
   # Schedules Cron jobs
   module Cron
     # Does something every 10 mins
-    SCHEDULER.every '10m' do
+    SCHEDULER.every '10s' do
       begin
         # Spawn monsters in unstable channels
-        Database::UnstableChannel.all.each do |channel|
+        Database::UnstableChannel.each do |channel|
           next unless channel.unstable && rand(0..14).zero?
+          current_monster = Database::ActiveMonster.current(channel.channel_id)
           spawned_monster = Database::ActiveMonster.spawn(channel.channel_id)
-          next unless spawned_monster[:new_monster]
+          next if current_monster
           BOT.channel(channel.channel_id).send_embed(
             'A Monster has entered the channel!',
-            spawned_monster[:monster].initial_embed
+            spawned_monster.initial_embed
           )
         end
       rescue

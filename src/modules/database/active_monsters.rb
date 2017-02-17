@@ -10,16 +10,13 @@ module Bot
       include Trap
 
       def self.spawn(channel)
-        { new_monster: false, monster: find(channel: channel) } || create_monster(channel)
+        find(channel: channel) || create(
+          channel: channel, monster_id: Database::Monster[rand(1..Database::Monster.count)].id
+        )
       end
 
-      def create_monster(channel)
-        {
-          new_monster: true,
-          monster: create(
-            channel: channel, monster_id: Database::Monster[rand(1..Database::Monster.count)].id
-          )
-        }
+      def self.current(channel)
+        find(channel: channel) || false
       end
 
       def attack(player_id)
@@ -35,6 +32,10 @@ module Bot
         else
           add_monster_attacker player_id: player_id, damage_done: damage_done
         end
+      end
+
+      def damage_by(discord_id)
+        monster_attackers.find { |e| e.player.discord_id == discord_id }
       end
 
       def damage
@@ -58,10 +59,6 @@ module Bot
         else
           %w(Limping Weak Feable Dying).sample
         end
-      end
-
-      def self.current(channel)
-        find(channel: channel) || false
       end
 
       # @return [object] embed
@@ -90,6 +87,40 @@ module Bot
         embed.description = 'Good Luck!'
         embed.timestamp = Time.now
         embed
+      end
+
+      def death_embed
+        embed = Discordrb::Webhooks::Embed.new
+        embed.author = {
+          name: monster.name,
+          icon_url: "http://monsterhunteronline.in/monsters/images/#{monster.icon}.png"
+        }
+        embed.title = 'Damage Results:'
+        embed.thumbnail = { url: 'http://i.imgur.com/0MskAc1.png' }
+        embed.color = monster.color
+        embed.description = ''
+        monster_attackers.sort_by { |e| -1 * e[:damage_done] }.each do |attacker|
+          star = if attacker.damage_done > 50 + attacker.player.hr
+                   '⭐'
+                 else
+                   ''
+                 end
+          embed.description += "**#{attacker.player.user.name}**: #{attacker.damage_done} #{star}\n"
+        end
+        embed.timestamp = Time.now
+        embed
+      end
+
+      def give_hr
+        monster_attackers.each do |attacker|
+          if attacker.damage_done > 50 + attacker.player.hr && attacker.player.hr < 100
+            attacker.player.update(hr: attacker.player.hr + 1)
+          end
+        end
+      end
+
+      def move_to_graveyard
+        update(channel: 0)
       end
     end
   end
