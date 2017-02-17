@@ -10,6 +10,9 @@ module Bot
             # Store the player
             current_player = Database::Player.resolve_id(event.user.id)
 
+            # Store the monster
+            monster = Database::ActiveMonster.current(event.channel.id)
+
             # Gain xp and store the output
             leveled_up = current_player.add_xp(rand(15..25))
 
@@ -22,10 +25,29 @@ module Bot
 
             # revive if dead and 5 minutes has past
             # damage player
-            # check if in trap
-            # check if still angry
-            # hit the monster
-            # raise anger
+
+            # Attack the monster
+            trap_mod = if monster.trapped?
+                         1.75
+                       else
+                         1
+                       end
+            unless current_player.carting?
+              damage = rand(0..(10 + current_player.hr)) * trap_mod
+              monster.add_attack(event.user.id, damage) if event.message.content.include?($hit)
+            end
+
+            # Check if there is a monster in the channel and if it's angry
+            if monster && event.message.content.include?($anger)
+              if monster.add_anger
+                event.respond "The #{monster.monster.name} has become angry!"
+                time = monster.angry_since + 3 * 60
+                message = "The #{monster.monster.name} is no longer angry!"
+                SCHEDULER.at time.to_s, tags: [event.channel.id.to_s] do
+                  BOT.channel(event.channel.id).send_message message
+                end
+              end
+            end
           end
         end
       end

@@ -1,3 +1,5 @@
+require 'time_difference'
+
 module Bot
   module Database
     # Defines a human player of the game.
@@ -6,6 +8,8 @@ module Bot
       one_to_many :monster_attackers
 
       include Levels
+
+      include Hitpoints
 
       def self.resolve_id(id)
         find(discord_id: id) || create(discord_id: id)
@@ -18,6 +22,14 @@ module Bot
         else
           update(notifications: true)
         end
+      end
+
+      def dead_for
+        TimeDifference.between(death_time, Time.now).in_minutes
+      end
+
+      def carting?
+        dead_for < 5
       end
 
       # item = Database::ItemDefinition[n]
