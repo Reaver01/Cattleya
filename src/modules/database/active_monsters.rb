@@ -56,7 +56,7 @@ module Bot
           %w(Strong Healthy).sample
         elsif (20...60).cover? hp_percent
           %w(Wounded Damaged).sample
-        else
+        elsif hp_percent < 20
           %w(Limping Weak Feable Dying).sample
         end
       end

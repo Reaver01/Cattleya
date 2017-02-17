@@ -97,8 +97,8 @@ module Bot
                     if current_player.notifications
                       # Send a DM with damage amount and monster name
                       begin
-                        event.user.pm("You have taken **#{incoming_damage} damage** from the " \
-                          "**#{monster.name}**")
+                        event.user.pm "You have taken **#{incoming_damage} damage** from the " \
+                          "**#{monster.monster.name}**"
                       rescue
                         puts 'Failed to DM a player'
                       end
