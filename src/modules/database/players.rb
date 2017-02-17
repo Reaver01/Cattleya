@@ -2,14 +2,12 @@ require 'time_difference'
 
 module Bot
   module Database
-    # Defines a human player of the game.
+    # Player table
     class Player < Sequel::Model
       one_to_many :items
       one_to_many :monster_attackers
 
       include Levels
-
-      include Hitpoints
 
       def self.resolve_id(id)
         find(discord_id: id) || create(discord_id: id)

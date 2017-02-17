@@ -12,16 +12,18 @@ module Bot
   # Load helpers
   Dir['src/helpers/*.rb'].each { |file| load file }
 
-  # Make directories if they don't already exist
+  # Make botfiles directory if it doesn't exist
   Dir.mkdir('botfiles') unless File.exist?('botfiles')
 
-  # Load hit and anger variables
+  # Set hit and anger variables
   $anger = %w(b l v y p w f g).sample
   $hit = %w(c m u d n t e h i o a s r).sample
 
   # Load other constant variables
   ITEMS = load_json('data/items.json')
   MONSTERS = load_json('data/monsters.json')
+
+  # Set Prefix
   PREFIX = ','.freeze
 
   # Load Modules

@@ -1,6 +1,6 @@
 module Bot
   module Database
-    # Defines a human player of the game.
+    # Active Monster table
     class ActiveMonster < Sequel::Model
       many_to_one :monster
       one_to_many :monster_attackers
@@ -10,9 +10,16 @@ module Bot
       include Trap
 
       def self.spawn(channel)
-        find(channel: channel) || create(
-          channel: channel, monster_id: Database::Monster[rand(1..Database::Monster.count)].id
-        )
+        { new_monster: false, monster: find(channel: channel) } || create_monster(channel)
+      end
+
+      def create_monster(channel)
+        {
+          new_monster: true,
+          monster: create(
+            channel: channel, monster_id: Database::Monster[rand(1..Database::Monster.count)].id
+          )
+        }
       end
 
       def attack(player_id)

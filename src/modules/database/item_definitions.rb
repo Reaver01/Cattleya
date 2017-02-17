@@ -1,6 +1,6 @@
 module Bot
   module Database
-    # Defines a human player of the game.
+    # Item Definition table
     class ItemDefinition < Sequel::Model
       one_to_many :items
     end

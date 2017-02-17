@@ -37,9 +37,9 @@ module Bot
             new_items.push(rand(1..(Database::ItemDefinition.count)))
           end
           level_up(new_zenny, new_items)
-          [true, new_zenny, new_items_embed(new_items)]
+          { leveled_up: true, zenny: new_zenny, embed: new_items_embed(new_items) }
         else
-          [false]
+          { leveled_up: false }
         end
       end
 
