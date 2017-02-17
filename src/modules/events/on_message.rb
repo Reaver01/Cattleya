@@ -26,7 +26,7 @@ module Bot
                   "#{current_player.level}\nYou have earned yourself #{leveled_up[:zenny]} " \
                   'Zenny and a few items you can trade or use!', leveled_up[:embed])
               rescue
-                puts 'Failed to DM a player'
+                puts 'Failed to DM a player with level up notice'
               end
             end
 
@@ -40,7 +40,7 @@ module Bot
                   begin
                     event.respond "The #{monster.monster.name} has become enraged!"
                   rescue
-                    puts 'Failed to respond to a message event'
+                    puts 'Failed to message a channel that a monster is enraged'
                   end
 
                   # Set up a reminder for when the monster is not enraged
@@ -100,7 +100,7 @@ module Bot
                         event.user.pm "You have taken **#{incoming_damage} damage** from the " \
                           "**#{monster.monster.name}**"
                       rescue
-                        puts 'Failed to DM a player'
+                        puts 'Failed to DM a player that they took damage'
                       end
                     end
 
@@ -121,7 +121,7 @@ module Bot
                         event.user.pm('You have taken too much damage! The felynes will take appr' \
                           'oximately 5 minutes to restore you to full power')
                       rescue
-                        puts 'Failed to DM a player'
+                        puts 'Failed to DM a player that they are dead'
                       end
 
                       # Set up a reminder for when the player can damage monsters again
@@ -140,7 +140,7 @@ module Bot
                     'The monster has been killed! Here are the results:', monster.death_embed
                   )
                 rescue
-                  puts 'Failed to send an embed'
+                  puts 'Failed to send a channel an embed about the monster being killed'
                 end
 
                 # Give players HR for killing
