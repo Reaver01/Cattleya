@@ -23,7 +23,7 @@ module Bot
     # Does something every 30 mins
     SCHEDULER.every '30m' do
       begin
-        BOT.game = 'with ' + MONSTERS.sample['name']
+        BOT.game = 'with ' + Database::Monster[rand(1..Database::Monster.count)].name
       rescue
         puts 'Setting game failed'
       end
@@ -37,6 +37,12 @@ module Bot
       rescue
         puts 'Changing variables failed'
       end
+    end
+
+    # Does something every 24 hours
+    SCHEDULER.every '24h' do
+      BOT.stop
+      exit
     end
   end
 end
