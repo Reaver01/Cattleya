@@ -1,11 +1,13 @@
 .bundle
 .env
 .lock
+.sqlite3
 .yardoc
 /log
 /run.sh
+/Gemfile.lock
 bin
 botfiles
-docs
+doc
 userbase
 vendor

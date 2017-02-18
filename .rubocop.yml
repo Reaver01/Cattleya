@@ -34,6 +34,12 @@ Style/ClassAndModuleChildren:
 Style/ConstantName:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+  
 # Allow 'Pokémon-style' exception handling
 Lint/RescueException:
   Enabled: false
@@ -45,7 +51,7 @@ Style/SingleLineBlockParams:
     - inject: [m, e]
 
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
 
 # http://stackoverflow.com/questions/4763121/should-i-use-alias-or-alias-method
 Style/Alias:
@@ -65,3 +71,6 @@ Style/GlobalVars:
 
 Style/GuardClause:
   Enabled: false
+
+Metrics/LineLength:
+  Max: 100

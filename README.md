@@ -10,7 +10,6 @@ https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&permission
 
 - botmod | (Bot Admin only) Add permissions for a user to the bot.
 - buy | Buy items from the shop with Zenny.
-- debug | (Bot Admin only) Toggle console debug mode.
 - eval | (Bot Admin only) Evaluate code.
 - game | (Bot Moderator only) Set the game status of the bot.
 - hosting | Show info about where the bot is hosted.
