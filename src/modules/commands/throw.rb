@@ -18,7 +18,7 @@ module Bot
         user_name = item_name[-1]
 
         # # Store everything but the last item in the array as the item if it contains a mention
-        item_name = item_name.first item.size - 1 unless BOT.parse_mention(user_name).nil?
+        item_name = item_name.first item_name.size - 1 unless BOT.parse_mention(user_name).nil?
 
         # Store it as a string and titleize it
         item_name = item_name.join(' ').titleize
