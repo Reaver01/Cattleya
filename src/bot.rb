@@ -22,7 +22,7 @@ module Bot
   $hit = %w(c m u d n t e h i o a s r).sample
 
   # Set Prefix
-  PREFIX = ','.freeze
+  PREFIX = '>'.freeze
 
   # Load Modules
   Dir['src/modules/*.rb'].each { |file| load file }
