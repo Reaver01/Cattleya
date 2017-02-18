@@ -7,6 +7,8 @@ module Bot
       one_to_many :items
       one_to_many :monster_attackers
 
+      # ---- INFO AND CREATION ----
+
       # @params id [Integer] The discord id of the player
       # @return [Object] The new player object if none existed, or the current one if it did
       def self.resolve_id(id)
@@ -30,10 +32,7 @@ module Bot
         end
       end
 
-      # @return [Integer] The amount of time in minutes the player has been dead
-      def dead_for
-        TimeDifference.between(death_time, Time.now).in_minutes
-      end
+      # ---- HEALTH AND DAMAGE ----
 
       # @params amount [Integer] The amount of damage dealt to the player
       # @return [Integer] The new health value of the player
@@ -43,9 +42,19 @@ module Bot
         new_hp
       end
 
+      # @return [Boolean] True if the player has been dead less than 5 mins
+      def carting?
+        dead_for < 5
+      end
+
       # @return [Boolean] True if the players health is less than 1
       def dead?
         hp < 1
+      end
+
+      # @return [Integer] The amount of time in minutes the player has been dead
+      def dead_for
+        TimeDifference.between(death_time, Time.now).in_minutes
       end
 
       # Sets the players death time to the current time
@@ -55,9 +64,17 @@ module Bot
         death_time
       end
 
-      # @return [Boolean] True if the player has been dead less than 5 mins
-      def carting?
-        dead_for < 5
+      # ---- ITEMS AND INVENTORY ----
+
+      # @params new_item [Object] Database::ItemDefinition[n]
+      # @params quantity [Integer] The number of items to add to the players inventory
+      def buy_item(new_item, quantity = 1)
+        existing_item = item(new_item)
+        if existing_item
+          existing_item.update quantity: existing_item.quantity + quantity
+        else
+          add_item item_definition_id: new_item.id, quantity: quantity
+        end
       end
 
       # @params item [Object] Database::ItemDefinition[n]
@@ -70,6 +87,15 @@ module Bot
       # @return [Boolean] True if the object exists in the players inventory
       def item?(item)
         !!item(item)
+      end
+
+      def item_amount(item)
+        existing_item = item(item)
+        if existing_item
+          existing_item.quantity
+        else
+          0
+        end
       end
 
       # @params new_item [Object] Database::ItemDefinition[n]
@@ -95,22 +121,6 @@ module Bot
       end
 
       # @params new_item [Object] Database::ItemDefinition[n]
-      # @params quantity [Integer] The number of items to add to the players inventory
-      def buy_item(new_item, quantity = 1)
-        existing_item = item(new_item)
-        if existing_item
-          existing_item.update quantity: existing_item.quantity + quantity
-        else
-          add_item item_definition_id: new_item.id, quantity: quantity
-        end
-      end
-
-      # @params amount [Integer] The amount of zenny to remove from the player
-      def remove_zenny(amount)
-        update(zenny: zenny - amount)
-      end
-
-      # @params new_item [Object] Database::ItemDefinition[n]
       def remove_item(new_item)
         existing_item = item(new_item)
         if existing_item
@@ -119,30 +129,12 @@ module Bot
         end
       end
 
-      # @return [Float] XP required to gain the next level
-      def next_level
-        0.8333333333 * (level - 1) * (2 * level ^ 2 + 23 * level + 66)
+      # @params amount [Integer] The amount of zenny to remove from the player
+      def remove_zenny(amount)
+        update(zenny: zenny - amount)
       end
 
-      # @return [Integer] The amount of zenny a player would earn on level up
-      def level_up_zenny
-        (rand(0..9) * 10) + (rand(0..9) * 100) + ((level / 4).floor * 1000)
-      end
-
-      # @return [Boolean] Checks if the player can level up
-      def enough_xp?
-        xp > next_level
-      end
-
-      # @return [Integer] The amount of seconds the player has not gained any xp
-      def no_xp_for
-        TimeDifference.between(last_xp_gain, Time.now).in_seconds
-      end
-
-      # @return [Boolean] True if the amount of time exceeds 30 seconds
-      def can_gain_xp?
-        no_xp_for > 30
-      end
+      # ---- LEVELS AND HEALTH ----
 
       # @param amount [Integer] xp amount
       # @return [Boolean] true if player leveled up
@@ -161,12 +153,37 @@ module Bot
         end
       end
 
+      # @return [Boolean] True if the amount of time exceeds 30 seconds
+      def can_gain_xp?
+        no_xp_for > 30
+      end
+
+      # @return [Boolean] Checks if the player can level up
+      def enough_xp?
+        xp > next_level
+      end
+
       # @params new_zenny [Integer] The amount of zenny earned on level up
       # @params new_items [Array] The items the player recieved on level up
       def level_up(new_zenny, new_items)
         update(level: level + 1, zenny: zenny + new_zenny)
         new_items.each { |x| give_item Database::ItemDefinition[x] }
         raise_max_hp
+      end
+
+      # @return [Integer] The amount of zenny a player would earn on level up
+      def level_up_zenny
+        (rand(0..9) * 10) + (rand(0..9) * 100) + ((level / 4).floor * 1000)
+      end
+
+      # @return [Float] XP required to gain the next level
+      def next_level
+        0.8333333333 * (level - 1) * (2 * level ^ 2 + 23 * level + 66)
+      end
+
+      # @return [Integer] The amount of seconds the player has not gained any xp
+      def no_xp_for
+        TimeDifference.between(last_xp_gain, Time.now).in_seconds
       end
 
       # Raises max HP of the player
@@ -180,17 +197,7 @@ module Bot
         update(hp: max_hp)
       end
 
-      # @return [object] embed
-      def new_items_embed(new_items)
-        embed = Discordrb::Webhooks::Embed.new
-        embed.title = 'Here are the new items you recieved!'
-        embed.color = rand(0xffffff)
-        embed.description = ''
-        new_items.each do |item|
-          embed.description += "**#{Database::ItemDefinition[item].name}**\n"
-        end
-        embed
-      end
+      # ---- EMBEDS ----
 
       # @return [object] embed
       def info_embed
@@ -216,6 +223,18 @@ module Bot
           embed.description += "**#{item.item_definition.name}:** #{item.quantity}\n"
         end
         embed.timestamp = Time.now
+        embed
+      end
+
+      # @return [object] embed
+      def new_items_embed(new_items)
+        embed = Discordrb::Webhooks::Embed.new
+        embed.title = 'Here are the new items you recieved!'
+        embed.color = rand(0xffffff)
+        embed.description = ''
+        new_items.each do |item|
+          embed.description += "**#{Database::ItemDefinition[item].name}**\n"
+        end
         embed
       end
     end

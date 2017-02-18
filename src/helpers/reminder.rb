@@ -13,7 +13,7 @@ end
 def reminder_channel(time, channel, tag, message)
   Bot::SCHEDULER.at time, tags: [channel.to_s, tag] do
     begin
-      Bot::BOT.channel(channel).send_temporary_message message, 30
+      Bot::BOT.channel(channel).send_temporary_message message, 60
     rescue
       puts 'Sending reminder to channel failed'
     end

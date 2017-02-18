@@ -12,10 +12,14 @@ module Bot
       ) do |event|
         check = Database::UnstableChannel.check(event.channel.id).toggle
         if check
-          event.channel.send_temporary_message 'Unstable turned on', 10
+          event.channel.send_temporary_message 'Unstable turned on', 60
         else
-          event.channel.send_temporary_message 'Unstable turned off', 10
+          event.channel.send_temporary_message 'Unstable turned off', 60
         end
+
+        # Deletes the invoking message
+        event.message.delete unless event.message.channel.pm?
+        nil
       end
     end
   end

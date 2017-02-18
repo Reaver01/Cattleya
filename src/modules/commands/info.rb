@@ -23,7 +23,7 @@ module Bot
 
         # Sends the info of the player to the channel
         event.channel.send_temporary_message(
-          '', 30, nil, Database::Player.resolve_id(user_id).info_embed
+          '', 60, nil, Database::Player.resolve_id(user_id).info_embed
         )
 
         # Deletes the invoking message

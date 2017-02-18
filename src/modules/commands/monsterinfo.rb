@@ -13,10 +13,10 @@ module Bot
         # Checks if the monster object returned anything
         if monster
           # Sends the monster embed to the channel
-          event.channel.send_temporary_message '', 30, nil, monster.info_embed
+          event.channel.send_temporary_message '', 60, nil, monster.info_embed
         else
           # Tells the channel there isn't a monster
-          event.channel.send_temporary_message "There isn't a monster in this channel", 30
+          event.channel.send_temporary_message "There isn't a monster in this channel", 60
         end
 
         # Deletes the invoking message

@@ -39,7 +39,7 @@ module Bot
         if current_item.nil?
           # Tell us about it
           begin
-            event.channel.send_temporary_message 'That item does not exist', 10
+            event.channel.send_temporary_message 'That item does not exist', 60
           rescue
             puts 'Failed to send message about item not existing'
           end
@@ -62,14 +62,14 @@ module Bot
           # Let the channel know that the player bought something
           begin
             event.channel.send_temporary_message "**#{event.user.name}** bought **#{amount} " \
-              "#{item_name}#{plural}**", 30
+              "#{item_name}#{plural}**", 60
           rescue
             puts 'Failed to send a message with how much a player bought'
           end
         else
           # Let the channel know the player can't afford what they are trying to buy
           begin
-            event.channel.send_temporary_message 'You cannot afford that!', 10
+            event.channel.send_temporary_message 'You cannot afford that!', 60
           rescue
             puts 'Failed to tell a player they cannot afford something'
           end
