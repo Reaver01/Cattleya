@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'discordrb'
 require 'discordrb/data'
 require 'dotenv'
+require 'fileutils'
 require 'rufus-scheduler'
 
 # The main bot module
@@ -14,14 +15,11 @@ module Bot
 
   # Make botfiles directory if it doesn't exist
   Dir.mkdir('botfiles') unless File.exist?('botfiles')
+  FileUtils.cp('data/items_monsters.db', 'botfiles/data.db') unless File.exist?('botfiles/data.db')
 
   # Set hit and anger variables
   $anger = %w(b l v y p w f g).sample
   $hit = %w(c m u d n t e h i o a s r).sample
-
-  # Load other constant variables
-  ITEMS = load_json('data/items.json')
-  MONSTERS = load_json('data/monsters.json')
 
   # Set Prefix
   PREFIX = ','.freeze
