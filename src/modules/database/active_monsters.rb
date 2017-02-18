@@ -5,10 +5,6 @@ module Bot
       many_to_one :monster
       one_to_many :monster_attackers
 
-      include Anger
-
-      include Trap
-
       # @params channel [Integer] The discord channel id in which you want to spawn a monster
       # @return [Object] The new monster created for the channel, or the current monster if there
       # is already a monster in the channel
@@ -89,6 +85,58 @@ module Bot
       # Moves the monster to the Graveyard channel so a new monster can spawn in the channel later
       def move_to_graveyard
         update(channel: 0)
+      end
+
+      # @return [Object] minutes
+      def angry_for
+        TimeDifference.between(angry_since, Time.now).in_minutes
+      end
+
+      # @return [Boolean] has the object been angry for less than 3 minutes?
+      def angry?
+        angry_for < 3
+      end
+
+      # @param amount [Integer] adds anger
+      # @return [Integer] new anger level
+      # @return [Object] time
+      def add_anger(amount = 1)
+        update(anger_level: anger_level + amount) unless angry?
+        if anger_level > 100
+          become_angry
+        else
+          false
+        end
+      end
+
+      # @return [Object] minutes
+      def trapped_for
+        TimeDifference.between(trapped_since, Time.now).in_minutes
+      end
+
+      # @return [Boolean] has the object been trapped for more than 2 minutes?
+      def trap_expired?
+        trapped_for > 2
+      end
+
+      # @return [Boolean] has the object been trapped for less than 2 minutes?
+      def trapped?
+        trapped_for < 2
+      end
+
+      # @return [Object] time
+      def become_trapped
+        update(trapped_since: Time.now)
+        Time.now
+      end
+
+      # Drops the anger level back down to 0 so the object can start being angry
+      # again when it's no longer angry.
+      # Sets angry_since to the current time.
+      # @return [Object] time
+      def become_angry
+        update(anger_level: 0, angry_since: Time.now)
+        true
       end
 
       # @return [object] embed
