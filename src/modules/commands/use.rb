@@ -44,7 +44,7 @@ module Bot
           mentioned = if BOT.parse_mention(user_name).nil?
                         ''
                       else
-                        " on **#{user_name}**"
+                        "on **#{user_name}**"
                       end
 
           # Tell the channel about the player using an item

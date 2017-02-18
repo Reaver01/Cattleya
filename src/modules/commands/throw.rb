@@ -44,7 +44,7 @@ module Bot
           mentioned = if BOT.parse_mention(user_name).nil?
                         ''
                       else
-                        " at **#{user_name}**"
+                        "at **#{user_name}**"
                       end
 
           # Tell the channel about the player throwing an item
