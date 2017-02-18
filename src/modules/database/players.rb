@@ -116,7 +116,9 @@ module Bot
                    else
                      quantity
                    end
-          add_item item_definition_id: new_item.id, quantity: amount
+          if new_item
+            add_item(item_definition_id: new_item.id, quantity: amount)
+          end
         end
       end
 
