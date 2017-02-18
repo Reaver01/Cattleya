@@ -5,7 +5,6 @@ module Bot
       extend Discordrb::Commands::CommandContainer
       command(
         [:info, :i],
-        bucket: :info,
         description: 'Responds with player info',
         usage: 'info'
       ) do |event, mention|
@@ -17,8 +16,8 @@ module Bot
                       BOT.parse_mention(mention).id
                     end
         end
-        event.channel.send_embed(
-          '', Database::Player.resolve_id(user_id).info_embed
+        event.channel.send_temporary_message(
+          '', 30, nil, Database::Player.resolve_id(user_id).info_embed
         )
         event.message.delete unless event.message.channel.pm?
         nil

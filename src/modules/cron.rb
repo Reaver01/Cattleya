@@ -2,7 +2,7 @@ module Bot
   # Schedules Cron jobs
   module Cron
     # Does something every 10 mins
-    SCHEDULER.every '10s' do
+    SCHEDULER.every '10m' do
       begin
         # Spawn monsters in unstable channels
         Database::UnstableChannel.each do |channel|

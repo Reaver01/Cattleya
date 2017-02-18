@@ -5,14 +5,13 @@ module Bot
       extend Discordrb::Commands::CommandContainer
       command(
         [:monsterinfo, :minfo, :mi],
-        bucket: :info,
         description: 'Responds with monster info'
       ) do |event|
         monster = Database::ActiveMonster.current(event.channel.id)
         if monster
-          event.channel.send_embed('', monster.info_embed)
+          event.channel.send_temporary_message '', 30, nil, monster.info_embed
         else
-          event.respond "There isn't a monster in this channel"
+          event.channel.send_temporary_message "There isn't a monster in this channel", 30
         end
         event.message.delete unless event.message.channel.pm?
         nil

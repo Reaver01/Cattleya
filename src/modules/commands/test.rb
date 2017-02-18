@@ -6,7 +6,7 @@ module Bot
       command(
         [:test, :t]
       ) do |event|
-        Database::ActiveMonster.current(event.channel.id).monster_attackers
+        'this is a test'
       end
     end
   end

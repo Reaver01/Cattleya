@@ -10,7 +10,7 @@ module Bot
         help_available: false,
         permission_level: 999
       ) do |event|
-        event.respond "Saving data and shutting down... I'll be back."
+        event.channel.send_temporary_message "Saving data and shutting down... I'll be back.", 5
         BOT.stop
         exit
       end

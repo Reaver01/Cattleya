@@ -77,6 +77,19 @@ module Bot
         end
       end
 
+      def buy_item(new_item, quantity = 1)
+        existing_item = item(new_item)
+        if existing_item
+          existing_item.update quantity: existing_item.quantity + quantity
+        else
+          add_item item_definition_id: new_item.id, quantity: quantity
+        end
+      end
+
+      def remove_zenny(amount)
+        update(zenny: zenny - amount)
+      end
+
       def remove_item(new_item)
         existing_item = item(new_item)
         if existing_item

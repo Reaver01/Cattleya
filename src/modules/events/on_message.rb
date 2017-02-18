@@ -38,7 +38,8 @@ module Bot
                 if monster.add_anger
                   # Send a message to the channel that monster is enraged
                   begin
-                    event.respond "The #{monster.monster.name} has become enraged!"
+                    event.channel.send_temporary_message "The #{monster.monster.name} has become " \
+                      'enraged!', 30
                   rescue
                     puts 'Failed to message a channel that a monster is enraged'
                   end
@@ -136,8 +137,9 @@ module Bot
               if monster.hp < 1
                 # Send death embed to channel
                 begin
-                  event.channel.send_embed(
-                    'The monster has been killed! Here are the results:', monster.death_embed
+                  event.channel.send_temporary_message(
+                    'The monster has been killed! Here are the results:', 30, nil,
+                    monster.death_embed
                   )
                 rescue
                   puts 'Failed to send a channel an embed about the monster being killed'
