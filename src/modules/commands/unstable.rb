@@ -6,10 +6,12 @@ module Bot
       command(
         [:unstable, :unst],
         description: 'Toggles monster appearance',
-        usage: 'unstable'
+        usage: 'unstable',
+        required_permissions: [:manage_channels],
+        permission_message: 'Only a channel manager can use %name%'
       ) do |event|
-        Database::UnstableChannel.check(event.channel.id).toggle
-        if Database::UnstableChannel.check(event.channel.id).unstable
+        check = Database::UnstableChannel.check(event.channel.id).toggle
+        if check
           event.channel.send_temporary_message 'Unstable turned on', 10
         else
           event.channel.send_temporary_message 'Unstable turned off', 10

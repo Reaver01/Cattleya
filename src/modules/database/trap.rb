@@ -21,7 +21,8 @@ module Bot
 
       # @return [Object] time
       def become_trapped
-        trapped_since = Time.now
+        update(trapped_since: Time.now)
+        Time.now
       end
     end
   end

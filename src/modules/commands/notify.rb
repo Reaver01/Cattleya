@@ -8,8 +8,8 @@ module Bot
         description: 'Toggles DM notifications',
         usage: 'notify'
       ) do |event|
-        Database::Player.resolve_id(event.user.id).toggle_notifications
-        if Database::Player.resolve_id(event.user.id).notifications
+        check = Database::Player.resolve_id(event.user.id).toggle_notifications
+        if check
           event.channel.send_temporary_message 'User notifications turned on', 10
         else
           event.channel.send_temporary_message 'User notifications turned off', 10

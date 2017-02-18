@@ -38,7 +38,11 @@ module Bot
         # Check if the item actually exists
         if current_item.nil?
           # Tell us about it
-          event.channel.send_temporary_message 'That item does not exist', 10
+          begin
+            event.channel.send_temporary_message 'That item does not exist', 10
+          rescue
+            puts 'Failed to send message about item not existing'
+          end
 
         # Check if the player has enough zenny
         elsif current_player.zenny > current_item.price * amount
@@ -56,11 +60,19 @@ module Bot
           current_player.remove_zenny(current_item.price * amount)
 
           # Let the channel know that the player bought something
-          event.channel.send_temporary_message "**#{event.user.name}** bought **#{amount} " \
-            "#{item_name}#{plural}**", 30
+          begin
+            event.channel.send_temporary_message "**#{event.user.name}** bought **#{amount} " \
+              "#{item_name}#{plural}**", 30
+          rescue
+            puts 'Failed to send a message with how much a player bought'
+          end
         else
           # Let the channel know the player can't afford what they are trying to buy
-          event.channel.send_temporary_message 'You cannot afford that!', 10
+          begin
+            event.channel.send_temporary_message 'You cannot afford that!', 10
+          rescue
+            puts 'Failed to tell a player they cannot afford something'
+          end
         end
         event.message.delete unless event.message.channel.pm?
       end

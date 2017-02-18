@@ -6,6 +6,8 @@ module Bot
         find(channel_id: channel_id) || create(channel_id: channel_id)
       end
 
+      # Toggles the unstable attribute for a channel
+      # @return [Boolean] True if unstable was toggled on
       def toggle
         status = unstable
         if status
