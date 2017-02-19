@@ -68,3 +68,9 @@ https://discord.gg/nry9B7H
 ##Emoji response
 - Bot will respond to some commands with emoji
 - A 💥 emoji (`:boom:`) will be posted on the chat message that triggers the 3 minute damage cooldown from the monster.
+
+
+
+#Other info
+
+Shout out to *z64* for all the help he has given me on sequel, and just ruby coding and general! This bot would suck and be a complete mess if it wasn't for that guy!
