@@ -7,7 +7,7 @@ module Bot
         :invite,
         description: 'Shows the invite link for the bot',
         usage: 'invite'
-      ) do |event|
+      ) do |_event|
         "Invite Link: <#{BOT.invite_url(permission_bits: 93_248)}>"
       end
     end
