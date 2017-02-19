@@ -4,6 +4,10 @@ This bot was originally written for the Monster Hunter Online discord, but you a
 
 https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&permissions=93248&scope=bot
 
+If you would like to come chat with us or just kill monsters that Cattleya spawns come on over to our server!
+
+https://discord.gg/nry9B7H
+
 #Current features:
 
 ##Commands:
