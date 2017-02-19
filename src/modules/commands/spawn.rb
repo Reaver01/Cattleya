@@ -6,7 +6,9 @@ module Bot
       command(
         :spawn,
         description: 'Spawns a monster',
-        usage: 'spawn'
+        usage: 'spawn',
+        help_available: false,
+        permission_level: 999
       ) do |event|
         current_monster = Database::ActiveMonster.current(event.channel.id)
         spawned_monster = Database::ActiveMonster.spawn(event.channel.id)
