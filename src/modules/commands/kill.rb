@@ -9,7 +9,7 @@ module Bot
         usage: 'kill',
         help_available: false,
         permission_level: 999
-      ) do |event|
+      ) do |_event|
         # Stops the bot
         BOT.stop
 

@@ -12,21 +12,16 @@ https://discord.gg/nry9B7H
 
 ##Commands:
 
-- botmod | (Bot Admin only) Add permissions for a user to the bot.
 - buy | Buy items from the shop with Zenny.
 - eval | (Bot Admin only) Evaluate code.
-- game | (Bot Moderator only) Set the game status of the bot.
-- hosting | Show info about where the bot is hosted.
 - info | Show game profile info about yourself or a mentioned user.
-- inventory (inv) | PM user their current inventory.
+- inventory | PM user their current inventory.
 - invite | Shows the bot invite link.
+- itemshop | PM user the game shop and prices in Zenny.
 - kill | (Bot Admin only) Shuts down the bot.
-- minfo (monster) | Shows info about the monster in the current channel if there is one.
+- monsterinfo | Shows info about the monster in the current channel if there is one.
 - notify | Toggle PM notifications of level and damage taken.
-- ping | Check if the bot is responding.
-- reset | Reset your current game profile back to start.
-- shop | PM user the game shop and prices in Zenny.
-- stats | Displays command stats for the bot and Global monster kill count.
+- spawn | (Bot Admin only) Spawns a monster in the current channel.
 - throw | Throw an item at the ground, monster, or another user.
 - unstable | (Manage channels server permissions only) Toggle monsters appearing in the current channel.
 - use | Use an item on yourself, monster, or another user.
@@ -67,6 +62,7 @@ https://discord.gg/nry9B7H
 
 ##Chat cleanup
 - If bot is given manage messages permissions on the server it will try to clean up command triggers that are not nessisary to keep around after command is triggered.
+- Most messages have a 1 minute auto delete to keep chat free of too much spam.
 - Bots messages can be cleaned up in chat by reacting with the ❌ emoji (`:x:`)
 
 ##Emoji response
