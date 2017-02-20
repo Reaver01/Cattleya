@@ -3,9 +3,13 @@ module Bot
     # Ready event
     module Ready
       extend Discordrb::EventContainer
-      ready do |event|
+      ready do |_event|
         # Set game text
-        event.bot.game = 'with monsters!'
+        BOT.game = 'with ' + Database::Monster[rand(1..Database::Monster.count)].name
+
+        # Set hit and anger variables
+        $anger = %w(b l v y p w f g).sample
+        $hit = %w(c m u d n t e h i o a s r).sample
 
         # Tell the console BOT is ready
         puts 'BOT Ready!'

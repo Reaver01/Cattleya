@@ -17,10 +17,6 @@ module Bot
   Dir.mkdir('botfiles') unless File.exist?('botfiles')
   FileUtils.cp('data/items_monsters.db', 'botfiles/data.db') unless File.exist?('botfiles/data.db')
 
-  # Set hit and anger variables
-  $anger = %w(b l v y p w f g).sample
-  $hit = %w(c m u d n t e h i o a s r).sample
-
   # Set Prefix
   PREFIX = '>'.freeze
 
@@ -39,12 +35,6 @@ module Bot
 
   # Set permissions
   BOT.set_user_permission(ENV['OWNER'].to_i, 999)
-
-  # Set up command buckets for rate limiting
-  BOT.bucket :item_use, limit: 3, time_span: 60, delay: 10
-  BOT.bucket :item_throw, limit: 3, time_span: 60, delay: 10
-  BOT.bucket :info, limit: 5, time_span: 60, delay: 5
-  BOT.bucket :reset, limit: 1, time_span: 60
 
   # Load all command modules
   Dir['src/modules/commands/*.rb'].each { |mod| load mod }

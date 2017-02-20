@@ -1,3 +1,0 @@
-,eval ITEMS.each { |x| Database::ItemDefinition.create name: x['name'], image: x['image'], price: x['price'], can_throw: x['throw'] }
-
-,eval MONSTERS.each { |x| Database::Monster.create hp: x['hp'], color: x['color'], icon: x['icon'], name: x['name'], trapped_by_shock: x['trapped_by_shock'], trapped_by_fall: x['trapped_by_fall'] }
