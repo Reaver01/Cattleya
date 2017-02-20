@@ -18,7 +18,7 @@ module Bot
   FileUtils.cp('data/items_monsters.db', 'botfiles/data.db') unless File.exist?('botfiles/data.db')
 
   # Set Prefix
-  PREFIX = ','.freeze
+  PREFIX = '>'.freeze
 
   # Load Modules
   Dir['src/modules/*.rb'].each { |file| load file }
