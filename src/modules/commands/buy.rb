@@ -16,7 +16,7 @@ module Bot
 
         # Check if the item had an s on the end
         if item_name.ends_with?('s') && item_name != 'Mega Nutrients'
-          item_name.chomp('s')
+          item_name = item_name.chomp('s')
         end
 
         # Check if the amount as an integer is zero
