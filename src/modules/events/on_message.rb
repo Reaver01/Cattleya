@@ -92,7 +92,11 @@ module Bot
                   # If the generated damage is zero don't do anything
                   unless incoming_damage.zero?
                     # React to the message that caused the damage
-                    event.message.react('💥')
+                    begin
+                      event.message.react('💥')
+                    rescue
+                      puts 'Failed to react'
+                    end
 
                     # Check if player has notifications on
                     if current_player.notifications
