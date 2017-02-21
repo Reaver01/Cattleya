@@ -117,17 +117,20 @@ module Bot
                       # Reset players health to max
                       current_player.set_hp_to_max
 
-                      # Send a DM to the player with innformation about their demise
-                      begin
-                        event.user.pm('You have taken too much damage! The felynes will take appr' \
-                          'oximately 5 minutes to restore you to full power')
-                      rescue
-                        puts 'Failed to DM a player that they are dead'
-                      end
+                      if current_player.notifications
+                        # Send a DM to the player with innformation about their demise
+                        begin
+                          event.user.pm('You have taken too much damage! The felynes will take ap' \
+                            'proximately 5 minutes to restore you to full power')
+                        rescue
+                          puts 'Failed to DM a player that they are dead'
+                        end
 
-                      # Set up a reminder for when the player can damage monsters again
-                      reminder_dm(time_of_death, event.user.id, 'death', 'You have been restored ' \
-                        'to full fighting power! You will be able to damage monsters once again!')
+                        # Set up a reminder for when the player can damage monsters again
+                        reminder_dm(time_of_death, event.user.id, 'death', 'You have been restore' \
+                          'd to full fighting power! You will be able to damage monsters once aga' \
+                          'in!')
+                      end
                     end
                   end
                 end
