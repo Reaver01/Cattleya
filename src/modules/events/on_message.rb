@@ -7,6 +7,7 @@ module Bot
         # Do nothing if the channel is a DM
         if event.message.channel.pm?
         else
+          puts "event (#{event.message.id}) raised by: #{event.user.distinct} (#{event.user.id})"
           # Do nothing if the message starts with BOT prefix
           unless event.message.content.start_with?(PREFIX)
             # Store the player
