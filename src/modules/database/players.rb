@@ -42,12 +42,12 @@ module Bot
         new_hp
       end
 
-      # @return [Boolean] True if the player has been dead less than 5 mins
+      # @return [Trueclass] True if the player has been dead less than 5 mins
       def carting?
         dead_for < 5
       end
 
-      # @return [Boolean] True if the players health is less than 1
+      # @return [Trueclass] True if the players health is less than 1
       def dead?
         hp < 1
       end
@@ -84,7 +84,7 @@ module Bot
       end
 
       # @params item [Object] Database::ItemDefinition[n]
-      # @return [Boolean] True if the object exists in the players inventory
+      # @return [Trueclass] True if the object exists in the players inventory
       def item?(item)
         !!item(item)
       end
@@ -155,12 +155,12 @@ module Bot
         end
       end
 
-      # @return [Boolean] True if the amount of time exceeds 30 seconds
+      # @return [Trueclass] True if the amount of time exceeds 30 seconds
       def can_gain_xp?
         no_xp_for > 30
       end
 
-      # @return [Boolean] Checks if the player can level up
+      # @return [Trueclass] Checks if the player can level up
       def enough_xp?
         xp > next_level
       end

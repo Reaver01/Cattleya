@@ -17,7 +17,7 @@ module Bot
       end
 
       # @params channel [Integer] The discord channel id you want to check for a current monster
-      # @return [Object/Boolean] The current monster if there is a monster in the channel or false
+      # @return [Object/Falseclass] The current monster if there is a monster in the channel/False
       # if there is no monster in the channel
       def self.current(channel)
         find(channel: channel) || false
@@ -105,7 +105,7 @@ module Bot
         TimeDifference.between(angry_since, Time.now).in_minutes
       end
 
-      # @return [Boolean] has the object been angry for less than 3 minutes?
+      # @return [Trueclass] has the object been angry for less than 3 minutes?
       def angry?
         angry_for < 3
       end
@@ -138,12 +138,12 @@ module Bot
         TimeDifference.between(trapped_since, Time.now).in_minutes
       end
 
-      # @return [Boolean] has the object been trapped for more than 2 minutes?
+      # @return [Trueclass] has the object been trapped for more than 2 minutes?
       def trap_expired?
         trapped_for > 2
       end
 
-      # @return [Boolean] has the object been trapped for less than 2 minutes?
+      # @return [Trueclass] has the object been trapped for less than 2 minutes?
       def trapped?
         trapped_for < 2
       end

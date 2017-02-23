@@ -7,7 +7,7 @@ module Bot
         # Do nothing if the channel is a DM
         if event.message.channel.pm?
         else
-          puts "event (#{event.message.id}) raised by: #{event.user.distinct} (#{event.user.id})"
+          puts "event (#{event.message.id}) by: #{event.user.distinct} (#{event.user.id})"
           # Do nothing if the message starts with BOT prefix
           unless event.message.content.start_with?(PREFIX)
             # Store the player
@@ -16,13 +16,15 @@ module Bot
             # Store the monster
             monster = Database::ActiveMonster.current(event.channel.id)
 
-            puts "players current xp is #{current_player.xp}"
+            puts "#{event.user.distinct} current xp is #{current_player.xp}"
 
             # Gain xp and store the output
             leveled_up = current_player.add_xp(rand(15..25))
 
             # Check if the player leveled up and has notifications turned on
             if leveled_up[:leveled_up] && current_player.notifications
+              puts "#{event.user.distinct} levled up to #{current_player.level}"
+
               # Send the user a DM about their level up with an embedded item list
               begin
                 event.user.pm.send_embed('Congratulations! You have leveled up to Level ' \

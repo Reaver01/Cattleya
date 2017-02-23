@@ -7,7 +7,7 @@ module Bot
       end
 
       # Toggles the unstable attribute for a channel
-      # @return [Boolean] True if unstable was toggled on
+      # @return [Trueclass] True if unstable was toggled on
       def toggle
         status = unstable
         if status
