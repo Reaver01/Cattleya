@@ -149,8 +149,8 @@ module Bot
               if monster.hp < 1
                 # Send death embed to channel
                 begin
-                  event.channel.send_temporary_message(
-                    'The monster has been killed! Here are the results:', 60, nil,
+                  event.channel.send_embed(
+                    'The monster has been killed! Here are the results:',
                     monster.death_embed
                   )
                 rescue
