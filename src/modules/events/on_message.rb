@@ -136,9 +136,9 @@ module Bot
                         end
 
                         # Set up a reminder for when the player can damage monsters again
-                        reminder_dm(time_of_death, event.user.id, 'death', 'You have been restore' \
-                          'd to full fighting power! You will be able to damage monsters once aga' \
-                          'in!')
+                        reminder_dm(time_of_death + 5 * 60, event.user.id, 'death', 'You have bee' \
+                          'n restored to full fighting power! You will be able to damage monsters' \
+                          ' once again!')
                       end
                     end
                   end
