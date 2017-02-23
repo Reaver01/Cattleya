@@ -16,6 +16,8 @@ module Bot
             # Store the monster
             monster = Database::ActiveMonster.current(event.channel.id)
 
+            puts "players current xp is #{current_player.xp}"
+
             # Gain xp and store the output
             leveled_up = current_player.add_xp(rand(15..25))
 
