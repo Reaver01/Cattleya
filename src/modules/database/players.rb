@@ -141,7 +141,7 @@ module Bot
       # @param amount [Integer] xp amount
       # @return [Hash] leveled_up status and zenny amount/new items embed if leveled up
       def add_xp(amount)
-        update(xp: xp + amount) if can_gain_xp?
+        update(xp: xp + amount, last_xp_gain: Time.now) if can_gain_xp?
         if enough_xp?
           new_zenny = level_up_zenny
           new_items = []
