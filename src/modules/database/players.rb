@@ -139,7 +139,7 @@ module Bot
       # ---- LEVELS AND HEALTH ----
 
       # @param amount [Integer] xp amount
-      # @return [Boolean] true if player leveled up
+      # @return [Hash] leveled_up status and zenny amount/new items embed if leveled up
       def add_xp(amount)
         update(xp: xp + amount) if can_gain_xp?
         if enough_xp?
