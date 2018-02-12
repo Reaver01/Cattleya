@@ -161,7 +161,7 @@ module Bot
         embed = Discordrb::Webhooks::Embed.new
         embed.title = monster.name
         embed.thumbnail = {
-          url: "http://monsterhunteronline.in/monsters/images/#{monster.icon}.png"
+          url: "https://monsterhunteronline.github.io/monsters/images/#{monster.icon}.png"
         }
         embed.color = monster.color
         embed.description = "Angry: #{angry? ? 'Yes' : 'No'}\n" \
@@ -176,7 +176,7 @@ module Bot
         embed = Discordrb::Webhooks::Embed.new
         embed.title = monster.name
         embed.thumbnail = {
-          url: "http://monsterhunteronline.in/monsters/images/#{monster.icon}.png"
+          url: "https://monsterhunteronline.github.io/monsters/images/#{monster.icon}.png"
         }
         embed.color = monster.color
         embed.description = 'Good Luck!'
@@ -189,7 +189,7 @@ module Bot
         embed = Discordrb::Webhooks::Embed.new
         embed.author = {
           name: monster.name,
-          icon_url: "http://monsterhunteronline.in/monsters/images/#{monster.icon}.png"
+          icon_url: "https://monsterhunteronline.github.io/monsters/images/#{monster.icon}.png"
         }
         embed.title = 'Damage Results:'
         embed.thumbnail = { url: 'http://i.imgur.com/0MskAc1.png' }
