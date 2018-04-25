@@ -18,6 +18,9 @@ module Bot
       rescue
         puts 'Spawning monster failed'
       end
+        
+      #Update leaderboard variable
+      $leaderboard = Database::Player.sort_by { |player| player.level }.reverse
     end
 
     # Does something every 30 mins
