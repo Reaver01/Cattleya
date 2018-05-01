@@ -9,6 +9,7 @@ module Bot
         usage: 'leaderboard'
       ) do |event|
         # Posts the leaderboard
+        event << "Here is the leaderboard!"
         10.times { |i| event << "#{BOT.user($leaderboard[i].discord_id).name} - #{$leaderboard[i].level}" }
         nil
       end
