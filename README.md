@@ -1,12 +1,12 @@
-##Cattleya
+## Cattleya
 
 This bot was originally written for the Monster Hunter Online discord, but you are welcome to invite it to your own server!
 
 https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&permissions=93248&scope=bot
 
-#Current features:
+# Current features:
 
-##Commands:
+## Commands:
 
 - buy | Buy items from the shop with Zenny.
 - eval | (Bot Admin only) Evaluate code.
@@ -23,7 +23,7 @@ https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&permission
 - use | Use an item on yourself, monster, or another user.
 
 
-##Levels
+## Levels
 
 - Players gain levels based on their messages sent.
 - XP needed to level is on a curve, and XP gain has 30 second timeout.
@@ -31,13 +31,13 @@ https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&permission
 - Every level the player will gain a semi-random amount of Zenny based on their new level.
 
 
-##Hunter Rank
+## Hunter Rank
 
 - Players will recieve a HR for participating in killing a monster as long as they did at least 50 + Current HR damage.
 - Damage done to monsters scales with HR.
 
 
-##Monsters
+## Monsters
 
 - Monsters have a 10% chance to enter an unstable channel every 10 minutes.
 - If a channel has muted the bot they will not be able to have monsters spawn.
@@ -51,22 +51,22 @@ https://discordapp.com/oauth2/authorize?&client_id=268825817537052692&permission
 - Every 3 minutes monsters in the channel will do a random amount of damage to any player that has hurt it based on the amount of damage the player has done.
 
 
-##Player death (Carting)
+## Player death (Carting)
 
 - If you take too much damage from a monster and your HP reaches 0 you will have a 5 minute cooldown before your chat messages will do damage to the monster.
 
 
-##Chat cleanup
+## Chat cleanup
 - If bot is given manage messages permissions on the server it will try to clean up command triggers that are not nessisary to keep around after command is triggered.
 - Most messages have a 1 minute auto delete to keep chat free of too much spam.
 - Bots messages can be cleaned up in chat by reacting with the ❌ emoji (`:x:`)
 
-##Emoji response
+## Emoji response
 - Bot will respond to some commands with emoji
 - A 💥 emoji (`:boom:`) will be posted on the chat message that triggers the 3 minute damage cooldown from the monster.
 
 
 
-#Other info
+# Other info
 
 Shout out to *z64* for all the help he has given me on sequel, and just ruby coding and general! This bot would suck and be a complete mess if it wasn't for that guy!
